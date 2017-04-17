@@ -1,0 +1,771 @@
+<?xml version='1.0'?>
+<kawaproject timestamp="Mon Apr 18 16:01:02 2005">
+<versioninfo>
+<documentversion>
+<major>"0"</major>
+<minor>"1"</minor>
+</documentversion>
+<productversion>
+<value>"121"</value>
+</productversion>
+</versioninfo>
+<path>"C:\AAAsrcWorking\SOURCE\customchat\chat\"</path>
+<classpaths>
+</classpaths>
+<profile>
+<name>""</name>
+</profile>
+<runfile>
+</runfile>
+<items>
+<folder>
+<name>"cchat"</name>
+<relativepath>"..\AAAsrcWorking\SOURCE\customchat\chat\cchat.kpx"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"Account.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\util\Admin.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"AlreadyInRoomException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\Argument.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"Auth.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\util\AuthInfo.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"AutoScroll.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"AutoScrollException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"BadLanguageException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"BadLanguageFilter.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\util\Base64.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\Body.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"BootedException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"1"</dirty>
+<relativepath>"Bootee.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"1"</dirty>
+<relativepath>"BootManager.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\util\CgiParser.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"ChatException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"ChatObject.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"Chatter.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"ChatterNotFoundException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\CheckBox.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"1"</dirty>
+<relativepath>"..\htmlutil\CheckBoxField.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"Connection.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\Container.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\ContainerTag.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\util\DataBaseDownException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\util\DataBaseException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"1"</dirty>
+<relativepath>"..\htmlutil\DateField.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\util\Debug.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\util\ErrorLog.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"Filter.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\Flag.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"Floor.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"FloorNotFoundException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\Form.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\Header.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"House.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\HTML.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\HTMLDate.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\HTTP.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\Image.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\Input.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"1"</dirty>
+<relativepath>"..\htmlutil\InputField.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"InvalidHandleException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\licensekey\InvalidLicenseException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"InvalidRoomPassException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\licensekey\License.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\Link.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\util\Login.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\util\LookupTable.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"Message.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\util\NoHandlesException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\Page.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"PageFactory.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\PullDown.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\util\QueryStringParser.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\util\RecordNotFoundException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"RedirectException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"Registry.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"ReThread.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"1"</dirty>
+<relativepath>"Room.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"RoomExistsException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"RoomFullException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"RoomNotFoundException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"Server.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"ShutDownException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\util\StringVector.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\Tag.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"Tag.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"Tagenizer.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\Text.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"1"</dirty>
+<relativepath>"..\htmlutil\TextField.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"TimeOut.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\util\Timer.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\htmlutil\Title.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"UnauthorizedException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"..\util\URLDecoder.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"1"</dirty>
+<relativepath>"User.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"1"</dirty>
+<relativepath>"UserManager.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"UserRegistry.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"Vulture.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+<file>
+<dirty>"0"</dirty>
+<relativepath>"WeirdSyncException.java"</relativepath>
+<scmstatus id="0">
+<userstring>""</userstring>
+<userinteger>"0"</userinteger>
+</scmstatus>
+</file>
+</folder>
+</items>
+<compileroptions debug="0" nowarning="0" optimize="0" verbose="0" deprecated="0">
+<outputdirvalues checked="0">
+</outputdirvalues>
+<customoptions checked="0">
+</customoptions>
+</compileroptions>
+<interpreteroptions debug="0" nogc="0" verbosegc="0" verbose="0" checksrc="0" verifieroff="0" verifieron="0" verifierremote="0">
+<commandlineargs checked="0">
+</commandlineargs>
+<runclassnames checked="0">
+<runclassname selected="0">
+<value>""</value>
+</runclassname>
+</runclassnames>
+<executedirs checked="0">
+<executedir selected="0">
+<value>""</value>
+</executedir>
+</executedirs>
+<customoptions checked="0">
+<customoption selected="0">
+<value>""</value>
+</customoption>
+</customoptions>
+<maxmemory checked="0">
+<value>""</value>
+</maxmemory>
+<startmemory checked="0">
+<value>""</value>
+</startmemory>
+<javacodestack checked="0">
+<value>""</value>
+</javacodestack>
+<ccodestack checked="0">
+<value>""</value>
+</ccodestack>
+<propertyvalues checked="0">
+<propertyvalue selected="0">
+<value>""</value>
+</propertyvalue>
+</propertyvalues>
+<remotedebugvalues checked="0">
+<remotedebugvalue selected="0">
+<value>""</value>
+</remotedebugvalue>
+</remotedebugvalues>
+</interpreteroptions>
+<javadocoptions version="0" type="1" author="0" noindex="0" notree="0" nodeprecated="0">
+<outputdirvalues checked="0">
+</outputdirvalues>
+<customoptions checked="0">
+<customoption selected="0">
+<value>""</value>
+</customoption>
+</customoptions>
+</javadocoptions>
+<rmioptions useprojectclasspath="0" debugtables="0" depend="0" debug="0" optimize="0" nowarn="0" verbose="0" nowrite="0" keepgenerated="0" show="0">
+<outputdirs checked="0">
+<outputdir selected="0">
+<value>""</value>
+</outputdir>
+</outputdirs>
+<stubdirs checked="0">
+<stubdir selected="0">
+<value>""</value>
+</stubdir>
+</stubdirs>
+<skeldirs checked="0">
+<skeldir selected="0">
+<value>""</value>
+</skeldir>
+</skeldirs>
+<customoptions checked="0">
+<customoption selected="0">
+<value>""</value>
+</customoption>
+</customoptions>
+<files>
+</files>
+</rmioptions>
+<kawajar>
+<value>"C:\AAAsrcWorking\SOURCE\blatherChat.kjx"</value>
+</kawajar>
+<breakpoints>
+</breakpoints>
+</kawaproject>
