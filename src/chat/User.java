@@ -10,7 +10,6 @@ abstract class  User implements Serializable {
 	static final long serialVersionUID = 4053076139390121L;
 	List inputFields;
 	Object key;
-	int yasmeen;	
 	protected static Form NewUser;
 	
 	User(Object key, List inputFields) {
