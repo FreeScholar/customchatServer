@@ -2,7 +2,7 @@ package customchat.chat;
 
 import java.util.*;
 import customchat.util.* ;
-
+// This is a comment added for intial commit
 /**
  * An account represents one active user account.  It keeps track of all
  * active sessions for this user as well as preferences that persist across
