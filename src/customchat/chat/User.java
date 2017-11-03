@@ -1,9 +1,11 @@
 package customchat.chat;
 
-import com.sun.java.util.collections.*;
+//import com.sun.java.util.collections.*;
 import customchat.htmlutil.*;
 import customchat.util.*;
 import java.io.*;
+import java.util.Iterator;
+import java.util.List;
 
 
 abstract class  User implements Serializable {

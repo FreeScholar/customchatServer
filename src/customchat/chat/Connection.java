@@ -175,7 +175,7 @@ class Connection implements Runnable {
 		    sAuth = sAuth.trim();
 		    //Parse the authorization info
 		    //reminder--do not allow :'s in the passwords
-		    sAuth = Base64.decode(sAuth);
+		    sAuth = customchat.util.Base64.decode(sAuth);
 		    int iLastColon = sAuth.lastIndexOf(':');
 		    if(iLastColon < 0)
 			continue;

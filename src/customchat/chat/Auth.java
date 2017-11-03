@@ -1,6 +1,5 @@
 package customchat.chat;
 
-import java.util.*;
 import java.sql.*;
 import customchat.util.*;
 

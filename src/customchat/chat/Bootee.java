@@ -1,9 +1,10 @@
 package customchat.chat;
 
-import com.sun.java.util.collections.*;
+//import com.sun.java.util.collections.*;
 import customchat.htmlutil.*;
 import customchat.util.*;
 import java.util.Calendar;
+import java.util.LinkedList;
 
 class Bootee extends User {
 	// added by ritchie
@@ -17,7 +18,7 @@ class Bootee extends User {
 	public String IP = null ;
 
 	Bootee(Login l, String handle, Calendar until, String message) {
-		super(l, new com.sun.java.util.collections.LinkedList());
+		super(l, new LinkedList());
 		prefix = l.getLogin() + String.valueOf(l.hashCode());
 
 		inputFields.add(new TextField(l.getLogin()));

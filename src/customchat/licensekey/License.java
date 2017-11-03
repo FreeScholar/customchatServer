@@ -289,23 +289,37 @@ public URL getAddr() {
 
 	//System.out.println("ARGV0 is "+argv[0]) ;
 
-	java.text.DateFormat df = java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT,Locale.US);
+	//java.text.DateFormat df = java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT,Locale.US);
 	
  
-		License l = new License(argv[0],
-								argv[1],
-								argv[2],
-								argv[3],
-								argv[4],
-								argv[5],
-								argv[6],
-								argv[7],
-								argv[8],
-								argv[9],
-								Integer.parseInt(argv[10]),
-								Integer.parseInt(argv[11]),
-								df.parse(argv[12]),
-								df.parse(argv[13]));
+//		License l = new License(argv[0],
+//								argv[1],
+//								argv[2],
+//								argv[3],
+//								argv[4],
+//								argv[5],
+//								argv[6],
+//								argv[7],
+//								argv[8],
+//								argv[9],
+//								Integer.parseInt(argv[10]),
+//								Integer.parseInt(argv[11]),
+//								df.parse(argv[12]),
+//								df.parse(argv[13]));
+License l = new License("Joe",
+								"Smith",
+								"Harley",
+								"315 MainStreet",
+								"Ashton",
+								"Massachusetts",
+								"02458",
+								"USA",
+								"info@customchat.com",
+								"http://127.0.0.1:6743",
+								10,
+								1,
+								new Date(99,1,1),
+								new Date(101,1,1));
 		l.output(new File("ccLicense"));
 
 		//License l = new License("Joe",

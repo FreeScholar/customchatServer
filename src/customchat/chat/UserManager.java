@@ -1,9 +1,12 @@
 package customchat.chat;
 
-import com.sun.java.util.collections.*;
+//import com.sun.java.util.collections.*;
 import java.io.*;
 import customchat.htmlutil.*;
 import customchat.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public abstract class UserManager implements Serializable {
     static final long serialVersionUID = 6071217399140425525L;

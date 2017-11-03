@@ -1,6 +1,5 @@
 package customchat.chat;
 
-import com.sun.java.util.collections.*;
 import customchat.htmlutil.*;
 import customchat.util.*;
 import java.util.Calendar;

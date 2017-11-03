@@ -1,6 +1,6 @@
 package customchat.htmlutil;
 
-import com.sun.java.util.collections.*;
+//import com.sun.java.util.collections.*;
 import customchat.util.*;
 import java.util.*;
 import java.io.*;

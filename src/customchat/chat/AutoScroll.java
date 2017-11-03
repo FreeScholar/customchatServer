@@ -61,7 +61,7 @@ public class AutoScroll extends Object {
 		      "  scrollOffFunction = new Function('scrollOff( )')\n" +
 		      "  StartUp();\n" +
 		      "  self.onload = new Function('alert(\"You have timed out of the room.  " +
-		      "Hit Reload or Refresh on your browser to reenter.\")');\n" +
+		      "Hit Reload or Refresh on your browser to re-enter the chat.\")');\n" +
 		      "  \n" +
 		      "  // -->\n" +
 		      "\n" +
@@ -69,7 +69,7 @@ public class AutoScroll extends Object {
 
 	p.addHTML("<FONT SIZE=1 FACE=Verdana, Arial, Helvetica><B>MESSAGES WILL APPEAR ON THE SCREEN IN REAL TIME, AS OTHERS POST THEM.</FONT>" +
 		  "</B></FONT><BR><FONT SIZE=1 FACE=Verdana, Arial, Helvetica>" +
-		  "<BR> If you see the message \"Transfer interrupted!\", or you wish to clear the screen" +
+		  "<BR> If you are idle for a while you may see the message \"Transfer interrupted!\", or you wish to clear the screen" +
 		  " of all messages...<BR> just hit the Reload button in your browser to reconnect to the CustomChat Server.<BR>" +
 		  "</FONT><BR><HR>\n\n");
 
