@@ -142,15 +142,14 @@ public class Server extends Thread {
 	    fail(e, "Could not start server");
 	}
 	addr = l.getAddr() ;
-	System.out.println("\n\nCustomChat Chat Server version 1.5 by CustomChat Inc.");
-	System.out.println("Written by CustomChat Inc.");
-	System.out.println("Graphics and Design by Angelo Aversa");
-	System.out.println("Copyright 1998, 1999, 2000");
-	System.out.println("All Rights Reserved.");
+	System.out.println("\n\nCustomChat Chat Server version 1.5 by CustomChat");
+	System.out.println("Written by CustomChat");
+	System.out.println("Programming by Ezra Keshet");
+        System.out.println("Concept and Architecture by Micky Metts");
 	System.out.println();
 	System.out.println("This license will expire on : " + l.date());
-	System.out.println("To obtain a licensed copy of the program see our web site at:");
-	System.out.println("http://www.customchat.com");
+	System.out.println("To obtain a free copy of the program see our web site at:");
+	System.out.println("http://customchat.com");
 	String logFile = System.getProperty("chat.errorlog");
 
 	if (ErrorLog.LOG) {

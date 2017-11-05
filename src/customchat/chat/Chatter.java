@@ -10,8 +10,8 @@ import customchat.util.*;
  * Class to store the state for a single user logged into the system,
  * and provides HTML formated for this chatter.
  *
- * @author CustomChat Inc.
- * @version 1.2
+ * @author CustomChat Server
+ * @version 1.5
  */
 
 public class Chatter extends Object implements Serializable {

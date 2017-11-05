@@ -91,7 +91,7 @@ public abstract class ChatObject extends Object implements Serializable {
 	String root = System.getProperty ("chat.owner");
 	if(root == null || root.indexOf(":") <= 0) {
 	    lDefaultOwner = new Login("admin", "gofi$h");
-	    System.err.println("No super user User name or Password.");
+	    System.err.println("No Super User User name or Password.");
 	    System.err.println("Defaulting to \"admin\" \"gofi$h\".");
 	}
 	else {
@@ -100,7 +100,7 @@ public abstract class ChatObject extends Object implements Serializable {
 	    String pass = root.substring(i+1);
 	    if(user.length() <= 4 || pass.length() <= 4) {
 		lDefaultOwner = new Login("admin", "gofi$h");
-		System.err.println("Super user User name or Password too short.");
+		System.err.println("Super user User name or Password is too short.");
 		System.err.println("Defaulting to \"admin\" \"gofi$h\".");
 	    } else
 		lDefaultOwner = new Login(user, pass);
@@ -352,7 +352,7 @@ public abstract class ChatObject extends Object implements Serializable {
 	throws ChatException {
 	if(activeCount >= maxChatters && !c.getLogin().equals(lOwner)) {
 	    ChatException ce = new ChatException("User limit has been reached.  Try back later.");
-	    ErrorLog.error(ce, 0, "Upgrade to a larger license at http://www.customchat.com");
+	    ErrorLog.error(ce, 0, "Upgrade to a larger license at http://customchat.com");
 	    throw new ChatException("User limit has been reached.  Try back later.");
 	}
 	if(parent != null)
@@ -1317,7 +1317,7 @@ public abstract class ChatObject extends Object implements Serializable {
 		return ct;
     }          
 
-	// this is the single calling function ...
+	// this is the single calling function ... Log and Block by IP address
 	public Container logList(Login l, String handle,LookupTable lt){
 		Container newcon = new Container();
 		newcon.addHTML("<form name=\"blah\" method=\"post\" action=\""+commandURL(IP_LOG)+"\">");

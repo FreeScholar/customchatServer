@@ -10,8 +10,8 @@ import customchat.htmlutil.*;
  * This class represents the entire house it stores the floors and
  * the global variables such as commands and CGI variable names.
  *
- * CustomChat Inc.
- * @version 2.0
+ * CustomChat Server
+ * @version 1.5
  */
 public class House extends ChatObject {
 

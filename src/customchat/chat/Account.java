@@ -8,9 +8,9 @@ import customchat.util.* ;
  * active sessions for this user as well as preferences that persist across
  * all sessions.
  *
- * @Author CustomChat Inc. <info@customchat.com>
+ * @Author CustomChat Server <info@customchat.com>
  * @see UserRegistry
- * @version 1.0
+ * @version 1.5
  */
 
 public class Account {

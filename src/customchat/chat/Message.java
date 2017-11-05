@@ -51,7 +51,7 @@ public class Message extends Object implements Serializable {
 	dTime = new Date();
 	this.type = type;
 	if(from == null)
-	  sDisplayFrom = "<B><FONT FACE=\"Arial,Helvetica,Geneva\" SIZE=\"2\"><a target=\"_new\" href=\"http://www.customchat.com\">CustomChat Server</a></font></b>";
+	  sDisplayFrom = "<B><FONT FACE=\"Arial,Helvetica,Geneva\" SIZE=\"2\"><a target=\"_new\" href=\"http://customchat.com\">CustomChat Server</a></font></b>";
 	else {
 	  Chatter c = UserRegistry.getChatter(from);
 	  if(c == null)

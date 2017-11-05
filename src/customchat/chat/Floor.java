@@ -11,8 +11,8 @@ import customchat.htmlutil.*;
  * rooms and all of the chatters in this area.  It also has HTML methods to
  * get infromation from the rooms.
  *
- * @author CustomChat Inc.
- * @version 1.0
+ * @author CustomChat Server
+ * @version 1.5
  */
 public class Floor extends ChatObject {
     // static final long serialVersionUID = -5087148074027832925L;

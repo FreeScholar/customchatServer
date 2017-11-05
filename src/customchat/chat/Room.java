@@ -12,7 +12,7 @@ import customchat.htmlutil.*;
  * for the room.  Based on these options, the class generates HTML customized for a given chatter.
  *
  * @author CustomChat Inc.
- * @version 1.0
+ * @version 1.5
  */
 public class Room extends ChatObject {
     //	static final long serialVersionUID = 8311762447962493048L;
@@ -367,8 +367,8 @@ public class Room extends ChatObject {
 	p.addHTML("</TR></TABLE></CENTER>");
 	//the CustomChat signature on the room entry pages
 	p.addHTML("<P><center>" + HTMLGetBottom(null) + "</center>");
-	p.addHTML("<CENTER><FONT SIZE=\"1\" FACE=Arial,Helvetica,Geneva>&copy; 2005 powered by " +
-		  "<A HREF=\"http://www.customchat.com\"><B>CustomChat Inc.</B></A></FONT></CENTER><P>");
+	p.addHTML("<CENTER><FONT SIZE=\"1\" FACE=Arial,Helvetica,Geneva>Powered by " +
+		  "<A HREF=\"http://customchat.com\"><B>CustomChat Server</B></A> since 1997</FONT></CENTER><P>");
 
 	return p;
     }
@@ -555,13 +555,13 @@ public class Room extends ChatObject {
 		}
 		c.AddMessage(new Message(
 			 "<B><FONT FACE=\"Arial,Helvetica,Geneva,Verdana\" size=\"2\">Welcome Room Owner! <BR>"
-			 + "To create a LINK to your CustomChat Room, just copy and paste the code"
-			 + " below into your Homepage:</FONT><BR>"
+			 + "To create a LINK to your CustomChat Room, just copy the code"
+			 + " below.:</FONT><BR>"
 			 + "<FONT FACE=\"Arial,Helvetica,Geneva,Verdana\" SIZE=\"1\">"
 			 + "&lt;A&nbsp;HREF=\"http://"+addr.getHostAddress()+":"+Server.getPort() + "/" + sKeyWord + "\">"
 			 + "My CustomChat Room&lt;/A></FONT>"
 			 + "<BR><FONT FACE=\"Arial,Helvetica,Geneva,Verdana\" size=\"2\">There are buttons at the top of "
-			 + "the room to Boot unruly chatters, Edit or Delete this room.</B>",
+			 + "the room to Remove/Boot unruly chatters, Edit or Delete this room.</B>",
 			 House.ctDaemon,
 			 c.sHandle,
 			 Message.SYSTEM));
@@ -2033,8 +2033,8 @@ public class Room extends ChatObject {
 
 	//End table
 	tBottomForm.addHTML("</TD></TR></TABLE>");
-	tBottomForm.addHTML("<FONT SIZE=\"1\" FACE=Arial,Helvetica,Geneva>&copy; 2001 powered by " +
-			    "<A target=\"new\" HREF=\"http://www.customchat.com\"><B>CustomChat Inc.</B></A></FONT><P>");
+	tBottomForm.addHTML("<FONT SIZE=\"1\" FACE=Arial,Helvetica,Geneva> powered by " +
+			    "<A target=\"new\" HREF=\"http://customchat.com\"><B>CustomChat Server</B></A> since 1997</FONT><P>");
 		
 	return p;
     }

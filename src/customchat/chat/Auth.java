@@ -36,7 +36,7 @@ public class Auth {
 		statement.close();
 		return null;
 	  }
-	  String s = result.getString(1) + "<BR>You will be able to re enter Chatalot after " +
+	  String s = result.getString(1) + "<BR>You will be able to re enter the chatroom after " +
 	result.getDate(2); 
 	  statement.close();
 	  return s;

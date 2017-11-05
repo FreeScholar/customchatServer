@@ -87,7 +87,7 @@ class Connection implements Runnable {
 	if(bPrintHeader)
 	    out.println(Server.sHTTPOK);
 	try {
-	    if (s.startsWith("You have been booted")) { // hack
+	    if (s.startsWith("You have been removed from the conversation.")) { // hack
 		out.println(ChatObject.fileToString(ChatObject.htmlFile("messageheaderframebust.html")));
 	    }
 	    else {
@@ -371,7 +371,7 @@ class Connection implements Runnable {
 	} catch (ChatException e) {
 	    MessagePage(e.getMessage());
 	} catch (OutOfMemoryError e) {
-	    MessagePage("The system is experiencing heavy volume; try back later.<p>" + e);
+	    MessagePage("The system is experiencing heavy volume; try again later.<p>" + e);
 	    System.gc();
 	    throw e;
 	}

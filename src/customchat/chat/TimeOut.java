@@ -12,8 +12,8 @@ import customchat.util.* ;
  * This class wakes up every 60 sec and removes all chatters idle for more than
  * 10 minutes.
  *
- * @author CustomChat Inc.
- * @version 1.1
+ * @author CustomChat Server
+ * @version 1.5
  */
 class TimeOut extends Thread implements Serializable {
     private Floor fFloor;
