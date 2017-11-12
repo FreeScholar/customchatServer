@@ -267,7 +267,7 @@ class Connection implements Runnable {
     private void resetUser()  throws ChatException {
 	if(!htReset.containsKey(client.getInetAddress())) {
 	    htReset.put(client.getInetAddress(), new Integer(1));
-	    throw new NotLoggedInException("please use the back button, and then RELOAD or REFRESH your browser -- ");
+	    throw new NotLoggedInException("<p><center>please use the back button, and then RELOAD or REFRESH your browser -- </center></p>");
 	}
 
 	htReset.remove(client.getInetAddress());

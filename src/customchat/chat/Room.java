@@ -462,7 +462,7 @@ public class Room extends ChatObject {
 	add(Login l, LookupTable lt)
 	throws ChatException {
 	
-	if(l == null) throw new UnauthorizedException("Please enter your username and passphrase.");
+	if(l == null) throw new UnauthorizedException("<p><center>Please enter your username and passphrase.</center></p>");
 	if(lt == null)
 	    return HTMLEntryPage(l, "Please choose a handle.  This will be your persona in the room.", null);
 
