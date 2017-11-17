@@ -53,9 +53,7 @@ public class HTTP {
 	mimeTypes.put ("jpg", "image/jpeg");
 	mimeTypes.put ("html", "text/html");
 	mimeTypes.put ("htm", "text/html");
-        mimeTypes.put ("css", "text/css");        
-        mimeTypes.put ("js", "text/javascript");        
-	mimeTypes.put ("wav", "audio/x-wav");
+ 	mimeTypes.put ("wav", "audio/x-wav");
 
 
 	//application/octet-stream	.bin .dms .lha. lzh .exe .class
