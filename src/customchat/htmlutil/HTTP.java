@@ -12,6 +12,10 @@ public class HTTP {
 	new File (System.getProperty ("user.dir"));
   public static final File HTML_ROOT =
 	new File (SERVER_LOCATION, "html");
+  // css root needed?
+  // added css root for testing
+   public static final File CSS_ROOT =
+	new File (SERVER_LOCATION, "css");
   public static final int PORT = 8888;
   public static final String DEFAULT_INDEX = "index.html";
 
@@ -37,6 +41,9 @@ public class HTTP {
 	environment.addElement ("GATEWAY_INTERFACE=" + "CGI/1.0");
 	environment.addElement ("SERVER_PORT=" + PORT);
 	environment.addElement ("DOCUMENT_ROOT=" + HTML_ROOT.getPath ());
+        // added css_root.getpath to elements
+        environment.addElement("DOCUMENT2_ROOT=" + CSS_ROOT.getPath());
+        // does there need to be a css root? document root? << may not need for css
 	try {
 	  environment.addElement
 		("SERVER_NAME=" + InetAddress.getLocalHost ().getHostName ());

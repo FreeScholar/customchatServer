@@ -68,7 +68,7 @@ public abstract class ChatObject extends Object implements Serializable {
     public static final String SET_ONE_VAR = "Set";
     public static final String PUBLIC_MESSAGE_VAR = "Public";
     public static final String XPUBLIC_MESSAGE_VAR = "XPublic";
-	public static final String PRIVATE_MESSAGE_VAR = "Private";
+    public static final String PRIVATE_MESSAGE_VAR = "Private";
     public static final String PRIVATE_CHECKBOX_VAR = "PrivCheckbox";
     public static final String RECIPIENT_VAR = "Recip";
     public static final String SEARCH_VAR = "ss";
@@ -83,8 +83,8 @@ public abstract class ChatObject extends Object implements Serializable {
     private static final String sAdminNameVar = "sAdminsName";
     private static final String sAdminStopVar = "sAdminStop";
 
-	// are we in manual or realtime mode
-	public boolean bScroll ;
+    // are we in manual or realtime mode
+    public boolean bScroll ;
 
     protected static Login lDefaultOwner;
     static {
@@ -108,8 +108,7 @@ public abstract class ChatObject extends Object implements Serializable {
     }
 
     protected transient Vector vChatters = new Vector();  //  List of current chatters
-	
-	protected static final String[] sPrivilegeNames = {"Create", "Edit", "Delete"};
+    protected static final String[] sPrivilegeNames = {"Create", "Edit", "Delete"};
     protected static final int CAN_CREATE = 0, CAN_EDIT = 1, CAN_DELETE = 2;
     protected static final String CHAT_FRAME = "_top";
     public static String URL_PREFIX;
@@ -127,11 +126,13 @@ public abstract class ChatObject extends Object implements Serializable {
     protected static final String FILE_ORDER = FILE_PREFIX + "order";
     protected static final String FILE_POST_IMAGES = "ccimages";
     protected static final String FILE_POST_SOUNDS = "ccsounds";
-	protected static final String FILE_BLOCKED_IP = FILE_PREFIX + "ipblock" ;
+    protected static final String FILE_BLOCKED_IP = FILE_PREFIX + "ipblock" ;
 
     // Default directories for data and HTML (see below)
     public static String DIR_DATA;
     public static String DIR_HTML;
+    // new css code (needs testing)
+    public static String DIR_CSS;
     public static String URL_IMG;
     public static String URL_RESOURCE;
     public static String DIR_RESOURCE;
@@ -146,6 +147,10 @@ public abstract class ChatObject extends Object implements Serializable {
 	if(DIR_HTML == null)
 	    DIR_HTML = "." + File.separator + "html" + File.separator;
 
+        // new css variable being tested and set to default ""
+        DIR_CSS = System.getProperty("chat.cssdir");
+        if(DIR_CSS == null)
+            DIR_CSS = "." + File.separator + "css" + File.separator;
 	DIR_RESOURCE = System.getProperty("chat.resourcedir");
 	if (DIR_RESOURCE == null)
 	    DIR_RESOURCE = "." + File.separator + "resources" + File.separator;
@@ -157,7 +162,6 @@ public abstract class ChatObject extends Object implements Serializable {
 	URL_IMG = System.getProperty("chat.imgurl");
 	if(URL_IMG == null)
 	    URL_IMG = URL_RESOURCE + "images/";
-
     }
 
     protected static final int SEARCH_RESULTS_LIMIT = 250;
@@ -221,7 +225,7 @@ public abstract class ChatObject extends Object implements Serializable {
      * @see Registry
      */
 
-    ChatObject( Login l, ChatObject parent, String sKey, String sName) throws ChatException {
+    ChatObject(Login l, ChatObject parent, String sKey, String sName) throws ChatException {
 	lOwner = l;
 	if (sName == null)
 	    throw new ChatException("You must specify a name.");
