@@ -116,7 +116,6 @@ public abstract class ChatObject extends Object implements Serializable {
 	if ((URL_PREFIX = System.getProperty("chat.urlprefix")) == null)
 	    URL_PREFIX = "/";
     }
-
     // Variables for file names
     protected static final String FILE_PREFIX = "cc";
     protected static final String FILE_DATA = FILE_PREFIX + "data";
@@ -147,10 +146,6 @@ public abstract class ChatObject extends Object implements Serializable {
 	if(DIR_HTML == null)
 	    DIR_HTML = "." + File.separator + "html" + File.separator;
 
-        // new css variable being tested and set to default ""
-        DIR_CSS = System.getProperty("chat.cssdir");
-        if(DIR_CSS == null)
-            DIR_CSS = "." + File.separator + "css" + File.separator;
 	DIR_RESOURCE = System.getProperty("chat.resourcedir");
 	if (DIR_RESOURCE == null)
 	    DIR_RESOURCE = "." + File.separator + "resources" + File.separator;
