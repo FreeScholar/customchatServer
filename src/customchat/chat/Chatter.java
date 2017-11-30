@@ -8,7 +8,7 @@ import customchat.util.*;
 
 /**
  * Class to store the state for a single user logged into the system,
- * and provides HTML formated for this chatter.
+ * and provides HTML formatted for this chatter.
  *
  * @author CustomChat Server
  * @version 1.5
@@ -92,78 +92,85 @@ public class Chatter extends Object implements Serializable {
     public void AddMessage(Message m) {
 	//Sort messages into public and private boxes (vectors)
 	switch(m.getType()) {
-	case Message.PUBLIC :
+	case Message.PUBLIC:
 	    //check if sender is being ignored publicly
-	    if(isIgPub(m.getFrom()))
-		break;
+            // changed to use brackets G.T. 11/30/2017
+	    if(isIgPub(m.getFrom())) {
+                break;
+            }
+            /* otherwise, falls through */
 	case Message.BROADCAST :
-	case Message.SYSTEM :
+            /* falls through again */
+	case Message.SYSTEM:
 	    synchronized(vPubBox) {
 		vPubBox.addElement(m);
 	    }
 	    break;
-
-	case Message.PRIVATE :
+	case Message.PRIVATE:
 	    //check if sender is being ignored privately
-	    if(isIgPriv(m.getFrom()))
-		break;
+            // changed to use brackets G.T. 11/30/2017
+	    if(isIgPriv(m.getFrom())) {
+                break;
+            }
+            
 	    synchronized(vPrivBox) {
 		vPrivBox.addElement(m); //if not, add the message
 	    }
 	    break;
-
-	case Message.INSTANT :
+	case Message.INSTANT:
 	    //check if chatter is ignoring outside messages
-	    if(bIgOutside)
-		break;
+            // changed to use brackets G.T. 11/30/2017
+	    if(bIgOutside) {
+                break;
+            }
+            
 	    synchronized(vPrivBox) {
 		vPrivBox.addElement(m);
 	    }
 	    break;
-	    
 	case Message.REMOVE: 
 	    if (loc != null) {
-			if (loc.bScroll)
-				m.append("\n<script>parent.WhoListFrame.document.location.reload();</script>\n");
-		}
-
-		 if (!bIgEntry) {
-				if (bUserDing) {
-					m.append("<embed src=\"/resources/sounds/doorbell.wav\" autostart=\"true\" hidden=\"true\">") ;
-					//System.out.println("doing sound for user leaving");
-				}	
-		
-			synchronized(vPubBox) {
-				vPubBox.addElement(m);
-			}
-			
+                // changed to use brackets G.T. 11/30/2017
+		if (loc.bScroll) {
+                    m.append("\n<script>parent.WhoListFrame.document.location.reload();</script>\n");
+                }
 	    }
 
-	    
-		break ;
-
-	case Message.ADDCHATTER:
-
-		if (loc != null) {
-			if (loc.bScroll)
-				m.append("\n<script>parent.WhoListFrame.document.location.reload();</script>\n");
-		}
-	
-		if (!bIgEntry) {
-			if (bUserDing) {
-					m.append("<embed src=\"/resources/sounds/doorbell.wav\" autostart=\"true\" hidden=\"true\">") ;
-					//System.out.println("doing sound for user arriving");
-			}	
-			synchronized(vPubBox) {
-				vPubBox.addElement(m);
-	    	}
-		}
-	
+	    if (!bIgEntry) {
+		if (bUserDing) {
+		    m.append("<embed src=\"/resources/sounds/doorbell.wav\" autostart=\"true\" hidden=\"true\">") ;
+		    //System.out.println("doing sound for user leaving");
+		}	
 		
-    break ;
-
-	default :
+		synchronized(vPubBox) {
+		    vPubBox.addElement(m);
+		}	
+            }
+	    break;
+	case Message.ADDCHATTER:
+	    if (loc != null) {
+                // changed to use brackets G.T. 11/30/2017
+		if (loc.bScroll) {
+                    m.append("\n<script>parent.WhoListFrame.document.location.reload();</script>\n");
+                }  
+	    }
+	
+	    if (!bIgEntry) {
+		if (bUserDing) {
+		    m.append("<embed src=\"/resources/sounds/doorbell.wav\" autostart=\"true\" hidden=\"true\">") ;
+		    //System.out.println("doing sound for user arriving");
+		}
+                
+		synchronized(vPubBox) {
+		    vPubBox.addElement(m);
+	    	}
+	    }
+            break;
+	default:
 	    ErrorLog.error(new ChatException(), 12321, "Invalid message type");
+            /* I added a break statement even though redundant in most cases. 
+              It can fix fall through errors. G.T. 11/30/2017 */
+            break;
 	}
     }
     /**
@@ -202,30 +209,37 @@ public class Chatter extends Object implements Serializable {
 	Enumeration e;
 
 	if(vPrivBox.size() > 0) {
-	    if(!bScroll)
-		out.append("<H2><FONT FACE=Arial, Helvetica>Private Messages</FONT></H2>\n");
+            // changed to use brackets G.T. 11/30/2017
+	    if(!bScroll) {
+                out.append("<H2><FONT FACE=Arial, Helvetica>Private Messages</FONT></H2>\n");
+            }
 
 	    //Print out the private messages
 	    e = vPrivBox.elements();
 	    while(e.hasMoreElements()) {
-				mCurr = (Message)e.nextElement();
-				if(mCurr.is(Message.INSTANT))
-					out.append("<H3><FONT FACE=Arial, Helvetica>Outside Message:</FONT></H3>");
-				else if(bScroll)
-					out.append("<H3><FONT FACE=Arial, Helvetica>Private Message:</FONT></H3>");
-
-				out.append(mCurr.getHTML(this));
+		mCurr = (Message)e.nextElement();
+                // changed to use brackets G.T. 11/30/2017
+		if(mCurr.is(Message.INSTANT)) {
+                    out.append("<H3><FONT FACE=Arial, Helvetica>Outside Message:</FONT></H3>");
+                } else if(bScroll) {
+                    out.append("<H3><FONT FACE=Arial, Helvetica>Private Message:</FONT></H3>");
+                }
+					
+		out.append(mCurr.getHTML(this));
 	    }
 
-	    if(!bScroll)
-			out.append("<HR>\n");
+            // changed to use brackets G.T. 11/30/2017
+	    if(!bScroll) {
+                out.append("<HR>\n");
+            }
 
-		vPrivBox.removeAllElements(); //delete messages
-
+	    vPrivBox.removeAllElements(); //delete messages
 	}
-
-	if(!bScroll)
-	    out.append("\n<H2><FONT FACE=Arial, Helvetica>Public Messages</FONT></H2>\n");
+        
+        // changed to use brackets G.T. 11/30/2017
+	if(!bScroll) {
+            out.append("\n<H2><FONT FACE=Arial, Helvetica>Public Messages</FONT></H2>\n");
+        }
 
 	if(vPubBox.size() > 0) {
 	    //Print out the public messages
@@ -234,10 +248,12 @@ public class Chatter extends Object implements Serializable {
 		mCurr = (Message)e.nextElement();
 		out.append(mCurr.getHTML(this));
 	    }
+            
 	    vPubBox.removeAllElements();//delete them
 	} else if(!bScroll) {
 	    out.append("<FONT FACE=Arial, Helvetica SIZE=2><I>None</I></FONT>");
 	}
+        
 	return out.toString();
     }
     //---------------------- HTML methods ------------------------------
@@ -265,8 +281,11 @@ public class Chatter extends Object implements Serializable {
     
     //----------------Data Abstraction Functions ----------------------------
     public String HashKey() {
-	if(!hasHandle())
-	    return null;
+        // changed to use brackets G.T. 11/30/2017
+	if(!hasHandle()) {
+            return null;
+        }
+        
 	return sHandle;
     }
     
@@ -277,8 +296,7 @@ public class Chatter extends Object implements Serializable {
     
     void MakeContact() {
 	dLastCheck = new Date();
-    }
-    
+    } 
 
     /**
      * @return True if the user is ignoring <img> tags in handles.
@@ -303,15 +321,19 @@ public class Chatter extends Object implements Serializable {
      */
     
     public synchronized void SetScroll(AutoScroll as) {
-	if(scroll != null) scroll.Exit();
+        // changed to use brackets G.T. 11/30/2017
+	if(scroll != null) {
+            scroll.Exit();
+        }
 	scroll = as;
     }
     
     public void deliverMessages() {
 	if(scroll != null) {
+            // removed semi-colon at the end of the synchronized statement G.T. 11/30/2017
 	    synchronized(scroll) {
 		scroll.print(HTMLGetNewMessages(true));
-	    };
+	    }
 	}
     }
     /**
@@ -354,7 +376,7 @@ public class Chatter extends Object implements Serializable {
 	 * Calls getHTML(false) which means with images.
 	 */
     public String getHTML() {
-	return getHTML(false,(loc==null) ? "None" : loc.bIdleTimes)  ;
+	return getHTML(false,(loc==null) ? "None" : loc.bIdleTimes);
     }
     /**
 	 * Generates the HTML code for the user handle to be displayed in the browser.
@@ -368,7 +390,7 @@ public class Chatter extends Object implements Serializable {
 	Date dNow = new Date();
 	long time = (dNow.getTime() - this.dLastCheck.getTime()) / 1000;
 	
-	String idleTimes = "" ;
+	String idleTimes = "";
 
 	if (!noIdleTimes.equals("0")) {
 		if (noIdleTimes.equals("1")) {	
@@ -388,48 +410,63 @@ public class Chatter extends Object implements Serializable {
 	    + idleTimes ;
     }
 
-
-
     public Login getLogin() {
 	return lUser;
     }
 
     public String getText() {
 	return Filter.stripHTML(sHandle);
-    }  
+    }
+    
     boolean hasHandle() {
 	return sHandle != null;
     }
+    
     boolean hashKeyIs(Object o) {
 	return((HashKey() != null) && (HashKey().equals(o)));
     }
+    
     public boolean isIgPriv(final String handle) {
-	if(handle == null || aIgPriv == null)
-	    return false;
+        // changed to use brackets G.T. 11/30/2017 both statements (2 ifs and 1 for)
+	if(handle == null || aIgPriv == null) {
+            return false;
+        }
 
-	for(int i = 0; i < aIgPriv.length; i++)
-	    if(aIgPriv[i].equals(handle))
-		return true;
-
-	return false;
-    }  
-    public boolean isIgPub(final String handle) {
-	if(handle == null || aIgPub == null)
-	    return false;
-
-	for(int i = 0; i < aIgPub.length; i++)
-	    if(aIgPub[i].equals(handle))
-		return true;
+	for(int i = 0; i < aIgPriv.length; i++) {
+            if(aIgPriv[i].equals(handle)) {
+                return true;
+            }
+        }
 
 	return false;
     }
-    public boolean isPMRecip(final String handle) {
-	if(handle == null || aPMRecips == null)
-	    return false;
+    
+    public boolean isIgPub(final String handle) {
+        // changed to use brackets G.T. 11/30/2017 both statements (2 ifs and 1 for)
+	if(handle == null || aIgPub == null) {
+            return false;
+        }
 
-	for(int i = 0; i < aPMRecips.length; i++)
-	    if(aPMRecips[i].equals(handle))
-		return true;
+	for(int i = 0; i < aIgPub.length; i++) {
+            if(aIgPub[i].equals(handle)) {
+                return true;
+            }
+        }
+
+	return false;
+    }
+    
+    public boolean isPMRecip(final String handle) {
+        // changed to use brackets G.T. 11/30/2017 both statements (2 ifs and 1 for)
+	if(handle == null || aPMRecips == null) {
+            return false;
+        }
+
+	for(int i = 0; i < aPMRecips.length; i++) {
+            if(aPMRecips[i].equals(handle)) {
+                return true;
+            }
+        }
 
 	return false;
     }
@@ -439,8 +476,11 @@ public class Chatter extends Object implements Serializable {
     }  
 
     Message privateMessage(String s) {
-	if(aPMRecips != null && aPMRecips.length > 0)
-	    return new Message(s, this.HashKey(), aPMRecips, Message.PRIVATE);
+        // changed to use brackets G.T. 11/30/2017 
+	if(aPMRecips != null && aPMRecips.length > 0) {
+            return new Message(s, this.HashKey(), aPMRecips, Message.PRIVATE);
+        }
+        
 	return null;
     }
 
@@ -460,62 +500,57 @@ public class Chatter extends Object implements Serializable {
     void update(final LookupTable lt) {
 	//set options
 	ChatObject.setFields(this, lt);
+        // changed to use brackets G.T. 11/30/2017 
+	if(lt.getValue(ChatObject.SET_ONE_VAR + Room.SCROLL_VAR) != null) {
+            if(lt.getValue(Room.SCROLL_VAR) == null) {
+                scroll = null;
+            }
+        }
 
-	if(lt.getValue(ChatObject.SET_ONE_VAR + Room.SCROLL_VAR) != null)
-	    if(lt.getValue(Room.SCROLL_VAR) == null)
-		scroll = null;
+        // changed to use brackets G.T. 11/30/2017 
+	if(lt.getValue(HANDLE_VAR) != null) {
+            sHandle = (new Filter()).FilterHTML(sHandle);
+        }
 
-	if(lt.getValue(HANDLE_VAR) != null)
-	    sHandle = (new Filter()).FilterHTML(sHandle);
-
-	if(lt.getValue(TAGLINE_VAR) != null)
-	    sTagline = (new Filter()).FilterHTML(sTagline);
+        // changed to use brackets G.T. 11/30/2017 
+	if(lt.getValue(TAGLINE_VAR) != null) {
+            sTagline = (new Filter()).FilterHTML(sTagline);
+        }
 
 	if(lt.getValue(ChatObject.SET_VAR) != null) {
 	    aPMRecips = lt.getFullValue(PM_RECIPIENT_VAR);// Handles of private message recipients.
 	    aIgPub = lt.getFullValue(PUBLIC_IGNORE_VAR);  // ""      public message ignorees
 	    aIgPriv = lt.getFullValue(PRIVATE_IGNORE_VAR);//""     private message ignorees
 	} else {
-	    if( lt.getValue(ChatObject.SET_ONE_VAR + PM_RECIPIENT_VAR) != null)
-	    if( lt.getValue(ChatObject.SET_ONE_VAR + PM_RECIPIENT_VAR) != null)
-			aPMRecips = lt.getFullValue(PM_RECIPIENT_VAR);
-	    if( lt.getValue(ChatObject.SET_ONE_VAR + PUBLIC_IGNORE_VAR) != null)
-			aIgPub = lt.getFullValue(PUBLIC_IGNORE_VAR);
-	    if( lt.getValue(ChatObject.SET_ONE_VAR + PRIVATE_IGNORE_VAR) != null)
-			aIgPriv = lt.getFullValue(PRIVATE_IGNORE_VAR);
+            // changed to use brackets G.T. 11/30/2017 
+	    if(lt.getValue(ChatObject.SET_ONE_VAR + PM_RECIPIENT_VAR) != null) {
+                // duplicate line of code found. Might serve purpose. G.T. 11/30/2017
+                // if(lt.getValue(ChatObject.SET_ONE_VAR + PM_RECIPIENT_VAR) != null)
+                aPMRecips = lt.getFullValue(PM_RECIPIENT_VAR);
+            }
+            
+            // changed to use brackets G.T. 11/30/2017 
+	    if(lt.getValue(ChatObject.SET_ONE_VAR + PUBLIC_IGNORE_VAR) != null) {
+                aIgPub = lt.getFullValue(PUBLIC_IGNORE_VAR);
+            }
+	
+	    if(lt.getValue(ChatObject.SET_ONE_VAR + PRIVATE_IGNORE_VAR) != null) {
+                aIgPriv = lt.getFullValue(PRIVATE_IGNORE_VAR);
+            }
 	}
-
     }
     public final boolean usingIE() {
 	return bIE;
     }  
-    /**
-	 * Verifies the given login name and passphrase.
-	 *
-	 * @param primary login name
-	 * @param pass passphrase
-	    if( lt.getValue(ChatObject.SET_ONE_VAR + PM_RECIPIENT_VAR) != null)
-			aPMRecips = lt.getFullValue(PM_RECIPIENT_VAR);
-	    if( lt.getValue(ChatObject.SET_ONE_VAR + PUBLIC_IGNORE_VAR) != null)
-			aIgPub = lt.getFullValue(PUBLIC_IGNORE_VAR);
-	    if( lt.getValue(ChatObject.SET_ONE_VAR + PRIVATE_IGNORE_VAR) != null)
-			aIgPriv = lt.getFullValue(PRIVATE_IGNORE_VAR);
-	}
 
-    }
-    public final boolean usingIE() {
-	return bIE;
-    }  
     /**
 	 * Verifies the given login name and passphrase.
 	 *
 	 * @param primary login name
 	 * @param pass passphrase
 	 * @return true for good login name and passphrase.
-	 */
+    */
     public boolean verify(Login l, String sHandle) {
 	return lUser.equals(l) && hashKeyIs(sHandle);
     }
-
-
 }
