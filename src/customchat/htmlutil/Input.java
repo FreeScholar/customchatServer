@@ -31,5 +31,5 @@ public class Input extends Tag {
     }  
     protected String toText() {
 	return "<FONT SIZE=2>" + super.toText() + "</FONT>";
-    }  
+    }
 }

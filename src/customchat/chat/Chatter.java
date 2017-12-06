@@ -138,7 +138,7 @@ public class Chatter extends Object implements Serializable {
 
 	    if (!bIgEntry) {
 		if (bUserDing) {
-		    m.append("<embed src=\"/resources/sounds/doorbell.wav\" autostart=\"true\" hidden=\"true\">") ;
+                    m.append("<embed src=\"/resources/sounds/doorbell.wav\" autostart=\"true\" hidden=\"true\">") ;
 		    //System.out.println("doing sound for user leaving");
 		}	
 		
@@ -235,7 +235,6 @@ public class Chatter extends Object implements Serializable {
 
 	    vPrivBox.removeAllElements(); //delete messages
 	}
-        
         // changed to use brackets G.T. 11/30/2017
 	if(!bScroll) {
             out.append("\n<H2><FONT FACE=Arial, Helvetica>Public Messages</FONT></H2>\n");

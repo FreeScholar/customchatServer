@@ -27,7 +27,7 @@ public abstract class ChatObject extends Object implements Serializable {
     public static final int BROADCAST = 104;
     public static final int SUBMIT = 105;
     public static final int NEW_ROOM = 106;
-    public static final int WHISPER = 107 ;
+    public static final int WHISPER = 107;
     /*
      * Construction Commands:
      * Commands that have to do with modifying objects.
@@ -84,7 +84,7 @@ public abstract class ChatObject extends Object implements Serializable {
     private static final String sAdminStopVar = "sAdminStop";
 
     // are we in manual or realtime mode
-    public boolean bScroll ;
+    public boolean bScroll;
 
     protected static Login lDefaultOwner;
     static {
@@ -121,7 +121,7 @@ public abstract class ChatObject extends Object implements Serializable {
     protected static final String FILE_DATA = FILE_PREFIX + "data";
     protected static final String FILE_TRANSCRIPT = FILE_PREFIX + "messages.html";
     protected static final String FILE_ADMINS = FILE_PREFIX + "admins";
-    public    static final String FILE_BOOTED = FILE_PREFIX + "booted";
+    public static final String FILE_BOOTED = FILE_PREFIX + "booted";
     protected static final String FILE_ORDER = FILE_PREFIX + "order";
     protected static final String FILE_POST_IMAGES = "ccimages";
     protected static final String FILE_POST_SOUNDS = "ccsounds";
@@ -177,15 +177,15 @@ public abstract class ChatObject extends Object implements Serializable {
     public boolean bLogging = false;
     public String sButtonURL = URL_IMG + "buttons/lightgray/";
     public int iWordSet = BadLanguageFilter.NONE;
-    public String video ;
-    public String sVideo ;
+    public String video;
+    public String sVideo;
     public boolean bDing = false;
-	public boolean bUserDing = false ;
-    public boolean bHtmlDis = false ;
-    public boolean bSwitchDis = false ;
-    public boolean bPMDis = false ;
-    public boolean bPrivateRooms = false ;
-    public String bIdleTimes = "1" ;
+    public boolean bUserDing = false;
+    public boolean bHtmlDis = false;
+    public boolean bSwitchDis = false;
+    public boolean bPMDis = false;
+    public boolean bPrivateRooms = false;
+    public String bIdleTimes = "1";
 
 
     // every object can get one of these ...
@@ -246,7 +246,7 @@ public abstract class ChatObject extends Object implements Serializable {
 	Link popup = new Link("javascript:openPM('"+h.commandURL(SEND) + "&" + RECIPIENT_VAR + "=" + URLEncoder.encode(c.HashKey())+"')",
 			      "<IMG SRC=\"" + buttonURL("pmcheck.gif") + "\" ALT=\"Send " + c.getText() + " a private message\" BORDER=0>") ;
 		
-	return popup ;
+	return popup;
 	
     }            
 
@@ -334,7 +334,7 @@ public abstract class ChatObject extends Object implements Serializable {
 		   + "Expires:</B></FONT></TD>");
 	tr.addHTML("<TD WIDTH=60 BGCOLOR=\"#A4C6F4\">&nbsp;</TD>");
 
-	table.addHTML(tr = new Container("TR")) ;
+	table.addHTML(tr = new Container("TR"));
 	tr.addHTML(new Container("TD",new Input(Input.TEXT, sAdminNameVar, "").addArgument("Size","12")));
 	tr.addHTML(new Container("TD",new Input(Input.TEXT, sAdminPassVar, "").addArgument("Size","12")));
 	tr.addHTML(new Container("TD",new HTMLDate(sAdminStartVar)));
@@ -347,8 +347,7 @@ public abstract class ChatObject extends Object implements Serializable {
 	return p;
     }          
 
-    public void addChatter(Chatter c)
-	throws ChatException {
+    public void addChatter(Chatter c) throws ChatException {
 	if(activeCount >= maxChatters && !c.getLogin().equals(lOwner)) {
 	    ChatException ce = new ChatException("User limit has been reached.  Try back later.");
 	    ErrorLog.error(ce, 0, "Upgrade to a larger license at http://customchat.com");
