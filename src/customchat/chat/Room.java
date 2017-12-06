@@ -11,6 +11,7 @@ import customchat.htmlutil.*;
  * This class implements one chat room.  The class keeps track of users in room, messages, and options
  * for the room.  Based on these options, the class generates HTML customized for a given chatter.
  *
+ * 
  * @author CustomChat Inc.
  * @version 1.5
  */
@@ -287,7 +288,6 @@ public class Room extends ChatObject {
 	try {
 	    String[] handles = UserRegistry.getHandles(l);
 
-            // changed to use brackets G.T. 11/30/2017
 	    if(handles == null) {
                 f.addHTML("<INPUT NAME=\"" + Chatter.HANDLE_VAR + "\" VALUE=\"" + sDefaultHandle + "\">");
             } else {
@@ -341,7 +341,7 @@ public class Room extends ChatObject {
 	    int i;
 	    boolean bFound = false;
             // this might be where the public message error is
-	    //for(i = (auto_inc - iShowRecent) % mesg_limit; i < auto_inc; i = (i + 1) % mesg_limit) {
+	   // for(i = (auto_inc - iShowRecent) % mesg_limit; i < auto_inc; i = (i + 1) % mesg_limit) {
 	    for(i = iShowRecent; i > 0; i--) {
 		Message m = (Message)htMessages.get(new Integer((auto_inc - i) % mesg_limit));
 		if(m != null && m.is(Message.PUBLIC)) {
@@ -350,7 +350,6 @@ public class Room extends ChatObject {
 	  	}
 	    }
             
-            // changed to use brackets G.T. 11/30/2017
 	    if(!bFound) {
                 p.addHTML("<I>No recent messages</I>");
             }
@@ -723,9 +722,11 @@ public class Room extends ChatObject {
 		p = doScrollList(c, lt.getValue("refreshtime"));
 		break;
 	    case SCROLL_MESSAGES:
-		if(c == null)
-		    throw new ChatterNotFoundException();
+		if(c == null) {
+                    throw new ChatterNotFoundException();
+                }
 		throw new AutoScrollException(c);
+               
 	    case SCROLL_SEND:
 		send(c, lt);
 		p = scrollSend(c);
@@ -1171,7 +1172,6 @@ public class Room extends ChatObject {
     }
 
     Page doScrollList(Chatter c, String sRefresh) {
-        // changed to use brackets G.T. 11/30/2017
 	if (sRefresh == null || sRefresh.length() == 0) {
             sRefresh = "";
         }
@@ -1563,6 +1563,7 @@ public class Room extends ChatObject {
 	f.addHTML("<CENTER><FONT FACE=Arial, Helvetica SIZE=2>Express Public Message:</FONT>");
 	Input i = new Input(Input.TEXT, XPUBLIC_MESSAGE_VAR, "");
 	i.addArgument("SIZE","35");
+        i.addArgument("class", "xPublic");
 	f.addHTML(i);
 	f.addHTML("</CENTER>");
 
@@ -1581,14 +1582,14 @@ public class Room extends ChatObject {
 	f.addHTML("<TABLE><TR><TD VALIGN=\"TOP\">");
 
         //changed to use brackets G.T. 11/30/2017
-	if (!bHtmlDis) {
+	if (bHtmlDis) {
             f.addHTML(HTMLGetPullDown(PUBLIC_MESSAGE_VAR));
         }
             
 	f.addHTML("<BR>\n");
 	f.addHTML("<FONT FACE=Arial, Helvetica SIZE=2>Type a Public Message to everyone in the room:</FONT><BR><TEXTAREA ROWS=\"4\" COLS=\"65\" " +
 		  "WRAP=\"SOFT\" NAME=\"" + PUBLIC_MESSAGE_VAR);
-	f.addHTML("\"></TEXTAREA><BR>\n");
+	f.addHTML("\"></TEXTAREA><BR>\n"); 
 	f.addHTML(new Input(Input.SUBMIT, "", sSpeak));
 
 	if (!bHtmlDis && !ct.bNoButtons) {
@@ -1858,13 +1859,13 @@ public class Room extends ChatObject {
 		   + commandURL(SCROLL_LIST, ct)
 		   + "\" MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" "
 		   + "SCROLLING=\"auto\" BORDER=\"1\" FRAMEBORDER=\"1\">\n"
-		   + "</FRAMESET>\n");
+		   + "</FRAMESET>\n"); 
 
 	//"<FRAME NAME=\"" + FRAME_MIDDLE + "\" SRC=\""
 	// + commandURL(SCROLL_MIDDLE, ct)
-	// + "\" MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" SCROLLING=\"auto\""
-	// + " BORDER=\"1\" FRAMEBORDER=\"1\">");
-	p.addFrame("<FRAME NAME=\"" + FRAME_SEND + "\" SRC=\""
+	 //+ "\" MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" SCROLLING=\"auto\""
+	 //+ " BORDER=\"1\" FRAMEBORDER=\"1\">");
+	p.addFrame("<FRAME class='frame-send' NAME=\"" + FRAME_SEND + "\" SRC=\""
 		   + commandURL(SCROLL_SEND, ct)
 		   + "\" MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" SCROLLING=\"auto\""
 		   + "BORDER=\"1\" FRAMEBORDER=\"1\">");
@@ -2003,6 +2004,8 @@ public class Room extends ChatObject {
 
 	//Message box
 	Input inp = new Input(Input.TEXT, PUBLIC_MESSAGE_VAR, "");
+        // new class added to message box
+        inp.addArgument("class", "message-box");
 	inp.addArgument("SIZE", "60") ;
 	tBottomForm.addHTML(inp);
 
@@ -2019,8 +2022,11 @@ public class Room extends ChatObject {
 	if (!bPMDis || isAdmin(ct.lUser)) {
         //tBottomForm.addHTML("<input type=image src=\"" + buttonURL("whisper.gif") + "\" set border=0 value=\"Whisper\" name=\""+PRIVATE_CHECKBOX_VAR+"\">") ;
 	    Input iWhisper = new Input(Input.SUBMIT, PRIVATE_CHECKBOX_VAR, sWhisper);
+            Input iSpeak = new Input(Input.SUBMIT, PUBLIC_MESSAGE_VAR, sSpeak);
+            
 	    iWhisper.addArgument("ALIGN", "TOP");
 	    iWhisper.addArgument("VSPACE", "0");
+            tBottomForm.addHTML(iSpeak);
 	    tBottomForm.addHTML(iWhisper);
 	}
 
@@ -2055,7 +2061,7 @@ public class Room extends ChatObject {
 	
 	//Exit button
 	tBottomForm.addHTML("<A HREF=" + commandURL(EXIT, ct)
-			    + " TARGET=_top><IMG SRC=\"" + buttonURL("exit.gif")
+			    + " TARGET=_top class='exit-link'><IMG SRC=\"" + buttonURL("exit.gif")
 			    + "\" ALT=\"\" BORDER=0></A>");
 	tBottomForm.addHTML("</td></tr>") ;
 	tBottomForm.addHTML("</table>") ;
@@ -2082,8 +2088,8 @@ public class Room extends ChatObject {
 	// PUBLIC_MESSAGE_VAR has the public message from manual
 	// and either the public or privat message in autoscroll
 	// depending on if they hit the speak or the whisper button
-	if(((sMessage = lt.getValue(PUBLIC_MESSAGE_VAR)) != null) && !sMessage.equals(""))
-	    if(lt.getValue(PRIVATE_CHECKBOX_VAR) == null) {
+	if(((sMessage = lt.getValue(PUBLIC_MESSAGE_VAR)) != null) && !sMessage.equals("")) {
+            if(lt.getValue(PRIVATE_CHECKBOX_VAR) == null) {
                 send(new Message(sMessage, c.HashKey(), (String)null, Message.PUBLIC));
             } else {
 		Message m = c.privateMessage(sMessage);
@@ -2091,6 +2097,8 @@ public class Room extends ChatObject {
                     UserRegistry.sendMessage(m);
                 }    
 	    }
+        }
+	    
 
 	// MANUAL PUBLIC MESSAGES
 	if(((sMessage = lt.getValue(PRIVATE_MESSAGE_VAR)) != null) && !sMessage.equals("")) {
