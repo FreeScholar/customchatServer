@@ -22,11 +22,11 @@ public class Room extends ChatObject {
 
     public static final int ADD = 1001;
     public static final int MANUAL = 1002;
-    public static final int SCROLL_TOP = 1003;
-    public static final int SCROLL_MESSAGES = 1004;
-    public static final int SCROLL_SEND = 1005;
+    public static final int scrollTop = 1003;
+    public static final int scrollMessages = 1004;
+    public static final int scrollSend = 1005;
     public static final int SCROLL_MIDDLE = 1006;
-    public static final int SCROLL_LIST = 1007;
+    public static final int scrollWhoList = 1007;
     public static final int OPTIONS = 1008;
     public static final int SWITCH = 1009;
     public static final int EXIT = 1010;
@@ -49,11 +49,11 @@ public class Room extends ChatObject {
     public static final String VAR_POST_SOUND = "postsound";
     public static final String VAR_OPTIONS_SUBMITTED = "OptionsFormSubmitted";
 
-    public static final String FRAME_WHO_LIST = "WhoListFrame";
+    public static final String frameWhoList = "WhoListFrame";
     public static final String FRAME_MIDDLE   = "MiddleFrame";
-    public static final String FRAME_MESSAGES = "MessagesFrame";
-    public static final String FRAME_TOP      = "TopFrame";
-    public static final String FRAME_SEND     = "SendFrame";
+    public static final String frameMessages = "MessagesFrame";
+    public static final String frameTop      = "TopFrame";
+    public static final String frameSend     = "SendFrame";
 
     public static final String FORM_WHO_LIST  = "PMForm";
     public static final String FORM_POST_IMAGES = "postimageform";
@@ -142,11 +142,10 @@ public class Room extends ChatObject {
 		while(e.hasMoreElements()) {
 		    c = (Chatter) e.nextElement();
                     
-                    // changed to use brackets G.T. 11/30/2017
 		    if(c.HasScroll()) {
                         c.deliverMessages();
                     }
-		}
+                }
                 
 		try { sleep(1000L); } catch(InterruptedException ie){}
 	    }
@@ -194,7 +193,7 @@ public class Room extends ChatObject {
 	Filter myF = new Filter();
 	return ((sHREF == null) ? "" : "<A HREF=\"" + sHREF + "\">") +
 	    myF.FilterHTML(
-			   //comment next line and line after sName [one with only ")"] to remove
+			   //comment next line and line after sNameSub [one with only ")"] to remove
 			   //image filter. This remove images from user created chatroom names
 			   Filter.ImgFilter(
 					    sName
@@ -224,7 +223,7 @@ public class Room extends ChatObject {
      * @param out the output stream to write the entry page to.
      */
     Page HTMLEntryPage(Login l, String sMessage, String sDefaultHandle) throws ChatException {
-        // changed to use brackets G.T. 11/30/2017
+      
 	if(l == null) {
             throw new UnauthorizedException("Please enter a username and passphrase.");
         }
@@ -280,7 +279,6 @@ public class Room extends ChatObject {
 	f.addHTML("<TR><TD><CENTER><TABLE><TR>");
 	f.addHTML("<TD Width=200><FONT SIZE=2 FACE=ARIAL><B>Your Handle or Name:</B><BR> ");
 
-        // changed to use brackets G.T. 11/30/2017
 	if(sDefaultHandle == null) {
             sDefaultHandle = l.getLogin();
         }
@@ -308,7 +306,6 @@ public class Room extends ChatObject {
 	// sChatPic
 	f.addHTML("<td width=200>");
         
-        // changed to use brackets G.T. 11/30/2017
 	if (!bHtmlDis) {
             f.addHTML("<B><FONT SIZE=2 FACE=ARIAL>Your Handle Image:</FONT><BR><FONT SIZE=2><INPUT NAME=\"sChatPic\" SIZE=\"25\"></FONT>");
         }
@@ -326,7 +323,6 @@ public class Room extends ChatObject {
 	f.addHTML("</TD></TR></TABLE></CENTER></TR></TABLE></CENTER>");
 
 	//print text or HTML on bottom of room entry page under the login fields
-        // changed to use brackets G.T. 11/30/2017
 	if(sEntryBottom != null && sEntryBottom.length()>0) {
             p.addHTML(Filter.ctrHTML(sEntryBottom, bCtrEntryBottom));
         }
@@ -337,13 +333,13 @@ public class Room extends ChatObject {
 	if(iShowRecent > 0) {
 	    p.addHTML("<TD width=" + (bEntryWho ? "\"300\"" : "\"600\"") + ">" +
 		      "<FONT SIZE=\"3\" FACE=\"Arial\">" +
-		      "<B>The most recent PUBLIC messages posted inside this room:</B></FONT><P>");
+		      "<B>The most recent PUBLIC messages posted inside this room:</B></FONT>");
 	    int i;
 	    boolean bFound = false;
             // this might be where the public message error is
 	   // for(i = (auto_inc - iShowRecent) % mesg_limit; i < auto_inc; i = (i + 1) % mesg_limit) {
 	    for(i = iShowRecent; i > 0; i--) {
-		Message m = (Message)htMessages.get(new Integer((auto_inc - i) % mesg_limit));
+		Message m = (Message)htMessages.get((auto_inc - i) % mesg_limit);
 		if(m != null && m.is(Message.PUBLIC)) {
 		    bFound = true;
 		    p.addHTML("<FONT SIZE=\"2\" FACE=\"Arial\">" + m.getHTML(null) + "</FONT>");
@@ -359,7 +355,7 @@ public class Room extends ChatObject {
 
 	if(bEntryWho) {
 	    p.addHTML("<TD><FONT SIZE=\"3\" FACE=\"Arial\">" +
-		      "<B>Who is currently in this room:</B></FONT><P>" +
+		      "<B>Who is currently in this room:</B></FONT>" +
 		      "<FONT SIZE=\"2\" FACE=\"Arial\">");
 
 	    Enumeration e = GetChatters();
@@ -375,7 +371,7 @@ public class Room extends ChatObject {
 	//the CustomChat signature on the room entry pages
 	p.addHTML("<P><center>" + HTMLGetBottom(null) + "</center>");
 	p.addHTML("<CENTER><FONT SIZE=\"1\" FACE=Arial,Helvetica,Geneva>Powered by " +
-		  "<A HREF=\"http://customchat.com\"><B>CustomChat Server</B></A> since 1997</FONT></CENTER><P>");
+		  "<A HREF=\"http://customchat.com\"><B>CustomChat Server</B></A> since 1997</FONT></CENTER></P>");
 
 	return p;
     }
@@ -403,29 +399,15 @@ public class Room extends ChatObject {
     }  
 
     private String HTMLGetPullDown(String sFieldName) {
-	StringBuffer sb = new StringBuffer("");
+	StringBuilder sb;
+        sb = new StringBuilder("");
 
 	//should change these to use PullDown() !!!
 	if (getSoundList() != null)
-	    sb.append("&nbsp;<FONT SIZE=2><SELECT NAME=\"Sound" + sFieldName
-		      + "\" onchange='if(this.selectedIndex != 0) document.Bottom."
-		      + sFieldName + ".value += " +
-		      "\"<embed src=\\\"\" + this.options[" +
-		      "this.selectedIndex].value +" +
-		      "\"\\\" hidden=\\\"False\\\" autostart=\\\"true\\\" align border=\\\"0\\\"" +
-		      "width=\\\"140\\\" height=\\\"30\\\" >\";" +
-		      "document.Bottom." + sFieldName + ".focus();'>" +
-		      "<option>Sounds" + getString(getSoundList()) + "</select>\n");
+	    sb.append("&nbsp;<FONT SIZE=2><SELECT NAME=\"Sound").append(sFieldName).append("\" onchange='if(this.selectedIndex != 0) document.Bottom.").append(sFieldName).append(".value += " + "\"<embed src=\\\"\" + this.options[" + "this.selectedIndex].value +" + "\"\\\" hidden=\\\"False\\\" autostart=\\\"true\\\" align border=\\\"0\\\"" + "width=\\\"140\\\" height=\\\"30\\\" >\";" + "document.Bottom.").append(sFieldName).append(".focus();'>" + "<option>Sounds").append(getString(getSoundList())).append("</select>\n");
 
-        // changed to use brackets G.T. 11/30/2017 
 	if (getImageList() != null) {
-            sb.append("<SELECT NAME=\"Picture" + sFieldName
-		      + "\" onchange='if(this.selectedIndex != 0) document.Bottom."
-		      + sFieldName + ".value += " +
-		      "\"<img src=\\\"\" + this.options["  +
-		      "this.selectedIndex].value +\"\\\" border=\\\"0\\\">\";" +
-		      "document.Bottom." + sFieldName + ".focus();'><option>Images"
-		      + getString(getImageList())+ "</select></FONT>\n");
+            sb.append("<SELECT NAME=\"Picture").append(sFieldName).append("\" onchange='if(this.selectedIndex != 0) document.Bottom.").append(sFieldName).append(".value += " + "\"<img src=\\\"\" + this.options[" + "this.selectedIndex].value +\"\\\" border=\\\"0\\\">\";" + "document.Bottom.").append(sFieldName).append(".focus();'><option>Images").append(getString(getImageList())).append("</select></FONT>\n");
         }
         
 	return sb.toString();
@@ -471,7 +453,17 @@ public class Room extends ChatObject {
      * @return the chatter object if successful or null otherwise.
      */
     
-	protected Page 
+    /**
+     * -----------------------------------------------------------------------------------
+ Tries to add the user to the room.Fails if the room is full and the chatter is not
+ an admin or the owner.  Also fails if the room password is incorrect.
+ On success send the arrival message to the room.
+     * @param l
+     * @param lt
+     * @return the chatter object if successful or null otherwise.
+     * @throws customchat.chat.ChatException
+     */
+    protected Page 
 	add(Login l, LookupTable lt)
 	throws ChatException {
 	
@@ -534,7 +526,12 @@ public class Room extends ChatObject {
 	return manual(c);
     }      
 
-
+    /**
+     *
+     * @param c
+     * @throws ChatException
+     */
+    @Override
     public void addChatter(Chatter c)
 	throws ChatException {
 	if(!inRoom(c)) {
@@ -614,7 +611,7 @@ public class Room extends ChatObject {
 	case EXIT :
 	    sURL = buttonURL("exit.gif");
 	    break;
-	case SCROLL_LIST :
+	case scrollWhoList :
 	case OPTIONS :
 	    sURL = buttonURL("setoptions.gif");
 	    break;
@@ -633,6 +630,14 @@ public class Room extends ChatObject {
 	return add(l, lt);
     }
 	
+    /**
+     *
+     * @param l
+     * @param m
+     * @return
+     * @throws ChatException
+     */
+    @Override
     public Page doBroadcast(Login l, Message m)
 	throws ChatException {
 	super.doBroadcast(l, m);
@@ -652,7 +657,7 @@ public class Room extends ChatObject {
 	if (c != null)
 	    c.MakeContact() ;
 
-	//	if(c != null && iCommand != SCROLL_SEND && iCommand != SCROLL_LIST) {
+	//	if(c != null && iCommand != scrollSend && iCommand != scrollWhoList) {
 	//  c.update(lt);
 	//  c.MakeContact();
 	//}
@@ -711,23 +716,23 @@ public class Room extends ChatObject {
 		send(c, lt);
 		p = manual(c);
 		break;
-            case SCROLL_TOP:
+            case scrollTop:
 		p = getTop(c, true);
 		break;
 	    case SCROLL_MIDDLE:
 		p = doMiddleFrame(c);
 		break;
-	    case SCROLL_LIST:
+	    case scrollWhoList:
 		c.update(lt);
 		p = doScrollList(c, lt.getValue("refreshtime"));
 		break;
-	    case SCROLL_MESSAGES:
+	    case scrollMessages:
 		if(c == null) {
                     throw new ChatterNotFoundException();
                 }
 		throw new AutoScrollException(c);
                
-	    case SCROLL_SEND:
+	    case scrollSend:
 		send(c, lt);
 		p = scrollSend(c);
 		break;
@@ -811,7 +816,6 @@ public class Room extends ChatObject {
 		break;
 	    default:
 		p = super.doCommand(lUser, lt, out, iCommand);
-                // break statement added even though redundant. can fix fall through errors.
                 break;
 	    }
 	} catch(ChatterNotFoundException e) {
@@ -821,7 +825,6 @@ public class Room extends ChatObject {
     }      
 
     public Page doRemoveImages(Login l, LookupTable lt) throws ChatException {
-        // changed to use brackets G.T. 11/30/2017
 	if (!hasPrivilege(l, CAN_EDIT)) {
             throw new UnauthorizedException("You do not have edit privileges for " + sName);
         }
@@ -870,14 +873,14 @@ public class Room extends ChatObject {
         }
 
  	Page p = new Page();
-	p.addFrameSetArg("COLS","75%,*");
-	p.addFrameSetArg("BORDER","1");
-	p.addFrame("<FRAME NAME=\"" + FRAME_MESSAGES + "\" SRC=\""
-		   + commandURL(SCROLL_MESSAGES, c)
+	//p.addFrameSetArg("COLS","75%,*");
+	//p.addFrameSetArg("BORDER","1");
+	p.addHTML("<FRAME NAME=\"" + frameMessages + "\" SRC=\""
+		   + commandURL(scrollMessages, c)
 		   + "\" MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" "
 		   + "SCROLLING=\"auto\" BORDER=\"1\" FRAMEBORDER=\"1\">");
-	p.addFrame("<FRAME NAME=\"" + FRAME_WHO_LIST + "\" SRC=\""
-		   + commandURL(SCROLL_LIST, c)
+	p.addHTML("<FRAME NAME=\"" + frameWhoList + "\" SRC=\""
+		   + commandURL(scrollWhoList, c)
 		   + "\" MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" "
 		   + "SCROLLING=\"auto\" BORDER=\"1\" FRAMEBORDER=\"1\">");
 	return p;
@@ -1147,15 +1150,16 @@ public class Room extends ChatObject {
             
 	    i++;
 	    f.addHTML("<TD>");
-	    String sName = (String) e.nextElement();
-	    Input box = new Input(Input.CHECKBOX, VAR_POST_SOUND, sName);
+	    String sNameSub;
+            sNameSub = (String) e.nextElement();
+	    Input box = new Input(Input.CHECKBOX, VAR_POST_SOUND, sNameSub);
             // changed to use brackets G.T. 11/30/2017
-	    if (haveSound(sName)) {
+	    if (haveSound(sNameSub)) {
                 box.addArgument(Flag.CHECKED);
             }
 		
 	    f.addHTML(box);
-	    f.addHTML("<A HREF=\"" + House.POST_SOUNDS.get(sName) + "\" TARGET=_blank>" + sName + "</A>");
+	    f.addHTML("<A HREF=\"" + House.POST_SOUNDS.get(sNameSub) + "\" TARGET=_blank>" + sNameSub + "</A>");
 	    f.addHTML("</TD>\n");
 	}
 	f.addHTML("</TR></TABLE>\n");
@@ -1177,7 +1181,8 @@ public class Room extends ChatObject {
         }
 
 	try {
-	    double d = (new Double(sRefresh)).doubleValue();
+	    double d;
+            d = (new Double(sRefresh));
             // changed to use brackets (both if statements) G.T. 11/30/2017
 	    if (d < 5) {
                 sRefresh = "5";
@@ -1191,7 +1196,7 @@ public class Room extends ChatObject {
 	}
 
 	Page p = (Page) pageTemplate.clone();
-	Form f = form(FORM_WHO_LIST, true, SCROLL_LIST, c);
+	Form f = form(FORM_WHO_LIST, true, scrollWhoList, c);
 
 	// add a dummy javascript function focusinput in here ...
 	// focusinput is only meant to be used with the bottom input frame but because of 
@@ -1269,7 +1274,6 @@ public class Room extends ChatObject {
 		i.addArgument("ONCLICK", "submit()");
 	    }
 
-            // changed to use brackets G.T. 11/30/2017
 	    if(isAdmin(c.getLogin())) {
                 f.addHTML(bootHTML(cCurr));
             }
@@ -1332,7 +1336,6 @@ public class Room extends ChatObject {
 		Form f = new Form(name, URL_PREFIX + getKeyWord() + "?" + (new Date()).getTime(), bGet ? "GET" : "POST");
 		if(c != null) {
                     f.addHTML(new Input(Input.HIDDEN, Chatter.HANDLE_VAR, c.sHandle));
-                    // changed to use brackets G.T. 11/30/2017
                     if(c.HasScroll()) {
                         f.addHTML(new Input(Input.HIDDEN, SCROLL_VAR, "1"));
                     }
@@ -1365,7 +1368,7 @@ public class Room extends ChatObject {
 	return null;
     }  
 	
-	public Page getTop(Chatter c, boolean bScrolling) throws ChatException {
+    public Page getTop(Chatter c, boolean bScrolling) throws ChatException {
 	
         // changed to use brackets 11/30/2017
 	if(c == null) {
@@ -1525,7 +1528,7 @@ public class Room extends ChatObject {
             Chatter cCurr = (Chatter)vChatters.elementAt(i);
             Container item = new Container("DD");
             innerList.addHTML(item);
-            //changed to use brackets 11/30/2017
+            
             if (!bPMDis || isAdmin(lOwner)) {
                 item.addHTML(PMHTML(cCurr));
             }
@@ -1548,7 +1551,6 @@ public class Room extends ChatObject {
 	Page p = getTop(ct,false);
 	Enumeration eChatters = null;
 
-        //changed to use brackets 11/30/2017
 	if (buttonJS == null) {
             buttonJS = getResource("button.js");
         }
@@ -1581,7 +1583,6 @@ public class Room extends ChatObject {
 	// Sound option for chatters in the NON SCROLLING area
 	f.addHTML("<TABLE><TR><TD VALIGN=\"TOP\">");
 
-        //changed to use brackets G.T. 11/30/2017
 	if (bHtmlDis) {
             f.addHTML(HTMLGetPullDown(PUBLIC_MESSAGE_VAR));
         }
@@ -1841,34 +1842,47 @@ public class Room extends ChatObject {
 	//out.println("<FRAMESET  ROWS=\"17%,68%,*\" BORDER=\"1\">" +
 
 	Page p = new Page();
+        Container style = new Container("style");
+        Container main = new Container();
+        Container row = new Container("div");
+        row.addArgument("class", "row full-page");
 
-	p.addHeadHTML("<SCRIPT>\n <!--\n var winRef = null;\n//-->\n</SCRIPT>\n");
+        main.addHTML(row);
+        main.addArgument("id", sName + "-page");
+        main.addArgument("class", "full-page");
+        p.addHTML(main);
+        // bootstrap
+        p.addHeadHTML("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css\" integrity=\"sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb\" crossorigin=\"anonymous\">");
+        p.addHeadHTML("<title>" + sName + "</title>");
+	p.addHeadHTML(style);
 
-	p.addFrameSetArg("ROWS", "26%,59%,*");
-	p.addFrameSetArg("BORDER", "1");
-	p.addFrame("<FRAME NAME=\"" + FRAME_TOP + "\" SRC=\""
-		   + commandURL(SCROLL_TOP, ct)
-		   + "\" MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" SCROLLING=\"auto\""
-		   + " BORDER=\"1\" FRAMEBORDER=\"1\">\n");
-	p.addFrame("<FRAMESET COLS=\"80%,*\" BORDER=\"1\">\n"
-		   + "\t<FRAME NAME=\"" + FRAME_MESSAGES + "\" SRC=\""
-		   + commandURL(SCROLL_MESSAGES, ct)
+        style.addHTML("html, body, .full-page {min-height: 100vh;}");
+        style.addHTML("#room-messages-frame {min-height:50vh;}");
+        
+        
+	row.addHTML("<iframe id='room-top-frame' class='full-frame col-12' name='" + frameTop + "' src='"+ commandURL(scrollTop, ct) + "'></iframe>");
+        row.addHTML("<iframe id='room-messages-frame' class='col-12 col-md-9' name='" + frameMessages+ "' src='"+ commandURL(scrollMessages, ct) + "'></iframe>");
+        row.addHTML("<iframe id='room-user-list-frame' class='col-12 col-md-3' name='" + frameWhoList + "' src='"+ commandURL(scrollWhoList, ct) + "'></iframe>");
+        row.addHTML("<iframe id='room-send-frame' class='full-frame col-12' name='" + frameSend + "' src='"+ commandURL(scrollSend, ct) + "'></iframe>");
+	/*p.addFrame("<FRAMESET COLS=\"80%,*\" BORDER=\"1\">\n"
+		   + "\t<FRAME NAME=\"" + frameMessages + "\" SRC=\""
+		   + commandURL(scrollMessages, ct)
 		   + "\" MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" "
 		   + "SCROLLING=\"auto\" BORDER=\"1\" FRAMEBORDER=\"1\">\n"
-		   + "\t<FRAME NAME=\"" + FRAME_WHO_LIST + "\" SRC=\""
-		   + commandURL(SCROLL_LIST, ct)
+		   + "\t<FRAME NAME=\"" + frameWhoList + "\" SRC=\""
+		   + commandURL(scrollWhoList, ct)
 		   + "\" MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" "
 		   + "SCROLLING=\"auto\" BORDER=\"1\" FRAMEBORDER=\"1\">\n"
-		   + "</FRAMESET>\n"); 
+		   + "</FRAMESET>\n"); */
 
 	//"<FRAME NAME=\"" + FRAME_MIDDLE + "\" SRC=\""
 	// + commandURL(SCROLL_MIDDLE, ct)
 	 //+ "\" MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" SCROLLING=\"auto\""
 	 //+ " BORDER=\"1\" FRAMEBORDER=\"1\">");
-	p.addFrame("<FRAME class='frame-send' NAME=\"" + FRAME_SEND + "\" SRC=\""
-		   + commandURL(SCROLL_SEND, ct)
+	/*p.addFrame("<FRAME class='frame-send' NAME=\"" + frameSend + "\" SRC=\""
+		   + commandURL(scrollSend, ct)
 		   + "\" MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" SCROLLING=\"auto\""
-		   + "BORDER=\"1\" FRAMEBORDER=\"1\">");
+		   + "BORDER=\"1\" FRAMEBORDER=\"1\">");*/
 	return p;
     }
 
@@ -1906,14 +1920,14 @@ public class Room extends ChatObject {
 
 		      + "function focusinput() {\n"
 		      + "self.focus() ;\n"
-		      + "document.Bottom.Public.focus();\n"
+		      + "document.getElementById('user-message').focus();\n"
 		      + "return true ;\n" 
 		      +"}\n\n"
 	
 		      + "function doSubmit() {\n"
 		      // if they are the admin reload the top frame
-		      // + (isAdmin(ct.getLogin) ? "parent." + FRAME_TOP + ".location.reload();\n" : "")
-		      // + "parent." + FRAME_WHO_LIST + ".document.location.reload();\n"
+		      // + (isAdmin(ct.getLogin) ? "parent." + frameTop + ".location.reload();\n" : "")
+		      // + "parent." + frameWhoList + ".document.location.reload();\n"
 		      + "return true;\n"
 		      + "}\n"
 		      + "\n"
@@ -1941,8 +1955,10 @@ public class Room extends ChatObject {
 
 	//Bottom Form
 	Form tBottomForm = form(sBottomForm, ct);
+        // new argument 12/20/2017
+        tBottomForm.addArgument("accept-charset", "utf-8");
 	tBottomForm.addArgument("onSUBMIT", "doSubmit()");
-	tBottomForm.addHTML(commandInput(Input.HIDDEN, SCROLL_SEND));
+	tBottomForm.addHTML(commandInput(Input.HIDDEN, scrollSend));
 
 	p.addHTML(tBottomForm);
 
@@ -1963,8 +1979,7 @@ public class Room extends ChatObject {
 	tBottomForm.addHTML("</TD><TD>");
 
 	//Java Script for Toggling Scrolling
-	tBottomForm.addHTML(
-			    //"</FONT>\n"
+	tBottomForm.addHTML(//"</FONT>\n"
 			    "<SCRIPT LANGUAGE=\"JavaScript1.1\">\n" +
 			    "\n" +
 			    "  <!--\n" +
@@ -1974,26 +1989,26 @@ public class Room extends ChatObject {
 			    "        if ( scrolling == true )\n" +
 			    "        {\n" +
 			    "            scrolling = false;\n" +
-			    "            parent." + FRAME_MESSAGES + ".clearTimeout();\n" +
-			    "            parent." + FRAME_MESSAGES + ".autoScrollOn = 0;\n" +
-			    "            parent." + FRAME_MESSAGES + ".onblur = parent." + FRAME_MESSAGES + ".scrollOffFunction;\n" +
+			    "            parent." + frameMessages + ".clearTimeout();\n" +
+			    "            parent." + frameMessages + ".autoScrollOn = 0;\n" +
+			    "            parent." + frameMessages + ".onblur = parent." + frameMessages + ".scrollOffFunction;\n" +
 			    "        } else {\n" +
 			    "            scrolling = true;\n" +
-			    "            parent." + FRAME_MESSAGES + ".autoScrollOn = 1;\n" +
-			    "            parent." + FRAME_MESSAGES + ".onblur = parent." + FRAME_MESSAGES + ".scrollOnFunction;\n" +
-			    "            parent." + FRAME_MESSAGES + ".scroll(0, 65000);\n" +
-			    "            parent." + FRAME_MESSAGES + ".setTimeout('scrollWindow()', 200);\n" +
+			    "            parent." + frameMessages + ".autoScrollOn = 1;\n" +
+			    "            parent." + frameMessages + ".onblur = parent." + frameMessages + ".scrollOnFunction;\n" +
+			    "            parent." + frameMessages + ".scroll(0, 65000);\n" +
+			    "            parent." + frameMessages + ".setTimeout('scrollWindow()', 200);\n" +
 			    "        }  // end if\n" +
 			    "    }  // end toggleScrolling\n" +
-			    "    if ( parent." + FRAME_MESSAGES + " != null  &&  parent." + FRAME_MESSAGES + ".autoScrollOn != null )\n" +
+			    "    if ( parent." + frameMessages + " != null  &&  parent." + frameMessages + ".autoScrollOn != null )\n" +
 			    "    {\n" +
 			    "        document.write('<INPUT NAME=AUTOSCROLL TYPE=CHECKBOX onclick=\"toggleScrolling()\"');\n" +
-			    "        if ( parent." + FRAME_MESSAGES + ".autoScrollOn == 1 )\n" +
+			    "        if ( parent." + frameMessages + ".autoScrollOn == 1 )\n" +
 			    "        {\n" +
 			    "            document.write(' CHECKED');\n" +
 			    "        }  // end if\n" +
 			    "        document.write('> <FONT FACE=\"Arial,Helvetica,Geneva\" SIZE=1>Scroll - Uncheck to scroll back</FONT>');\n" +
-			    "        scrolling = ( parent." + FRAME_MESSAGES + ".autoScrollOn == 1 );\n" +
+			    "        scrolling = ( parent." + frameMessages + ".autoScrollOn == 1 );\n" +
 			    "    }  // end if\n" +
 			    "  //  -->\n" +
 			    "\n" +
@@ -2005,6 +2020,7 @@ public class Room extends ChatObject {
 	//Message box
 	Input inp = new Input(Input.TEXT, PUBLIC_MESSAGE_VAR, "");
         // new class added to message box
+        inp.addArgument("id", "user-message");
         inp.addArgument("class", "message-box");
 	inp.addArgument("SIZE", "60") ;
 	tBottomForm.addHTML(inp);
@@ -2066,8 +2082,7 @@ public class Room extends ChatObject {
 	tBottomForm.addHTML("</td></tr>") ;
 	tBottomForm.addHTML("</table>") ;
 	//Put cursor in the message box
-	tBottomForm.addHTML("<SCRIPT><!--\ndocument.Bottom." + PUBLIC_MESSAGE_VAR +
-			    ".focus();\n//--></SCRIPT>");
+	tBottomForm.addHTML("<SCRIPT><!--\ndocument.getElementById('user-message').focus();\n//--></SCRIPT>");
 	//End table
 	tBottomForm.addHTML("</TD></TR></TABLE>");
 	tBottomForm.addHTML("<FONT SIZE=\"1\" FACE=Arial,Helvetica,Geneva> powered by " +
@@ -2113,7 +2128,7 @@ public class Room extends ChatObject {
      * recipients.
      *
      * @param m the message to me sent
-     * @return the message
+     * @throws customchat.chat.BadLanguageException
      */
     public void send(Message m)	throws BadLanguageException {
 
@@ -2145,7 +2160,7 @@ public class Room extends ChatObject {
         }
 
         //Add the message to the hashtable
-        htMessages.put(new Integer(auto_inc % mesg_limit), m);
+        htMessages.put(auto_inc % mesg_limit, m);
         auto_inc++;
 
         //Add message to queues of recips
@@ -2160,6 +2175,7 @@ public class Room extends ChatObject {
         }      
     }
     
+    @Override
     public String toString() {
         return(this.sName);
     }
@@ -2168,7 +2184,8 @@ public class Room extends ChatObject {
         String res = null;
         try {
             BufferedReader in = new BufferedReader( new InputStreamReader( new FileInputStream( new File(fn))));
-            StringBuffer sb = new StringBuffer() ;
+            StringBuilder sb;
+            sb = new StringBuilder();
             String l ;
             while ((l = in.readLine()) != null) {
                 if (l != null) {
@@ -2185,7 +2202,8 @@ public class Room extends ChatObject {
     }
 
     public String getFontDrops(String ibox) {
-        StringBuffer sb = new StringBuffer(); 
+        StringBuilder sb; 
+        sb = new StringBuilder();
         sb.append("<SELECT onchange=showfont(this.options[this.selectedIndex].value,'"+ibox+"') name=font>");
         sb.append("<OPTION value=Arial selected>Arial</OPTION>");
         sb.append("<OPTION value=\"Century\">Century</OPTION>");
