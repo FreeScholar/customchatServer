@@ -8,8 +8,8 @@ public class Tag extends HTML {
     protected Hashtable arguments;
 
 
-    public static final Tag P = new Tag("P");
-    public static final Tag BR = new Tag("BR");
+    //public static final Tag P = new Tag("P");
+    //public static final Tag BR = new Tag("BR");
 
     public Tag(final String name) {
 	this.name = name;
@@ -37,9 +37,14 @@ public class Tag extends HTML {
 	arguments.remove(s);
     }  
 
+    /**
+     *
+     * @return
+     */
+    @Override
     protected String toText() {
-	StringBuffer sb = new StringBuffer(100);
-	sb.append("<" + name.toUpperCase());
+	StringBuilder sb = new StringBuilder(100);
+	sb.append("<").append(name.toUpperCase());
 	Enumeration e = arguments.elements();
 	while(e.hasMoreElements())
 	    sb.append(((Argument)e.nextElement()).toString());

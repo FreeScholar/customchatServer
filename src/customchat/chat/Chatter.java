@@ -62,11 +62,11 @@ public class Chatter extends Object implements Serializable {
 
     private Date dLastCheck = new Date();  // Time of last activity
     private transient AutoScroll scroll = null;
-    private transient Thread outThread = null; //thread associated with chatter
+    //private final transient Thread outThread = null; //thread associated with chatter
 
     // Messages waiting for chatter
-    private Vector vPubBox = new Vector();  // Public message queue.
-    private Vector vPrivBox = new Vector(); // Private message queue.
+    private final Vector vPubBox = new Vector();  // Public message queue.
+    private final Vector vPrivBox = new Vector(); // Private message queue.
 
 	public String sChatPic = "DEF";
 
@@ -94,7 +94,6 @@ public class Chatter extends Object implements Serializable {
 	switch(m.getType()) {
 	case Message.PUBLIC:
 	    //check if sender is being ignored publicly
-            // changed to use brackets G.T. 11/30/2017
 	    if(isIgPub(m.getFrom())) {
                 break;
             }
@@ -204,12 +203,13 @@ public class Chatter extends Object implements Serializable {
      */
 
     public String HTMLGetNewMessages(boolean bScroll) {
-	StringBuffer out = new StringBuffer("");
+	StringBuilder out;
+        out = new StringBuilder("");
 	Message mCurr;
 	Enumeration e;
 
 	if(vPrivBox.size() > 0) {
-            // changed to use brackets G.T. 11/30/2017
+          
 	    if(!bScroll) {
                 out.append("<H2><FONT FACE=Arial, Helvetica>Private Messages</FONT></H2>\n");
             }
@@ -228,14 +228,14 @@ public class Chatter extends Object implements Serializable {
 		out.append(mCurr.getHTML(this));
 	    }
 
-            // changed to use brackets G.T. 11/30/2017
+
 	    if(!bScroll) {
                 out.append("<HR>\n");
             }
 
 	    vPrivBox.removeAllElements(); //delete messages
 	}
-        // changed to use brackets G.T. 11/30/2017
+
 	if(!bScroll) {
             out.append("\n<H2><FONT FACE=Arial, Helvetica>Public Messages</FONT></H2>\n");
         }
@@ -383,6 +383,7 @@ public class Chatter extends Object implements Serializable {
 	 * time.
 	 *
 	 * @param bNoPic true means replace images in handle with a small default image.
+     * @param noIdleTimes
 	 * @return a string with the handle as it should be printed in html
 	 */
     public String getHTML(boolean bNoPic,String noIdleTimes) {

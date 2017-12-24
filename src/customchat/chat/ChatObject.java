@@ -1410,8 +1410,8 @@ public abstract class ChatObject extends Object implements Serializable {
 		}
 		
 	    Enumeration ec = vChatters.elements() ;
-		StringBuffer sb = new StringBuffer() ;
-		sb.append("<h"+level+">"+sName+"</h"+level+">");
+		StringBuilder sb = new StringBuilder() ;
+		sb.append("<h").append(level).append(">").append(sName).append("</h").append(level).append(">");
 		if (vChatters.size() > 0) {
 		sb.append("<b>WHO'S HERE</b><p>");
 		sb.append("<ul>");
@@ -1419,14 +1419,13 @@ public abstract class ChatObject extends Object implements Serializable {
 		
 		while (ec.hasMoreElements()) {
 			Chatter ch = (Chatter)ec.nextElement();
-			String Handle = ch.toString() ;
+			String Handle = ch.toString();
 			sb.append("<li>");
-			sb.append(	"<input type=checkbox name=\"chk:"+sKeyWord+":"+Handle+"\""+
-					  	" value=\""+ch.lUser.IP.toString()+"\">");
-			sb.append(ch.lUser.IP.toString()) ;
-			sb.append(":") ;
-			sb.append(Handle) ;
-			sb.append("<p>") ;
+			sb.append("<input type=checkbox name=\"chk:").append(sKeyWord).append(":").append(Handle).append("\"" + " value=\"").append(ch.lUser.IP).append("\">");
+			sb.append(ch.lUser.IP);
+			sb.append(":");
+			sb.append(Handle);
+			sb.append("<p>");
 			sb.append("</li>");
 		}
 		sb.append("</ul>");

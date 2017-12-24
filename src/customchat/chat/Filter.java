@@ -145,14 +145,14 @@ public class Filter implements Serializable {
 
 	  //check each arg
 	  for(int i=0; i<sTag.args.length; i++) {
-	      if(sArgs.indexOf(sTag.args[i] + ",") < 0) {
+	      if(!sArgs.contains(sTag.args[i] + ",")) {
 	        //argument not found
 	        Escape(sb, sTag.iBegin, sTag.iEnd);
 	        continue;
 	      }
 		String sAllowed;
 	      if(((sAllowed = (String)htAllow.get(sTag.sName)) != null)
-		  &&(sAllowed.indexOf(sTag.args[i] + ",") < 0)) {
+		  &&(!sAllowed.contains(sTag.args[i] + ","))) {
 
 	        //value not allowed for arg
 	        Escape(sb, sTag.iBegin, sTag.iEnd);
@@ -230,8 +230,8 @@ public class Filter implements Serializable {
 	Tagenizer t = new Tagenizer(s);
 
 	Tag tag;
-	int i, iSoFar=0;
-	String sSrc = null, sSoFar = "";
+	int iSoFar=0;
+	String sSoFar = "";
 	while((tag = t.NextTag()) != null) {
 	  if(!tag.sName.equals("EMBED") || tag.bClose )
 	      continue;
@@ -253,7 +253,8 @@ public class Filter implements Serializable {
   }  
 
   public static String stripHTML(final String s) {
-	StringBuffer sb = new StringBuffer(s.length());
+	StringBuilder sb;
+            sb = new StringBuilder(s.length());
 	int i, j;
 	char ch;
 
