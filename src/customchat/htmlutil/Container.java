@@ -8,7 +8,7 @@ public class Container extends Tag implements Cloneable {
     public Vector contents; // list of HTML elements contained in this tag
 
     public Container() {
-	super("SPAN") ;
+	super("div");
 	contents = new Vector(3);
     }
 
@@ -34,6 +34,7 @@ public class Container extends Tag implements Cloneable {
     public Container addHTML(String s) {
 	return addHTML(new Text(s));
     }  
+    @Override
     public synchronized Object clone() {
 	Container c = new Container(name) ;
 	Enumeration e = contents.elements() ;
@@ -48,8 +49,14 @@ public class Container extends Tag implements Cloneable {
 	return c;
     }  
 
+    /**
+     *
+     * @param noClose
+     * @return
+     */
     protected String toString(boolean noClose) {
-	StringBuffer sb = new StringBuffer();
+	StringBuilder sb;
+        sb = new StringBuilder();
 	if(noClose) {
 	    sb.append(super.toText());
 	    sb.append("\n");
@@ -61,13 +68,19 @@ public class Container extends Tag implements Cloneable {
 	    return toString();
     }  
 
+    /**
+     *
+     * @return
+     */
+    @Override
     protected String toText() {
-	StringBuffer sb = new StringBuffer(100);
+	StringBuilder sb;
+        sb = new StringBuilder(100);
 	sb.append(super.toText());
 	sb.append("\n");
 	for(int i = 0; i < contents.size(); i++)
 	    sb.append(((HTML)contents.elementAt(i)).toString());
-	sb.append("</" + name + ">");
+	sb.append("</").append(name).append(">");
 	sb.append("\n");
 	return sb.toString();
     }  
