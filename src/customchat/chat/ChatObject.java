@@ -605,8 +605,7 @@ public abstract class ChatObject extends Object implements Serializable {
 	return defaultCommand(l, null);
     }  
 
-    protected Page doCommand(Login lUser, LookupTable lt, PrintWriter out, int iCommand)
-	throws ChatException, IOException {
+    protected Container doCommand(Login lUser, LookupTable lt, PrintWriter out, int iCommand) throws ChatException, IOException {
 	Container con = new Container(); 
 	Page p = null;
 	// handle the command
@@ -813,7 +812,7 @@ public abstract class ChatObject extends Object implements Serializable {
 		// get the command variable COM_VAR
 		String sCommand = lt.getValue(COM_VAR);
 		int iCommand;
-		Page p;
+		Container commandContainer;
 
 		if(sCommand == null)
 			iCommand = DEFAULT;
@@ -831,7 +830,7 @@ public abstract class ChatObject extends Object implements Serializable {
 			//Debug.println("iCommand:"+ String.valueOf(iCommand));
 			//Debug.println("Timer:"+String.valueOf(customchat.util.Timer.stop(key)));
 			//Debug.println("-------------------------------------") ;
-			p = doCommand(lUser, lt, out, iCommand);
+			commandContainer = doCommand(lUser, lt, out, iCommand);
 			
 		} catch(ChatException e) {
 			throw e;
@@ -846,8 +845,8 @@ public abstract class ChatObject extends Object implements Serializable {
 			out.print("Content-type: text/html\r\n");
 			out.println();
 		}
-		//System.out.println(p.toString()) ;
-		out.print(p.toString());
+		//System.out.println(commandContainer.toString()) ;
+		out.print(commandContainer.toString());
 		out.close();
 
     }      

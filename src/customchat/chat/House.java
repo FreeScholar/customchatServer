@@ -97,7 +97,7 @@ public class House extends ChatObject {
 	return "Area";
     }  
 
-    public Page doCommand(Login lUser, LookupTable lt, PrintWriter out, int iCommand)
+    public Container doCommand(Login lUser, LookupTable lt, PrintWriter out, int iCommand)
 	throws ChatException, IOException {
 	boolean bRestart = false;
 
