@@ -51,7 +51,7 @@ public class Message extends Object implements Serializable {
 	dTime = new Date();
 	this.type = type;
 	if(from == null)
-	  sDisplayFrom = "<B><FONT FACE=\"Arial,Helvetica,Geneva\" SIZE=\"2\"><a target=\"_new\" href=\"http://customchat.com\">CustomChat Server</a></font></b>";
+	  sDisplayFrom = "<b><font FACE=\"Arial,Helvetica,Geneva\" SIZE=\"2\"><a target=\"_new\" href=\"http://customchat.com\">CustomChat Server</a></font></b>";
 	else {
 	  Chatter c = UserRegistry.getChatter(from);
 	  if(c == null)
@@ -89,19 +89,17 @@ public class Message extends Object implements Serializable {
 		sFromTemp = Filter.ImgFilter(sFromTemp);
 	    
 	    if (ct != null) {
-			String ret = "<DL><DT><B>" + sFromTemp +"</B></DT><DD>\n";
 		    // don't filter the message for html if we have a system message
 			// cos we may have <script> </script> code in it ...
 			if (ct.loc.bHtmlDis &&  ! ct.isAdmin && 
 				type != REMOVE && type != ADDCHATTER) 	{
-				return ret + Filter.stripHTML(sTextTemp) + "</DD></DL>\n";
+				return "<div class='user-and-message'><div class='u font-weight-bold'>" + Filter.stripHTML(sFromTemp) + "</div><div class='m'>" + Filter.stripHTML(sTextTemp) + "</div></div>";
 				}
 			else {
-				return ret + sTextTemp + "</DD></DL>\n";
+				return  "<div class='user-and-message'><div class='u font-weight-bold'>" + Filter.stripHTML(sFromTemp) + "</div><div class='m'>" + Filter.stripHTML(sTextTemp) + "</div></div>";
 			}
 	    } else {
-		return "<DL><DT><B>" + sFromTemp +"</B></DT><DD>\n"
-		    +  sTextTemp + "</DD></DL>\n";
+		return "<div class='user-and-message'><div class='u font-weight-bold'>" + Filter.stripHTML(sFromTemp) + "</div><div class='m'>" + Filter.stripHTML(sTextTemp) + "</div></div>";
 	    }
 	} catch (Exception e) {
 	    System.out.println("Messages:getHTML:"+e) ;
@@ -109,8 +107,7 @@ public class Message extends Object implements Serializable {
 	    if (ct != null)
 		System.out.println("\tloc is "+ct.loc) ;
 	}
-	return "<DL><DT><B>" + sFromTemp +"</B></DT><DD>\n"
-		    +  sTextTemp + "</DD></DL>\n";
+	return "<div class='user-and-message'><div class='u'>" + Filter.stripHTML(sFromTemp) + "</div><div class='m'>" + Filter.stripHTML(sTextTemp) + "</div></div>";
 
   }  
 
@@ -135,12 +132,13 @@ public class Message extends Object implements Serializable {
 	return aTo;
   }  
 
+ @Override
   public String toString() {
 	return sText;
   }  
 
   public void append(String s) {
-	StringBuffer sb  = new StringBuffer() ;
+	StringBuilder sb  = new StringBuilder() ;
 	sb.append(sText) ;
 	sb.append(s) ;
 	sText = sb.toString() ;
