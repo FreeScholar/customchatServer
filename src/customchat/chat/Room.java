@@ -48,6 +48,7 @@ public class Room extends ChatObject {
     public static final String VAR_POST_IMAGE = "postimage";
     public static final String VAR_POST_SOUND = "postsound";
     public static final String VAR_OPTIONS_SUBMITTED = "OptionsFormSubmitted";
+    
 
     public static final String frameWhoList = "WhoListFrame";
     public static final String FRAME_MIDDLE   = "MiddleFrame";
@@ -60,6 +61,7 @@ public class Room extends ChatObject {
     public static final String FORM_POST_SOUNDS = "postsoundform";
 
     public static final String DONE = "Done";
+    
 
     /**
      * Hash table implementing a ring buffer of lenght mesg_limit messages posted in the room.
@@ -124,6 +126,8 @@ public class Room extends ChatObject {
 
     public static String buttonJS = null;
     public static String signature = null ;
+    
+    private Page roomPage;
 
    class DeliveryThread extends Thread {
 	private Room r;
@@ -463,9 +467,7 @@ public class Room extends ChatObject {
      * @return the chatter object if successful or null otherwise.
      * @throws customchat.chat.ChatException
      */
-    protected Page 
-	add(Login l, LookupTable lt)
-	throws ChatException {
+    protected Page add(Login l, LookupTable lt) throws ChatException {
 	
 	if(l == null) throw new UnauthorizedException("Please enter your username and passphrase.");
 	if(lt == null)
@@ -563,7 +565,7 @@ public class Room extends ChatObject {
 		addr = InetAddress.getLocalHost() ;
 		} catch (java.net.UnknownHostException exc) {
 		}
-		c.AddMessage(new Message(
+		c.addMessage(new Message(
 			 "<B><FONT FACE=\"Arial,Helvetica,Geneva,Verdana\" size=\"2\">Welcome Room Owner! <BR>"
 			 + "To create a LINK to your CustomChat Room, just copy the code"
 			 + " below.:</FONT><BR>"
@@ -647,25 +649,20 @@ public class Room extends ChatObject {
 
 
 	
-    protected Page doCommand(Login lUser, LookupTable lt, PrintWriter out, int iCommand)
+    protected Container doCommand(Login lUser, LookupTable lt, PrintWriter out, int iCommand)
 	throws ChatException, IOException {
 	
-	Page p;
+	Container con;
 	Chatter c = getChatter(lUser, lt.getValue(Chatter.HANDLE_VAR));
 
 
 	if (c != null)
 	    c.MakeContact() ;
 
-	//	if(c != null && iCommand != scrollSend && iCommand != scrollWhoList) {
-	//  c.update(lt);
-	//  c.MakeContact();
-	//}
-
 	try {
 	    switch(iCommand) {
 	    case ADD:
-		p = add(lUser, lt);
+		con = add(lUser, lt);
 		break;
             case MANUAL:
 		if (lt.getValues().length > 3) {
@@ -714,17 +711,17 @@ public class Room extends ChatObject {
 		}
 
 		send(c, lt);
-		p = manual(c);
+		con = manual(c);
 		break;
             case scrollTop:
-		p = getTop(c, true);
+		con = getTop(c, true);
 		break;
 	    case SCROLL_MIDDLE:
-		p = doMiddleFrame(c);
+		con = doMiddleFrame(c);
 		break;
 	    case scrollWhoList:
 		c.update(lt);
-		p = doScrollList(c, lt.getValue("refreshtime"));
+		con = doScrollList(c, lt.getValue("refreshtime"));
 		break;
 	    case scrollMessages:
 		if(c == null) {
@@ -734,27 +731,27 @@ public class Room extends ChatObject {
                
 	    case scrollSend:
 		send(c, lt);
-		p = scrollSend(c);
+               con = scrollSend(c);
 		break;
 	    case OPTIONS:
 		// options() throws ChatException if Chatter not in room (because it's
 		// in its own window), but send throws ChatterNotFoundException, effectively
 		// opening the room in the little window.  So, this order is important.
 		if(lt.getValue(VAR_OPTIONS_SUBMITTED) != null) {
-		    p = new Page();
-		    p.addHTML("<script>\n <!-- \nself.close();\n//-->\n</script>");
+		    con = new Page();
+		    con.addHTML("<script>\n <!-- \nself.close();\n//-->\n</script>");
 		} else {
-		    p = options(c);
+		    con = options(c);
 		}
 		break;
             case PASTE_POP:
-		p = pastePop(c) ;	
+		con = pastePop(c) ;	
 		break ;
             case PASTE_SEND:
-		p = null ;
+		con = null ;
 		send(c, lt);
-		p = new Page();
-		p.addHTML("<script>\n <!-- \nself.close();\n//-->\n</script>");
+		con = new Page();
+		con.addHTML("<script>\n <!-- \nself.close();\n//-->\n</script>");
 		break ;
 	    case SET_OPTIONS:
 		c.update(lt);
@@ -788,14 +785,14 @@ public class Room extends ChatObject {
 		    c.bUserDing  = false ;
 		}
 
-		p = new Page();
-		p.addHTML("<script>\n <!-- \nself.close();\n//-->\n</script>");
+		con = new Page();
+		con.addHTML("<script>\n <!-- \nself.close();\n//-->\n</script>");
 		break ;
 	    case SWITCH:
-		p = doSwitch(lUser, lt);
+		con = doSwitch(lUser, lt);
 		break;
 	    case EXIT:
-		p = doExit(c, lt);
+		con = doExit(c, lt);
 		break;
 	    case CREATE_PAGE:
                 /* falls through */
@@ -803,25 +800,25 @@ public class Room extends ChatObject {
 		throw new ChatException("Not Implemented");
                 /* falls through */
 	    case COM_POST_IMAGES:
-		p = doPostImages(lUser, lt.getFullValue(VAR_POST_IMAGE),lt);
+		con = doPostImages(lUser, lt.getFullValue(VAR_POST_IMAGE),lt);
 		break;
 	    case COM_POST_SOUNDS:
-	     	p = doPostSounds(lUser, lt.getFullValue(VAR_POST_SOUND),lt);
+	     	con = doPostSounds(lUser, lt.getFullValue(VAR_POST_SOUND),lt);
 		break;
 	    case COM_REMOVE_SOUNDS:
-		p = doRemoveSounds(lUser,lt);
+		con = doRemoveSounds(lUser,lt);
 		break;
 	    case COM_REMOVE_IMAGES:
-		p= doRemoveImages(lUser,lt);
+		con= doRemoveImages(lUser,lt);
 		break;
 	    default:
-		p = super.doCommand(lUser, lt, out, iCommand);
+		con = super.doCommand(lUser, lt, out, iCommand);
                 break;
 	    }
 	} catch(ChatterNotFoundException e) {
-	    p = popPage(ADD, lt);
+	    con = popPage(ADD, lt);
 	} 
-	return p;
+	return con;
     }      
 
     public Page doRemoveImages(Login l, LookupTable lt) throws ChatException {
@@ -970,11 +967,11 @@ public class Room extends ChatObject {
                     }
 		}
 	 
-		//Page p = new Page();
+		//Page bottomPage = new Page();
 		//Container script = new Container("SCRIPT", "\n<!--\nself.close();\n//-->\n");
 		//p.addHTML(script);
 
-		//return p;
+		//return bottomPage;
 	    }
 	    // in either case throw us back to the list ....
 	    saveImageList();
@@ -1051,11 +1048,11 @@ public class Room extends ChatObject {
 	    saveSoundList();
 	    throw new RedirectException(URL_PREFIX + getKeyWord());
 
-	    //Page p = new Page();
+	    //Page bottomPage = new Page();
 	    //Container script = new Container("SCRIPT", "\n<!--\nself.close();\n//-->\n");
 	    //p.addHTML(script);
 
-	    //return p;
+	    //return bottomPage;
 	}
 
 	House.readSounds();
@@ -1127,11 +1124,11 @@ public class Room extends ChatObject {
 	    saveSoundList();
 	    throw new RedirectException(URL_PREFIX + getKeyWord());
 
-	    //Page p = new Page();
+	    //Page bottomPage = new Page();
 	    //Container script = new Container("SCRIPT", "\n<!--\nself.close();\n//-->\n");
 	    //p.addHTML(script);
 
-	    //return p;
+	    //return bottomPage;
 	}
 
 	Container con = new Container() ;
@@ -1175,6 +1172,11 @@ public class Room extends ChatObject {
 	return PageFactory.makeUtilPage(con);
     }
 
+    Container getWhoList(Chatter c, String sRefresh) {
+        Container whoList = new Container("div");
+        
+        return whoList;
+    }
     Page doScrollList(Chatter c, String sRefresh) {
 	if (sRefresh == null || sRefresh.length() == 0) {
             sRefresh = "";
@@ -1837,11 +1839,10 @@ public class Room extends ChatObject {
 			      Message.REMOVE));
     }  
     
-    private Page scrollPage(Chatter ct) {
+    private Page scrollPage(Chatter ct) throws ChatException {
 	//The FRAMESET in AutoScroll rooms
 	//out.println("<FRAMESET  ROWS=\"17%,68%,*\" BORDER=\"1\">" +
-
-	Page p = new Page();
+	roomPage = new Page();
         Container style = new Container("style");
         Container main = new Container();
         Container row = new Container("div");
@@ -1850,40 +1851,60 @@ public class Room extends ChatObject {
         main.addHTML(row);
         main.addArgument("id", sName + "-page");
         main.addArgument("class", "full-page");
-        p.addHTML(main);
+        roomPage.addHTML(main);
         // bootstrap
-        p.addHeadHTML("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css\" integrity=\"sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb\" crossorigin=\"anonymous\">");
-        p.addHeadHTML("<title>" + sName + "</title>");
-	p.addHeadHTML(style);
+        
+        roomPage.addHeadHTML("<title>" + sName + "</title>");
+	roomPage.addHeadHTML(style);
+        roomPage.addHeadHTML(
+		      "<SCRIPT>\n"
+		      //	+ "<!--\n"
 
-        style.addHTML("html, body, .full-page {min-height: 100vh;}");
+		      + "function focusinput() {\n"
+		      + "self.focus() ;\n"
+		      + "document.getElementById('user-message').focus();\n"
+		      + "return true ;\n" 
+		      +"}\n\n"
+	
+		      + "function doSubmit() {\n"
+		      // if they are the admin reload the top frame
+		      // + (isAdmin(ct.getLogin) ? "parent." + frameTop + ".location.reload();\n" : "")
+		      // + "parent." + frameWhoList + ".document.location.reload();\n"
+		      + "return true;\n"
+		      + "}\n"
+		      + "\n"
+		      + "function openOptions() {\n"
+		      + "  if(parent.winRef && !parent.winRef.closed) \n"
+		      + "     parent.winRef.close();\n"
+		      + "  parent.winRef = open(\"" + commandURL(OPTIONS, ct) + "&\" + (new Date()).getTime(),\n"
+		      + "                       \"other_win\",\"menubar=no,scrollbars=auto,"
+		      +                         "resizable=yes,width=240,height=180\");\n"
+		      + "  parent.winRef.focus(); \n"
+		      + "  return false;\n"
+		      + "}\n\n"
+			  + "function openPopPaste() {\n"
+		      + "  if(parent.winRef && !parent.winRef.closed) \n"
+		      + "     parent.winRef.close();\n"
+		      + "  parent.winRef = open(\"" + commandURL(PASTE_POP, ct) + "&\" + (new Date()).getTime(),\n"
+		      + "                       \"other_win\",\"menubar=no,scrollbars=auto,"
+		      +                         "resizable=yes,width=400,height=250\");\n"
+		      + "  parent.winRef.focus(); \n"
+		      + "  return false;\n"
+		      + "}\n\n"
+
+			  + buttonJS
+		      + "</script>\n");
+
+        
+        style.addHTML("html, body, .full-page {min-height: 100vh; overflow-x: hidden}");
         style.addHTML("#room-messages-frame {min-height:50vh;}");
         
-        
-	row.addHTML("<iframe id='room-top-frame' class='full-frame col-12' name='" + frameTop + "' src='"+ commandURL(scrollTop, ct) + "'></iframe>");
-        row.addHTML("<iframe id='room-messages-frame' class='col-12 col-md-9' name='" + frameMessages+ "' src='"+ commandURL(scrollMessages, ct) + "'></iframe>");
-        row.addHTML("<iframe id='room-user-list-frame' class='col-12 col-md-3' name='" + frameWhoList + "' src='"+ commandURL(scrollWhoList, ct) + "'></iframe>");
-        row.addHTML("<iframe id='room-send-frame' class='full-frame col-12' name='" + frameSend + "' src='"+ commandURL(scrollSend, ct) + "'></iframe>");
-	/*p.addFrame("<FRAMESET COLS=\"80%,*\" BORDER=\"1\">\n"
-		   + "\t<FRAME NAME=\"" + frameMessages + "\" SRC=\""
-		   + commandURL(scrollMessages, ct)
-		   + "\" MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" "
-		   + "SCROLLING=\"auto\" BORDER=\"1\" FRAMEBORDER=\"1\">\n"
-		   + "\t<FRAME NAME=\"" + frameWhoList + "\" SRC=\""
-		   + commandURL(scrollWhoList, ct)
-		   + "\" MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" "
-		   + "SCROLLING=\"auto\" BORDER=\"1\" FRAMEBORDER=\"1\">\n"
-		   + "</FRAMESET>\n"); */
 
-	//"<FRAME NAME=\"" + FRAME_MIDDLE + "\" SRC=\""
-	// + commandURL(SCROLL_MIDDLE, ct)
-	 //+ "\" MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" SCROLLING=\"auto\""
-	 //+ " BORDER=\"1\" FRAMEBORDER=\"1\">");
-	/*p.addFrame("<FRAME class='frame-send' NAME=\"" + frameSend + "\" SRC=\""
-		   + commandURL(scrollSend, ct)
-		   + "\" MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" SCROLLING=\"auto\""
-		   + "BORDER=\"1\" FRAMEBORDER=\"1\">");*/
-	return p;
+	row.addHTML("<iframe id='room-top-frame' class='full-frame col-12 frame' name='" + frameTop + "' src='"+ commandURL(scrollTop, ct) + "'></iframe>");
+        row.addHTML("<iframe id='room-messages-frame' class='col-12 col-md-9 frame' name='" + frameMessages+ "' src='"+ commandURL(scrollMessages, ct) + "'></iframe>");
+        row.addHTML("<iframe id='room-user-list-frame' class='col-12 col-md-3 frame' name='" + frameWhoList + "' src='"+ commandURL(scrollWhoList, ct) + "'></iframe>");
+        row.addHTML("<iframe id='room-send-frame' class='col-12 frame' name='" + frameSend + "' src='"+ commandURL(scrollSend, ct) + "'></iframe>");
+	return roomPage;
     }
 
 
@@ -1897,6 +1918,161 @@ public class Room extends ChatObject {
      * @param ct the chatter to customize this display for.
      * @return the HTML code for the bottom frame in real time chat
      */
+    
+    protected Container getBottomPage(Chatter ct) throws ChatException {
+        Container bottomPage = new Container("div");
+        if(ct == null) { 
+            throw new ChatterNotFoundException(); 
+        }
+
+	if (buttonJS == null) {
+            buttonJS = getResource("button.js");
+        }
+
+	if (signature == null) {
+            signature = getResource("signature.html");
+        }
+
+	bottomPage.addArgument("onload=\"return focusinput();\"") ;	
+	//Script defining functions used below
+	//p.addHeadHTML("<script src=\"button.js\" language=\"javascript\"></script>") ;
+
+	//Bottom Form
+	Form tBottomForm = form(sBottomForm, ct);
+
+	tBottomForm.addArgument("onSUBMIT", "doSubmit()");
+	tBottomForm.addHTML(commandInput(Input.HIDDEN, scrollSend));
+
+	bottomPage.addHTML(tBottomForm);
+
+	//Begin the table
+	tBottomForm.addHTML("<TABLE WIDTH=700 CELLPADDING=\"0\" CELLSPACING=\"0\" VALIGN=\"TOP\" BORDER=0><TR>" +
+			    "<TD NOWRAP VALIGN=\"TOP\">\n");
+
+	//Sounds and images pulldown menus
+	if (!bHtmlDis) {
+            tBottomForm.addHTML(HTMLGetPullDown(PUBLIC_MESSAGE_VAR));
+        }
+
+	if (!bHtmlDis) {
+            tBottomForm.addHTML(getFontDrops("RealTime"));	
+        }	
+	
+	//Start new column
+	tBottomForm.addHTML("</TD><TD>");
+
+	//Java Script for Toggling Scrolling
+	tBottomForm.addHTML(//"</FONT>\n"
+			    "<SCRIPT LANGUAGE=\"JavaScript1.1\">\n" +
+			    "\n" +
+			    "  <!--\n" +
+			    "    var scrolling = true;\n" +
+			    "    function toggleScrolling( )\n" +
+			    "    {\n" +
+			    "        if ( scrolling == true )\n" +
+			    "        {\n" +
+			    "            scrolling = false;\n" +
+			    "            parent." + frameMessages + ".clearTimeout();\n" +
+			    "            parent." + frameMessages + ".autoScrollOn = 0;\n" +
+			    "            parent." + frameMessages + ".onblur = parent." + frameMessages + ".scrollOffFunction;\n" +
+			    "        } else {\n" +
+			    "            scrolling = true;\n" +
+			    "            parent." + frameMessages + ".autoScrollOn = 1;\n" +
+			    "            parent." + frameMessages + ".onblur = parent." + frameMessages + ".scrollOnFunction;\n" +
+			    "            parent." + frameMessages + ".scroll(0, 65000);\n" +
+			    "            parent." + frameMessages + ".setTimeout('scrollWindow()', 200);\n" +
+			    "        }  // end if\n" +
+			    "    }  // end toggleScrolling\n" +
+			    "    if ( parent." + frameMessages + " != null  &&  parent." + frameMessages + ".autoScrollOn != null )\n" +
+			    "    {\n" +
+			    "        document.write('<INPUT NAME=AUTOSCROLL TYPE=CHECKBOX onclick=\"toggleScrolling()\"');\n" +
+			    "        if ( parent." + frameMessages + ".autoScrollOn == 1 )\n" +
+			    "        {\n" +
+			    "            document.write(' CHECKED');\n" +
+			    "        }  // end if\n" +
+			    "        document.write('> <FONT FACE=\"Arial,Helvetica,Geneva\" SIZE=1>Scroll - Uncheck to scroll back</FONT>');\n" +
+			    "        scrolling = ( parent." + frameMessages + ".autoScrollOn == 1 );\n" +
+			    "    }  // end if\n" +
+			    "  //  -->\n" +
+			    "\n" +
+			    "</SCRIPT>");
+
+	//Start a new row in the table
+	tBottomForm.addHTML("</TD></TR><TR><TD>\n");
+
+	//Message box
+	Input inp = new Input(Input.TEXT, PUBLIC_MESSAGE_VAR, "");
+        // new class added to message box
+        inp.addArgument("id", "user-message");
+        inp.addArgument("class", "message-box");
+	inp.addArgument("SIZE", "60") ;
+	tBottomForm.addHTML(inp);
+
+	//Instructions
+	tBottomForm.addHTML(signature) ;
+
+	//New column
+	tBottomForm.addHTML("</TD><TD VALIGN=\"TOP\">");
+
+	tBottomForm.addHTML("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" ><tr>") ;
+	tBottomForm.addHTML("<td>");
+
+	// Whisper Button for bottom frame of AUTOSCROLL room
+	if (!bPMDis || isAdmin(ct.lUser)) {
+        //tBottomForm.addHTML("<input type=image src=\"" + buttonURL("whisper.gif") + "\" set border=0 value=\"Whisper\" name=\""+PRIVATE_CHECKBOX_VAR+"\">") ;
+	    Input iWhisper = new Input(Input.SUBMIT, PRIVATE_CHECKBOX_VAR, sWhisper);
+            Input iSpeak = new Input(Input.SUBMIT, PUBLIC_MESSAGE_VAR, sSpeak);
+            
+	    iWhisper.addArgument("ALIGN", "TOP");
+	    iWhisper.addArgument("VSPACE", "0");
+            tBottomForm.addHTML(iSpeak);
+	    tBottomForm.addHTML(iWhisper);
+	}
+
+	tBottomForm.addHTML("</td>");
+	if (!bHtmlDis) {
+		tBottomForm.addHTML("<td><A href=\"javascript:bold('RealTime')\"><IMG alt=\"Bold\" border=\"0\" SRC=\""+buttonURL("bold.gif")+"\"></A>") ;
+		tBottomForm.addHTML("<A href=\"javascript:italicize('RealTime')\"><IMG alt=\"Italics\" border=\"0\" SRC=\""+buttonURL("italicize.gif")+"\"></A>") ;
+		tBottomForm.addHTML("<A href=\"javascript:underline('RealTime')\"><IMG alt=\"Underline\" border=\"0\" SRC=\""+buttonURL("underline.gif")+"\"></A>") ;
+		tBottomForm.addHTML("<A href=\"javascript:center('RealTime')\"><IMG alt=\"Center\" border=\"0\" SRC=\""+buttonURL("center.gif")+"\"></A>") ;
+		tBottomForm.addHTML("<A href=\"javascript:hyperlink('RealTime')\"><IMG alt=\"Hyperlink\" border=\"0\" SRC=\""+buttonURL("url.gif")+"\"></A>") ;
+		tBottomForm.addHTML("<A href=\"javascript:image('RealTime')\"><IMG alt=\"Image\" border=\"0\" SRC=\""+buttonURL("image.gif")+"\"></A>") ;
+		//tBottomForm.addHTML("<A href=\"javascript:quote('RealTime')\"><IMG border=\"0\" SRC=\""+buttonURL("quote.gif")+"\"</A></td>") ;
+		tBottomForm.addHTML("<A HREF=\"\" onClick='return openPopPaste()'>" + "<IMG alt=\"Text Editor\" SRC=\"" + buttonURL("quote.gif")  + "\" ALT=\"\" BORDER=\"0\"></A>");
+	}
+
+	tBottomForm.addHTML("</tr>") ;
+	tBottomForm.addHTML("<tr>") ;
+	tBottomForm.addHTML("<td nowrap colspan=\"2\">") ;
+
+	//Set options button
+	tBottomForm.addHTML("<A HREF=\"\" onClick='return openOptions()'>"
+			    +	"<IMG SRC=\"" + commandButton(OPTIONS)
+			    + "\" ALT=\"\" BORDER=\"0\"></A>");
+
+	// Switch rooms button
+	if (!bSwitchDis || ct.isAdmin) {
+	    tBottomForm.addHTML("<A HREF=\"" + commandURL(SWITCH, ct)+"&"+DESTINATION_VAR+"="+parent.sKeyWord
+			    + "\" TARGET=\"_top\"><IMG SRC=\""
+			    + buttonURL("switchrooms.gif") + "\""
+			    + " BORDER=0></A>");
+	}
+	
+	//Exit button
+	tBottomForm.addHTML("<A HREF=" + commandURL(EXIT, ct)
+			    + " TARGET=_top class='exit-link'><IMG SRC=\"" + buttonURL("exit.gif")
+			    + "\" ALT=\"\" BORDER=0></A>");
+	tBottomForm.addHTML("</td></tr>") ;
+	tBottomForm.addHTML("</table>") ;
+	//Put cursor in the message box
+	tBottomForm.addHTML("<SCRIPT><!--\ndocument.getElementById('user-message').focus();\n//--></SCRIPT>");
+	//End table
+	tBottomForm.addHTML("</TD></TR></TABLE>");
+	tBottomForm.addHTML("<FONT SIZE=\"1\" FACE=Arial,Helvetica,Geneva> powered by " +
+			    "<A target=\"new\" HREF=\"http://customchat.com\"><B>CustomChat Server</B></A> since 1997</FONT><P>");
+        
+        return bottomPage;
+    }
     protected Page scrollSend(Chatter ct) throws ChatException {
 	if(ct == null) { 
             throw new ChatterNotFoundException(); 
@@ -1955,8 +2131,7 @@ public class Room extends ChatObject {
 
 	//Bottom Form
 	Form tBottomForm = form(sBottomForm, ct);
-        // new argument 12/20/2017
-        tBottomForm.addArgument("accept-charset", "utf-8");
+
 	tBottomForm.addArgument("onSUBMIT", "doSubmit()");
 	tBottomForm.addHTML(commandInput(Input.HIDDEN, scrollSend));
 
@@ -2167,7 +2342,7 @@ public class Room extends ChatObject {
         Enumeration eTo = GetChatters();
         while(eTo.hasMoreElements()) {
             Chatter ct = (Chatter)eTo.nextElement();
-            ct.AddMessage(m);
+            ct.addMessage(m);
         }
 
         if(bLogging) {
