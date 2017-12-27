@@ -14,8 +14,8 @@ public abstract class PageFactory {
 
   static {
 	try {
-	  UTIL_PAGE = new Page(ChatObject.fileToString(ChatObject.htmlFile("utilheader.html")));
-	  UTIL_FOOTER = ChatObject.fileToString(ChatObject.htmlFile("utilfooter.html"));
+	  UTIL_PAGE = new Page(ChatObject.fileToString(ChatObject.htmlFile("messageheader.html")));
+	  UTIL_FOOTER = ChatObject.fileToString(ChatObject.htmlFile("messagefooter.html"));
 	} catch (ChatException e) {
 	  ErrorLog.error(e, 501, "error reading utility page header or footer");
 	  if (UTIL_PAGE == null)
