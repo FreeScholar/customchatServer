@@ -89,7 +89,7 @@ public class Chatter extends Object implements Serializable {
 	 *
 	 * @param m The message to be added.
 	 */
-    public void AddMessage(Message m) {
+    public void addMessage(Message m) {
 	//Sort messages into public and private boxes (vectors)
 	switch(m.getType()) {
 	case Message.PUBLIC:
@@ -107,7 +107,6 @@ public class Chatter extends Object implements Serializable {
 	    break;
 	case Message.PRIVATE:
 	    //check if sender is being ignored privately
-            // changed to use brackets G.T. 11/30/2017
 	    if(isIgPriv(m.getFrom())) {
                 break;
             }
@@ -247,7 +246,6 @@ public class Chatter extends Object implements Serializable {
 		mCurr = (Message)e.nextElement();
 		out.append(mCurr.getHTML(this));
 	    }
-            
 	    vPubBox.removeAllElements();//delete them
 	} else if(!bScroll) {
 	    out.append("<FONT FACE=Arial, Helvetica SIZE=2><I>None</I></FONT>");
@@ -329,7 +327,7 @@ public class Chatter extends Object implements Serializable {
     
     public void deliverMessages() {
 	if(scroll != null) {
-            // removed semi-colon at the end of the synchronized statement G.T. 11/30/2017
+            
 	    synchronized(scroll) {
 		scroll.print(HTMLGetNewMessages(true));
 	    }
