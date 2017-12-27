@@ -67,8 +67,8 @@ public class AutoScroll extends Object {
 		      "\n" +
 		      "</SCRIPT>");
 
-	p.addHTML("<FONT SIZE=1 FACE=Verdana, Arial, Helvetica><B>MESSAGES WILL APPEAR ON THE SCREEN IN REAL TIME, AS OTHERS POST THEM.</FONT>" +
-		  "</B></FONT><BR><FONT SIZE=1 FACE=Verdana, Arial, Helvetica>" +
+	p.addHTML("<FONT SIZE='1' FACE='Verdana, Arial, Helvetica'><B>MESSAGES WILL APPEAR ON THE SCREEN IN REAL TIME, AS OTHERS POST THEM.</FONT>" +
+		  "</B></FONT><BR><FONT SIZE='1' FACE='Verdana, Arial, Helvetica'>" +
 		  "<BR> If you are idle for a while you may see the message \"Transfer interrupted!\", or if you want to clear the screen" +
 		  " of all messages...<BR> just hit the Reload button in your browser to reconnect to the CustomChat Server.<BR>" +
 		  "</FONT><BR><HR>\n\n");
