@@ -97,7 +97,7 @@ public abstract class UserRegistry {
 					    m.getFrom(),
 					    Message.SYSTEM));
 	    } else
-		    c.AddMessage(m);
+		    c.addMessage(m);
 	}
     }  
 }
