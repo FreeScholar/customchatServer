@@ -33,8 +33,7 @@ public class Floor extends ChatObject {
      * @param name The human readable name of the floor.
      * @param h the house containing this floor.
      */
-    public Floor(Login l, House h, String keyWord, String name)
-	throws ChatException {
+    public Floor(Login l, House h, String keyWord, String name) throws ChatException {
 	super(l, h, keyWord, name);
 	pageTemplate = new Page();
     }
