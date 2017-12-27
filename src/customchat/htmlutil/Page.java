@@ -3,6 +3,8 @@ package customchat.htmlutil;
 import customchat.util.ErrorLog;
 
 public class Page extends Container {
+    StringBuilder sBuilder = new StringBuilder();
+    String docType = "<!DOCTYPE html>";
     Container head;
     public Container body;
     Container frameSet;
@@ -19,21 +21,24 @@ public class Page extends Container {
     public Page(Container head, Body body) {
 	super("HTML");
 
-	if (head == null)
-	    head = new Container("HEAD");
-
+	if (head == null) {
+            head = new Container("HEAD");
+        }
+        
 	this.head = head;
-
 	super.addHTML(this.head);
 
+        head.addHTML("<meta charset='utf-8'>");
+        head.addHTML("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css\" integrity=\"sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb\" crossorigin=\"anonymous\">");
 	head.addHTML("<STYLE TYPE=\"text/css\"><!-- A:link, A:visited, A:active { text-decoration: none; } --></STYLE>");
 
-	if (body == null)
-	    body = new Body();
+	if (body == null) {
+             body = new Body();
+        }
+	   
 
 	this.body = body;
-	super.addHTML(body);
-
+	super.addHTML(this.body);
     }    
     /**
      * Create a page from contents.  Assumes that contents is a properly formatted
@@ -41,6 +46,11 @@ public class Page extends Container {
      *
      */
 
+    /**
+     * Create a page from contents.Assumes that contents is a properly formatted
+ HTML page.  Calling addHTML or addHeadHTML will cause a null pointer error.
+     * @param contents
+     */
     public Page(String contents) {
 	this();
 	addHTML(contents);
@@ -86,11 +96,12 @@ public class Page extends Container {
     }  
 
     public HTML addHeadHTML(String s) {
-	if (head == null) 
-	    head = new Container("HEAD");
-	    
+	if (head == null) {
+            head = new Container("HEAD");
+        }
+	     	    
 	return head.addHTML(s);
-    }  
+    } 
 
     public Object clone() {
 
@@ -127,18 +138,24 @@ public class Page extends Container {
 	return toString();
     }  
 
+    @Override
     public String toString() 
     {	
-	StringBuffer sb = new StringBuffer();
+	StringBuilder sb = new StringBuilder();
 		
 	if (frameSet == null) {
+            sb.append(docType);
 	    sb.append("<HTML>\n");
 	    sb.append(head.toString());
 	    sb.append(body.toString(true));
 	    sb.append("</HTML>\n");
 	}
-	else
-	    sb.append(frameSet) ;
+        else {
+            sb.append(docType);
+	    sb.append(head.toString());
+	    sb.append(frameSet);
+        }
+	    
 
 	return sb.toString();
     }
