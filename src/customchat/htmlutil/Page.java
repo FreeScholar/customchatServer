@@ -159,4 +159,12 @@ public class Page extends Container {
 
 	return sb.toString();
     }
+    
+    public void resetHead() {
+        head = new Container("head");
+    }
+    
+    public Container getHead() {
+        return this.head;
+    }
 }
