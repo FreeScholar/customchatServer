@@ -68,7 +68,7 @@ public class Server extends Thread {
 	    }
 	}
 
-	this.port = iPort;
+	Server.port = iPort;
 	this.iMaxThreads = iMaxThreads;
 	System.out.println("Running on port :\t" + iPort);
 	System.out.println("Running with maxThreads :\t" + String.valueOf(iMaxThreads));
@@ -82,7 +82,6 @@ public class Server extends Thread {
 	// Create a threadgroup for our connections
 	threadgroup = new ThreadGroup("Server Connections");
 	setPriority(NORM_PRIORITY - 2);
-	this.start();
     }
     //--------------------------------------------------------------------------
     // Exit with an error message, when an exception occurs.
@@ -142,6 +141,7 @@ public class Server extends Thread {
 	    fail(e, "Could not start server");
 	}
 	addr = l.getAddr() ;
+
 	System.out.println("\n\nCustomChat Chat Server version 1.5 by CustomChat");
 	System.out.println("Written by CustomChat");
 	System.out.println("Programming by Ezra Keshet");
@@ -150,8 +150,9 @@ public class Server extends Thread {
 	System.out.println("This license will expire on : " + l.date());
 	System.out.println("To obtain a free copy of the program see our web site at:");
 	System.out.println("http://customchat.com");
+        
 	String logFile = System.getProperty("chat.errorlog");
-
+        
 	if (ErrorLog.LOG) {
 	    if (logFile == null)
 		logFile = "." + File.separator + "logs" + File.separator + "err.log";
@@ -163,7 +164,8 @@ public class Server extends Thread {
 	    }
 	}
 	
-	new Server(iPort, iMaxThreads);
+        Server server = new Server(iPort, iMaxThreads);
+        server.start();
     }
     public static int numConnections() {
 	return Connection.connection_number;
@@ -178,6 +180,7 @@ public class Server extends Thread {
     // class does the same, so the vulture won't be removing dead
     // connections while we're adding fresh ones.
 
+    @Override
     public void run() {
 	Runtime rt = Runtime.getRuntime();
 	Connection c;
@@ -192,8 +195,10 @@ public class Server extends Thread {
 			    Thread t = new Thread (c);
 			    t.setPriority(this.getPriority() +1 );
 			    t.start();
-			} else
-			    (new ReThread(c)).start();
+			} else {
+                            (new ReThread(c)).start();
+                        }
+			    
 			yield();
 		    } catch (SocketException e) {
 			ErrorLog.error(e, 16, "Error connecting to client.");
@@ -204,8 +209,10 @@ public class Server extends Thread {
 			} catch(InterruptedException ignored) {}
 		    }
 
-		} else
-		    try{ sleep(1000L); } catch(InterruptedException e) {	}
+		} else {
+                    try{ sleep(1000L); } catch(InterruptedException e) {	}
+                }
+		    
 	    }
 	}
 	catch (IOException e) {
