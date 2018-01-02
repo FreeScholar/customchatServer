@@ -317,8 +317,8 @@ public class Chatter extends Object implements Serializable {
      * @param as An AutoScoll object that outputs to the user's Web Browser.
      */
     
-    public synchronized void SetScroll(AutoScroll as) {
-        // changed to use brackets G.T. 11/30/2017
+    public synchronized void setScroll(AutoScroll as) {
+
 	if(scroll != null) {
             scroll.Exit();
         }
@@ -360,8 +360,14 @@ public class Chatter extends Object implements Serializable {
 	 * @return a string with the handle as it should be printed in html
 	 */
 
+    /**
+     * Generates the HTML code for the user handle to be displayed in the browser.Makes the name bold, links it to the home page (if provided) and adds the idle
+ time.
+     * @param bNoPic
+     * @return a string with the handle as it should be printed in html
+     */
     public String getFullHTML(boolean bNoPic) {
-	return (!bNoPicHandle ? ((sChatPic != "DEF") ? "<IMG src=\"" + sChatPic +"\" width=\"144\" height=\"120\">" : "") : "") +
+	return (!bNoPicHandle ? ((!sChatPic.equals("DEF")) ? "<IMG src=\"" + sChatPic +"\" width=\"144\" height=\"120\">" : "") : "") +
 				getHTML(bNoPic,(loc==null) ? "None" : loc.bIdleTimes) + "<BR>"
 	    // include tagline
 	    + (sTagline != null ?
