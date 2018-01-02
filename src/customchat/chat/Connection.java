@@ -76,7 +76,6 @@ class Connection implements Runnable {
 		client.close();
 	    } catch (IOException e2) { ; }
 	    ErrorLog.error(e, 17, "Connection");
-	    return;
 	}
     }
     void MessagePage(String s) {
@@ -303,7 +302,7 @@ class Connection implements Runnable {
 
 	    if (sKey.startsWith(ChatObject.URL_RESOURCE.substring(1))) {
 			String sFile = ChatObject.DIR_RESOURCE + sKey.substring(ChatObject.URL_RESOURCE.length() - 1);
-			if (sFile.indexOf("..") >= 0)
+			if (sFile.contains(".."))
 				throw new ChatException(".. is not allowed in URL's.");
 			File f = new File(sFile);
 			if (!f.exists() || !f.isFile() || !f.canRead())
@@ -313,10 +312,12 @@ class Connection implements Runnable {
 			BufferedInputStream fs = new BufferedInputStream(new FileInputStream(f));
 			byte ba[] = new byte[256];
 			int iread = 0;
-			while ((iread = fs.read(ba)) >= 0)
-				os.write(ba, 0, iread);
-			out.close();
-			fs.close();
+			while ((iread = fs.read(ba)) >= 0) {
+                            os.write(ba, 0, iread);
+                        }
+                        fs.close();
+				
+			
 	    } else {
 			ChatObject co = ChatObject.registry.get(sKey.toLowerCase()) ;
 			co.doCommand(lUser, lt, out, true);
@@ -330,11 +331,9 @@ class Connection implements Runnable {
 		
 	} catch (AutoScrollException e) {
 	    Chatter c = e.getChatter();
-	    c.SetScroll(new AutoScroll(c.location().getTemplate(), out, bMisery, true));
+	    c.setScroll(new AutoScroll(c.location().getTemplate(), out, bMisery, true));
 		
 	} catch (ShutDownException e) {
-	    FileOutputStream fos = null;
-	    ObjectOutputStream oos = null;
 	    ServerSocket ss = server.listen_socket;
 
 	    if (ss != null) {
@@ -350,7 +349,7 @@ class Connection implements Runnable {
 		try {
 				client.close();
 	    } catch (IOException e2) {
-			;
+			
 	    }
 		
 	    System.runFinalization();
@@ -380,7 +379,8 @@ class Connection implements Runnable {
 	// we have to use synchronized first to lock the vulture
 	// object before we can call notify() for it.
 	finally {
-	   	    server.wakeup();
+            out.close();
+	    server.wakeup();
 	}
     }
     //---------------------------------------------------------------------------
