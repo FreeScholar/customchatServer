@@ -6,6 +6,8 @@ import java.io.*;
 import java.net.*;
 import customchat.util.*;
 import customchat.htmlutil.*;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.*;
 
 /**
  * This class implements one chat room.  The class keeps track of users in room, messages, and options
@@ -581,15 +583,28 @@ public class Room extends ChatObject {
 	}
     }                    
 
-    protected String childCreationPage() throws ChatException {
+    /**
+     *
+     * @return
+     * @throws ChatException
+     */
+    @Override
+    protected String createChildPage() throws ChatException {
 	String s = fileToString(Room.sNewHTML);
 	s = replace(s, "#ParentName#", sName);
 	s = replace(s, "#ParentKey#", sKeyWord);
 	return s;
     }  
-    protected String childName() {
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    protected String getChildName() {
 	return "Inner Room";
     }  
+    @Override
     public synchronized void cleanup() {
 	for(int i = 0; i < vChatters.size(); i++)
 	    try {
@@ -600,6 +615,13 @@ public class Room extends ChatObject {
 	    } catch (ChatException ignored) {}
 	super.cleanup();
     }  
+
+    /**
+     *
+     * @param command
+     * @return
+     */
+    @Override
     public String commandButton(final int command) {
 	String sURL;
 
@@ -627,6 +649,15 @@ public class Room extends ChatObject {
 	return super.commandURL(iCommand) + "&" + Chatter.HANDLE_VAR + "="
 	    + URLEncoder.encode(c.sHandle);
     }  
+
+    /**
+     *
+     * @param l
+     * @param lt
+     * @return
+     * @throws ChatException
+     */
+    @Override
     public Page defaultCommand(Login l, LookupTable lt)
 	throws ChatException {
 	return add(l, lt);
@@ -657,7 +688,7 @@ public class Room extends ChatObject {
 
 
 	if (c != null)
-	    c.MakeContact() ;
+	    c.MakeContact();
 
 	try {
 	    switch(iCommand) {
@@ -1385,20 +1416,19 @@ public class Room extends ChatObject {
 	
 	if (video != null && !video.equals("")) {
 	    if (video.equals("webcam")) {
-		Container b = (Container)p.body ;
 		p.addHeadHTML("<meta http-equiv=\"Pragma\" content=\"no-cache\">\n");
       		p.addHeadHTML("<meta http-equiv=\"REFRESH\" content=\"90\">\n");
 	    }
 	}
 
-	p.addHTML("<TABLE><TR>");
+	p.addHTML("<section id='top-content'>");
 	if((sTop!=null) && !sTop.equals("")) {
-	    p.addHTML("<TD valign=top>") ;
+	    p.addHTML("<div class='top-image' style='float:left;'>") ;
 	    p.addHTML(Filter.ctrHTML("<IMG SRC=\"" + sTop + "\">", bCtrTop));
-	    p.addHTML("</TD>") ;
+	    p.addHTML("</div>") ;
 	}
 
-	p.addHTML("<TD valign=top>");
+	p.addHTML("<div class='room-video'>");
 	if (video != null && !video.equals("")) {
 	    
 	    if (bCtrVid) {
@@ -1428,10 +1458,10 @@ public class Room extends ChatObject {
 
 	}
 
-	p.addHTML("</TD><TD valign=top>") ;
+	p.addHTML("</div><div class='room-text-and-links'>") ;
 	//the Creator - set entry page text then set users chosen links
 	if((sRoomText != null) && !sRoomText.equals("")) {
-	    p.addHTML(Filter.ctrHTML(sRoomText, bCtrRoomText));
+	    p.addHTML(Jsoup.parseBodyFragment(sRoomText).toString());
 	}
 
 	if((sRoomLink1 != null) && !sRoomLink1.equals("")) {
@@ -1444,11 +1474,8 @@ public class Room extends ChatObject {
 	    p.addHTML("</UL>");
 
 	}
-	
-	p.addHTML("</TD>") ;
-	p.addHTML("<TD>&nbsp;") ;
-	p.addHTML("</TD>") ;
-	p.addHTML("</TR></TABLE>") ;
+        
+	p.addHTML("</div></section>") ;
 
 	Form f = form("TopAdminForm", c);
 	p.addHTML(f);
