@@ -2,25 +2,24 @@ package customchat.chat;
 
 import customchat.htmlutil.Page;
 
-//import chat.*;
+
 import java.io.*;
-import java.net.*;
 
 
 public class AutoScroll extends Object {
     public boolean bMisery = false;
     PrintWriter out;
-    private String sBoundary = "ThisRandomString\nContent-type: text/html\r\n\n";
-    private static final String HTTPResponse = "HTTP/1.1 200 OK\r\nContent-type: multipart/mixed;boundary=ThisRandomString\r\n\n";
+    private static final String S_BOUNDARY = "ThisRandomString\nContent-type: text/html\r\n\n";
+    private static final String HTTP_RESPONSE = "HTTP/1.1 200 OK\r\nContent-type: multipart/mixed;boundary=ThisRandomString\r\n\n";
 
     public AutoScroll(Page p, final PrintWriter pw, final boolean b, boolean bPrintHeader) {
 	out = pw;
 	bMisery = b;
 	if (bPrintHeader)
-	    out.print(HTTPResponse);
+	    out.print(HTTP_RESPONSE);
 
 	if(!bMisery && !Connection.anotherIEHack)
-	    out.println(sBoundary);
+	    out.println(S_BOUNDARY);
 
 	p.addHeadHTML(
 		      "<SCRIPT LANGUAGE=\"JavaScript1.1\">\n" +
