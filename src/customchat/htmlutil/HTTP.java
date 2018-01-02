@@ -12,6 +12,7 @@ public class HTTP {
 	new File (System.getProperty ("user.dir"));
   public static final File HTML_ROOT =
 	new File (SERVER_LOCATION, "html");
+
   public static final int PORT = 8888;
   public static final String DEFAULT_INDEX = "index.html";
 
@@ -31,17 +32,18 @@ public class HTTP {
   public static final int STATUS_NOT_IMPLEMENTED = 501;
 
 
-  protected static final Vector environment = new Vector ();
+  protected static final Vector ENVIRONMENT = new Vector ();
   static {
-	environment.addElement ("SERVER_SOFTWARE=" + SERVER_INFO);
-	environment.addElement ("GATEWAY_INTERFACE=" + "CGI/1.0");
-	environment.addElement ("SERVER_PORT=" + PORT);
-	environment.addElement ("DOCUMENT_ROOT=" + HTML_ROOT.getPath ());
+	ENVIRONMENT.addElement ("SERVER_SOFTWARE=" + SERVER_INFO);
+	ENVIRONMENT.addElement ("GATEWAY_INTERFACE=" + "CGI/1.0");
+	ENVIRONMENT.addElement ("SERVER_PORT=" + PORT);
+	ENVIRONMENT.addElement ("DOCUMENT_ROOT=" + HTML_ROOT.getPath ());
+
 	try {
-	  environment.addElement
+	  ENVIRONMENT.addElement
 		("SERVER_NAME=" + InetAddress.getLocalHost ().getHostName ());
 	} catch (UnknownHostException ex) {
-	  environment.addElement ("SERVER_NAME=localhost");
+	  ENVIRONMENT.addElement ("SERVER_NAME=localhost");
 	}
   }
 
@@ -126,7 +128,7 @@ video/x-sgi-movie	.movie
   }  
   public static String decodeString (String str) {
 	String replaced = str.replace ('+', ' ');
-	StringBuffer result = new StringBuffer ();
+	StringBuilder result = new StringBuilder ();
 	int idx, odx = 0;
 	while ((idx = str.indexOf ('%', odx)) != -1) {
 	  result.append (replaced.substring (odx, idx));
@@ -167,7 +169,7 @@ video/x-sgi-movie	.movie
 	return from;
   }  
   public static String translateFilename (String filename) {
-	StringBuffer result = new StringBuffer ();
+	StringBuilder result = new StringBuilder ();
 	int idx, odx = 0;
 	while ((idx = filename.indexOf ('/', odx)) != -1) {
 	  result.append (filename.substring (odx, idx)).append (File.separator);
