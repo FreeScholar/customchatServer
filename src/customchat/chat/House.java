@@ -89,11 +89,11 @@ public class House extends ChatObject {
 	}
     }
 
-    protected String childCreationPage() throws ChatException {
+    protected String createChildPage() throws ChatException {
 	return fileToString(Floor.sNewHTML);
     }  
 
-    protected String childName() {
+    protected String getChildName() {
 	return "Area";
     }  
 

@@ -41,13 +41,13 @@ public class Floor extends ChatObject {
 	this(l, h, lt.getValue("sKeyWord"), lt.getValue("sName"));
 	update(lt);
     }
-    protected String childCreationPage() throws ChatException {
+    protected String createChildPage() throws ChatException {
 	String s = fileToString(Room.sNewHTML);
 	s = replace(s, "#ParentName#", sName);
 	s = replace(s, "#ParentKey#", sKeyWord);
 	return s;
     }  
-    protected String childName() {
+    protected String getChildName() {
 	return "Room";
     }  
     /**
