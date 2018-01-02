@@ -7,6 +7,9 @@ import java.io.*;
 import java.lang.reflect.*;
 import java.net.*;
 
+  import org.jsoup.Jsoup;
+  import org.jsoup.nodes.*;
+
 
 public abstract class ChatObject extends Object implements Serializable {
 
@@ -116,6 +119,7 @@ public abstract class ChatObject extends Object implements Serializable {
 	if ((URL_PREFIX = System.getProperty("chat.urlprefix")) == null)
 	    URL_PREFIX = "/";
     }
+    
     // Variables for file names
     protected static final String FILE_PREFIX = "cc";
     protected static final String FILE_DATA = FILE_PREFIX + "data";
@@ -145,6 +149,11 @@ public abstract class ChatObject extends Object implements Serializable {
 	DIR_HTML = System.getProperty("chat.htmldir");
 	if(DIR_HTML == null)
 	    DIR_HTML = "." + File.separator + "html" + File.separator;
+        
+        // new css variable being tested and set to default ""
+        DIR_CSS = System.getProperty("chat.cssdir");
+        if(DIR_CSS == null)
+            DIR_CSS = "./resources/" + File.separator + "css" + File.separator;
 
 	DIR_RESOURCE = System.getProperty("chat.resourcedir");
 	if (DIR_RESOURCE == null)
@@ -426,7 +435,7 @@ public abstract class ChatObject extends Object implements Serializable {
 
 	if (hasPrivilege(l, CAN_CREATE)
 	    && (this instanceof House || this instanceof Floor))
-	    pdCommand.addOption("New " + childName(), String.valueOf(CREATE_PAGE));
+	    pdCommand.addOption("New " + getChildName(), String.valueOf(CREATE_PAGE));
 
 
 	if (hasPrivilege(l, CAN_EDIT) && parent != null ) {
@@ -487,8 +496,8 @@ public abstract class ChatObject extends Object implements Serializable {
 	    parent.checkBooted(l);
     }
 
-    protected abstract String childCreationPage() throws ChatException;  
-    protected abstract String childName();  
+    protected abstract String createChildPage() throws ChatException;  
+    protected abstract String getChildName();  
 
     public synchronized void cleanup() {
 	File fDir = new File(getPath());
@@ -557,11 +566,12 @@ public abstract class ChatObject extends Object implements Serializable {
     }  
 
     public Page createPage(Login l) throws ChatException {
-	if(!hasPrivilege(l, CAN_CREATE))
-	    throw new UnauthorizedException("You do not have create privileges for "
+	if(!hasPrivilege(l, CAN_CREATE)) {
+            throw new UnauthorizedException("You do not have create privileges for "
 					    + sName + ".");
-
-	String sFile = childCreationPage();
+        }
+	    
+	String sFile = createChildPage();
 	sFile = replace(sFile, "#sKeyWord#", getKeyWord());
 	sFile = replace(sFile, "#Command#", String.valueOf(CREATE));
 	sFile = replace(sFile, "#sName#", sName);
@@ -569,7 +579,16 @@ public abstract class ChatObject extends Object implements Serializable {
 	sFile = replace(sFile, "#GalleryPullDown#",
 			PageFactory.makeDirectoryPulldown(new File(DIR_RESOURCE + "images/backgrounds")).toString());
 
-	return new Page( sFile );
+        
+          Document doc = Jsoup.parse(sFile);
+          Element head = doc.head();
+          String newHead = head.html();
+          head.empty();
+          
+          Page p = new Page(doc.toString());
+          p.resetHead();
+          p.addHeadHTML(newHead);
+	return p;
     }  
 
     public Page defaultCommand(Login lUser, LookupTable lt)
@@ -803,8 +822,7 @@ public abstract class ChatObject extends Object implements Serializable {
 		return false ;
 	}
 
-    public final void doCommand(Login lUser, LookupTable lt, PrintWriter out, boolean bPrintHeader)
-	throws ChatException {
+    public final void doCommand(Login lUser, LookupTable lt, PrintWriter out, boolean bPrintHeader) throws ChatException {
 		
 		if(lUser != null)
 			checkBooted(lUser);
@@ -814,14 +832,17 @@ public abstract class ChatObject extends Object implements Serializable {
 		int iCommand;
 		Container commandContainer;
 
-		if(sCommand == null)
-			iCommand = DEFAULT;
-		else
-			try {
-			iCommand = Integer.parseInt(sCommand);
-			} catch (NumberFormatException e) {
-			throw new ChatException(sCommand + " is an invalid Action");
-			}
+		if(sCommand == null) {
+                    iCommand = DEFAULT;
+                }		
+                else {
+                    try {
+                    iCommand = Integer.parseInt(sCommand);
+                    } catch (NumberFormatException e) {
+                    throw new ChatException(sCommand + " is an invalid Action");
+                    }
+                }
+			
 
 		try {
 			Object key = customchat.util.Timer.start(null);
