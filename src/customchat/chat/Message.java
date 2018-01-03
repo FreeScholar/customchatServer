@@ -96,10 +96,10 @@ public class Message extends Object implements Serializable {
 				return "<div class='user-and-message'><div class='u font-weight-bold'>" + Filter.stripHTML(sFromTemp) + "</div><div class='m'>" + Filter.stripHTML(sTextTemp) + "</div></div>";
 				}
 			else {
-				return  "<div class='user-and-message'><div class='u font-weight-bold'>" + Filter.stripHTML(sFromTemp) + "</div><div class='m'>" + Filter.stripHTML(sTextTemp) + "</div></div>";
+				return  "<div class='user-and-message'><div class='u font-weight-bold'>" + Filter.stripHTML(sFromTemp) + "</div><div class='m'>" + sTextTemp + "</div></div>";
 			}
 	    } else {
-		return "<div class='user-and-message'><div class='u font-weight-bold'>" + Filter.stripHTML(sFromTemp) + "</div><div class='m'>" + Filter.stripHTML(sTextTemp) + "</div></div>";
+		return "<div class='user-and-message'><div class='u font-weight-bold'>" + Filter.stripHTML(sFromTemp) + "</div><div class='m'>" + sTextTemp + "</div></div>";
 	    }
 	} catch (Exception e) {
 	    System.out.println("Messages:getHTML:"+e) ;
@@ -107,7 +107,7 @@ public class Message extends Object implements Serializable {
 	    if (ct != null)
 		System.out.println("\tloc is "+ct.loc) ;
 	}
-	return "<div class='user-and-message'><div class='u'>" + Filter.stripHTML(sFromTemp) + "</div><div class='m'>" + Filter.stripHTML(sTextTemp) + "</div></div>";
+	return "<div class='user-and-message'><div class='u'>" + Filter.stripHTML(sFromTemp) + "</div><div class='m'>" + sTextTemp + "</div></div>";
 
   }  
 
