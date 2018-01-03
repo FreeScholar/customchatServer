@@ -1886,7 +1886,6 @@ public class Room extends ChatObject {
         roomPage.addHeadHTML(
 		      "<SCRIPT>\n"
 		      //	+ "<!--\n"
-
 		      + "function focusinput() {\n"
 		      + "self.focus() ;\n"
 		      + "document.getElementById('user-message').focus();\n"
@@ -1946,160 +1945,6 @@ public class Room extends ChatObject {
      * @return the HTML code for the bottom frame in real time chat
      */
     
-    protected Container getBottomPage(Chatter ct) throws ChatException {
-        Container bottomPage = new Container("div");
-        if(ct == null) { 
-            throw new ChatterNotFoundException(); 
-        }
-
-	if (buttonJS == null) {
-            buttonJS = getResource("button.js");
-        }
-
-	if (signature == null) {
-            signature = getResource("signature.html");
-        }
-
-	bottomPage.addArgument("onload=\"return focusinput();\"") ;	
-	//Script defining functions used below
-	//p.addHeadHTML("<script src=\"button.js\" language=\"javascript\"></script>") ;
-
-	//Bottom Form
-	Form tBottomForm = form(sBottomForm, ct);
-
-	tBottomForm.addArgument("onSUBMIT", "doSubmit()");
-	tBottomForm.addHTML(commandInput(Input.HIDDEN, scrollSend));
-
-	bottomPage.addHTML(tBottomForm);
-
-	//Begin the table
-	tBottomForm.addHTML("<TABLE WIDTH=700 CELLPADDING=\"0\" CELLSPACING=\"0\" VALIGN=\"TOP\" BORDER=0><TR>" +
-			    "<TD NOWRAP VALIGN=\"TOP\">\n");
-
-	//Sounds and images pulldown menus
-	if (!bHtmlDis) {
-            tBottomForm.addHTML(HTMLGetPullDown(PUBLIC_MESSAGE_VAR));
-        }
-
-	if (!bHtmlDis) {
-            tBottomForm.addHTML(getFontDrops("RealTime"));	
-        }	
-	
-	//Start new column
-	tBottomForm.addHTML("</TD><TD>");
-
-	//Java Script for Toggling Scrolling
-	tBottomForm.addHTML(//"</FONT>\n"
-			    "<SCRIPT LANGUAGE=\"JavaScript1.1\">\n" +
-			    "\n" +
-			    "  <!--\n" +
-			    "    var scrolling = true;\n" +
-			    "    function toggleScrolling( )\n" +
-			    "    {\n" +
-			    "        if ( scrolling == true )\n" +
-			    "        {\n" +
-			    "            scrolling = false;\n" +
-			    "            parent." + frameMessages + ".clearTimeout();\n" +
-			    "            parent." + frameMessages + ".autoScrollOn = 0;\n" +
-			    "            parent." + frameMessages + ".onblur = parent." + frameMessages + ".scrollOffFunction;\n" +
-			    "        } else {\n" +
-			    "            scrolling = true;\n" +
-			    "            parent." + frameMessages + ".autoScrollOn = 1;\n" +
-			    "            parent." + frameMessages + ".onblur = parent." + frameMessages + ".scrollOnFunction;\n" +
-			    "            parent." + frameMessages + ".scroll(0, 65000);\n" +
-			    "            parent." + frameMessages + ".setTimeout('scrollWindow()', 200);\n" +
-			    "        }  // end if\n" +
-			    "    }  // end toggleScrolling\n" +
-			    "    if ( parent." + frameMessages + " != null  &&  parent." + frameMessages + ".autoScrollOn != null )\n" +
-			    "    {\n" +
-			    "        document.write('<INPUT NAME=AUTOSCROLL TYPE=CHECKBOX onclick=\"toggleScrolling()\"');\n" +
-			    "        if ( parent." + frameMessages + ".autoScrollOn == 1 )\n" +
-			    "        {\n" +
-			    "            document.write(' CHECKED');\n" +
-			    "        }  // end if\n" +
-			    "        document.write('> <FONT FACE=\"Arial,Helvetica,Geneva\" SIZE=1>Scroll - Uncheck to scroll back</FONT>');\n" +
-			    "        scrolling = ( parent." + frameMessages + ".autoScrollOn == 1 );\n" +
-			    "    }  // end if\n" +
-			    "  //  -->\n" +
-			    "\n" +
-			    "</SCRIPT>");
-
-	//Start a new row in the table
-	tBottomForm.addHTML("</TD></TR><TR><TD>\n");
-
-	//Message box
-	Input inp = new Input(Input.TEXT, PUBLIC_MESSAGE_VAR, "");
-        // new class added to message box
-        inp.addArgument("id", "user-message");
-        inp.addArgument("class", "message-box");
-	inp.addArgument("SIZE", "60") ;
-	tBottomForm.addHTML(inp);
-
-	//Instructions
-	tBottomForm.addHTML(signature) ;
-
-	//New column
-	tBottomForm.addHTML("</TD><TD VALIGN=\"TOP\">");
-
-	tBottomForm.addHTML("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" ><tr>") ;
-	tBottomForm.addHTML("<td>");
-
-	// Whisper Button for bottom frame of AUTOSCROLL room
-	if (!bPMDis || isAdmin(ct.lUser)) {
-        //tBottomForm.addHTML("<input type=image src=\"" + buttonURL("whisper.gif") + "\" set border=0 value=\"Whisper\" name=\""+PRIVATE_CHECKBOX_VAR+"\">") ;
-	    Input iWhisper = new Input(Input.SUBMIT, PRIVATE_CHECKBOX_VAR, sWhisper);
-            Input iSpeak = new Input(Input.SUBMIT, PUBLIC_MESSAGE_VAR, sSpeak);
-            
-	    iWhisper.addArgument("ALIGN", "TOP");
-	    iWhisper.addArgument("VSPACE", "0");
-            tBottomForm.addHTML(iSpeak);
-	    tBottomForm.addHTML(iWhisper);
-	}
-
-	tBottomForm.addHTML("</td>");
-	if (!bHtmlDis) {
-		tBottomForm.addHTML("<td><A href=\"javascript:bold('RealTime')\"><IMG alt=\"Bold\" border=\"0\" SRC=\""+buttonURL("bold.gif")+"\"></A>") ;
-		tBottomForm.addHTML("<A href=\"javascript:italicize('RealTime')\"><IMG alt=\"Italics\" border=\"0\" SRC=\""+buttonURL("italicize.gif")+"\"></A>") ;
-		tBottomForm.addHTML("<A href=\"javascript:underline('RealTime')\"><IMG alt=\"Underline\" border=\"0\" SRC=\""+buttonURL("underline.gif")+"\"></A>") ;
-		tBottomForm.addHTML("<A href=\"javascript:center('RealTime')\"><IMG alt=\"Center\" border=\"0\" SRC=\""+buttonURL("center.gif")+"\"></A>") ;
-		tBottomForm.addHTML("<A href=\"javascript:hyperlink('RealTime')\"><IMG alt=\"Hyperlink\" border=\"0\" SRC=\""+buttonURL("url.gif")+"\"></A>") ;
-		tBottomForm.addHTML("<A href=\"javascript:image('RealTime')\"><IMG alt=\"Image\" border=\"0\" SRC=\""+buttonURL("image.gif")+"\"></A>") ;
-		//tBottomForm.addHTML("<A href=\"javascript:quote('RealTime')\"><IMG border=\"0\" SRC=\""+buttonURL("quote.gif")+"\"</A></td>") ;
-		tBottomForm.addHTML("<A HREF=\"\" onClick='return openPopPaste()'>" + "<IMG alt=\"Text Editor\" SRC=\"" + buttonURL("quote.gif")  + "\" ALT=\"\" BORDER=\"0\"></A>");
-	}
-
-	tBottomForm.addHTML("</tr>") ;
-	tBottomForm.addHTML("<tr>") ;
-	tBottomForm.addHTML("<td nowrap colspan=\"2\">") ;
-
-	//Set options button
-	tBottomForm.addHTML("<A HREF=\"\" onClick='return openOptions()'>"
-			    +	"<IMG SRC=\"" + commandButton(OPTIONS)
-			    + "\" ALT=\"\" BORDER=\"0\"></A>");
-
-	// Switch rooms button
-	if (!bSwitchDis || ct.isAdmin) {
-	    tBottomForm.addHTML("<A HREF=\"" + commandURL(SWITCH, ct)+"&"+DESTINATION_VAR+"="+parent.sKeyWord
-			    + "\" TARGET=\"_top\"><IMG SRC=\""
-			    + buttonURL("switchrooms.gif") + "\""
-			    + " BORDER=0></A>");
-	}
-	
-	//Exit button
-	tBottomForm.addHTML("<A HREF=" + commandURL(EXIT, ct)
-			    + " TARGET=_top class='exit-link'><IMG SRC=\"" + buttonURL("exit.gif")
-			    + "\" ALT=\"\" BORDER=0></A>");
-	tBottomForm.addHTML("</td></tr>") ;
-	tBottomForm.addHTML("</table>") ;
-	//Put cursor in the message box
-	tBottomForm.addHTML("<SCRIPT><!--\ndocument.getElementById('user-message').focus();\n//--></SCRIPT>");
-	//End table
-	tBottomForm.addHTML("</TD></TR></TABLE>");
-	tBottomForm.addHTML("<FONT SIZE=\"1\" FACE=Arial,Helvetica,Geneva> powered by " +
-			    "<A target=\"new\" HREF=\"http://customchat.com\"><B>CustomChat Server</B></A> since 1997</FONT><P>");
-        
-        return bottomPage;
-    }
     protected Page scrollSend(Chatter ct) throws ChatException {
 	if(ct == null) { 
             throw new ChatterNotFoundException(); 
@@ -2133,6 +1978,11 @@ public class Room extends ChatObject {
 		      // + "parent." + frameWhoList + ".document.location.reload();\n"
 		      + "return true;\n"
 		      + "}\n"
+                      + "function checkSubmit(e) {\n" 
+                      + " if(e && e.keyCode == 13) {\n" 
+                      + "    document.forms[0].submit();\n" 
+                      + "  }\n" 
+                      + "}"
 		      + "\n"
 		      + "function openOptions() {\n"
 		      + "  if(parent.winRef && !parent.winRef.closed) \n"
@@ -2159,6 +2009,7 @@ public class Room extends ChatObject {
 	//Bottom Form
 	Form tBottomForm = form(sBottomForm, ct);
 
+        tBottomForm.addArgument("onKeyPress", "return checkSubmit(event)");
 	tBottomForm.addArgument("onSUBMIT", "doSubmit()");
 	tBottomForm.addHTML(commandInput(Input.HIDDEN, scrollSend));
 
@@ -2240,11 +2091,11 @@ public class Room extends ChatObject {
 	if (!bPMDis || isAdmin(ct.lUser)) {
         //tBottomForm.addHTML("<input type=image src=\"" + buttonURL("whisper.gif") + "\" set border=0 value=\"Whisper\" name=\""+PRIVATE_CHECKBOX_VAR+"\">") ;
 	    Input iWhisper = new Input(Input.SUBMIT, PRIVATE_CHECKBOX_VAR, sWhisper);
-            Input iSpeak = new Input(Input.SUBMIT, PUBLIC_MESSAGE_VAR, sSpeak);
+            //Input iSpeak = new Input(Input.SUBMIT, PUBLIC_MESSAGE_VAR, sSpeak);
             
 	    iWhisper.addArgument("ALIGN", "TOP");
 	    iWhisper.addArgument("VSPACE", "0");
-            tBottomForm.addHTML(iSpeak);
+            //tBottomForm.addHTML(iSpeak);
 	    tBottomForm.addHTML(iWhisper);
 	}
 
