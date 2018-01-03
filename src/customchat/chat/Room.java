@@ -132,7 +132,7 @@ public class Room extends ChatObject {
     private Page roomPage;
 
    class DeliveryThread extends Thread {
-	private Room r;
+	private final Room r;
 
 	public DeliveryThread(Room r) {
 	    this.r = r;
@@ -547,7 +547,7 @@ public class Room extends ChatObject {
 		    vChatters.addElement(c);
 		} else {
 		    System.out.println("Throwing RoomFullException") ;
-		    throw new RoomFullException("This room is limited to " + new Integer(MaxChatters()) + " users.");
+		    throw new RoomFullException("This room is limited to " + MaxChatters() + " users.");
 		}
 	    }
 
