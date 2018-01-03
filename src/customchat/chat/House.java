@@ -255,17 +255,26 @@ public class House extends ChatObject {
 	}
   */
 
-
-    protected HTML liveList0(int level, String handle, boolean showPics,
-			     Container ct)
-	throws ChatException {
+    /**
+     * Read the rooms in for this house and this mode.And add them to the proper floors.
+     * @param level
+     * @param handle
+     * @param showPics
+     * @param ct
+     * @return 
+     * @throws customchat.chat.ChatException 
+     */
+    @Override
+    protected HTML liveList0(int level, String handle, boolean showPics, Container ct) throws ChatException {
 	return super.liveList0(6, handle, showPics, ct);
     }  
 
+ @Override
     protected String modifyPage() throws ChatException {
 	return fileToString(sNewHTML);
     }  
 
+ @Override
     protected ChatObject newChild(Login lOwner, LookupTable lt) throws ChatException {
 	return new Floor(lOwner, lt, this);
     }  
