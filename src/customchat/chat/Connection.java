@@ -315,6 +315,7 @@ class Connection implements Runnable {
 			while ((iread = fs.read(ba)) >= 0) {
                             os.write(ba, 0, iread);
                         }
+                        out.close();
                         fs.close();
 				
 			
@@ -379,7 +380,6 @@ class Connection implements Runnable {
 	// we have to use synchronized first to lock the vulture
 	// object before we can call notify() for it.
 	finally {
-            out.close();
 	    server.wakeup();
 	}
     }
