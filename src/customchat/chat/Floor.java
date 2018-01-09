@@ -1,8 +1,5 @@
 package customchat.chat;
 
-import java.util.*;
-import java.io.*;
-import java.net.*;
 import customchat.util.*;
 import customchat.htmlutil.*;
 
@@ -15,9 +12,9 @@ import customchat.htmlutil.*;
  * @version 1.5
  */
 public class Floor extends ChatObject {
-    // static final long serialVersionUID = -5087148074027832925L;
+    // static final long SERIAL_VERSION_UID = -5087148074027832925L;
     //added by ritchie
-    static final long serialVersionUID = 6309882955745548636L;
+    static final long SERIAL_VERSION_UID = 6309882955745548636L;
     // Variables that are set by the Floor Creator
     public String sAreaImg = null;
     public boolean bCtrImg = true;
@@ -25,13 +22,16 @@ public class Floor extends ChatObject {
     public boolean bCtrHead = true;
 
 
-    protected static final String sNewHTML = htmlFile("NewArea.html");
+    protected static final String NEW_HTML = htmlFile("NewArea.html");
 
     /**
      * creates a Floor in house <I>h</I> named <I>name</I>, and initializes the TimeOut thread.
      *
+     * @param l
      * @param name The human readable name of the floor.
+     * @param keyWord
      * @param h the house containing this floor.
+     * @throws customchat.chat.ChatException
      */
     public Floor(Login l, House h, String keyWord, String name) throws ChatException {
 	super(l, h, keyWord, name);
@@ -39,14 +39,16 @@ public class Floor extends ChatObject {
     }
     public Floor(Login l, LookupTable lt, House h) throws ChatException {
 	this(l, h, lt.getValue("sKeyWord"), lt.getValue("sName"));
-	update(lt);
+	super.update(lt);
     }
+    @Override
     protected String createChildPage() throws ChatException {
-	String s = fileToString(Room.sNewHTML);
+	String s = fileToString(Room.NEW_HTML);
 	s = replace(s, "#ParentName#", sName);
 	s = replace(s, "#ParentKey#", sKeyWord);
 	return s;
     }  
+    @Override
     protected String getChildName() {
 	return "Room";
     }  
@@ -107,15 +109,18 @@ public class Floor extends ChatObject {
 	return p;
     }
 
+    @Override
     protected HTML liveList0(int level, String handle,boolean showPics,Container ct)
 	throws ChatException {
 	return super.liveList0(6, handle, showPics, ct);
     }  
 
+    @Override
     protected String modifyPage() throws ChatException {
-	return fileToString(sNewHTML);
+	return fileToString(NEW_HTML);
     }  
 
+    @Override
     protected ChatObject newChild(Login lOwner, LookupTable lt)
 	throws ChatException {
 	return new Room(lOwner, lt, this);
