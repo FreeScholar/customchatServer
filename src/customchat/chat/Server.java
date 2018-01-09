@@ -20,7 +20,7 @@ public class Server extends Thread {
     // Class Variables/values.
     public final static int DEFAULT_PORT = 6743;
     protected static int port;
-    protected ServerSocket listen_socket;
+    protected ServerSocket listenSocket;
     protected ThreadGroup threadgroup;
     protected Vector connections;
     private int iMaxThreads;
@@ -74,7 +74,7 @@ public class Server extends Thread {
 	System.out.println("Running with maxThreads :\t" + String.valueOf(iMaxThreads));
 
 	try {
-	    listen_socket = new ServerSocket(port, 100);
+	    listenSocket = new ServerSocket(port, 100);
 	} catch (IOException e) {
 	    fail(e, "Exception creating server socket (" + port + ")");
 	}
@@ -188,9 +188,9 @@ public class Server extends Thread {
 	    while(true) {
 		if(threadgroup.activeCount() < iMaxThreads) {
 		    try {
-			Socket client_socket = listen_socket.accept();
-			client_socket.setSoTimeout(soTimeout);
-			c = new Connection(client_socket, threadgroup, this.getPriority()+1, this);
+			Socket clientSocket = listenSocket.accept();
+			clientSocket.setSoTimeout(soTimeout);
+			c = new Connection(clientSocket, threadgroup, this.getPriority()+1, this);
 			if(System.getProperty("chat.reThread") == null ) {
 			    Thread t = new Thread (c);
 			    t.setPriority(this.getPriority() +1 );
@@ -226,5 +226,5 @@ public class Server extends Thread {
     }
     public synchronized void wakeup() {
 	notify();
-    }  
+    }
 }
