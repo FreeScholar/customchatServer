@@ -49,21 +49,21 @@ class Connection implements Runnable {
     };
 
     // Initialize the streams and start the thread
-    public Connection(Socket client_socket, ThreadGroup threadgroup,
+    public Connection(Socket clientSocket, ThreadGroup threadGroup,
 		      int priority, Server s)
     {
 	// Give the thread a group, a name, and a priority.
-	//super(threadgroup, "Connection " + connection_number++);
-	//tg = threadgroup;
+	//super(threadGroup, "Connection " + connection_number++);
+	//tg = threadGroup;
 	// Now that we are initialised, we can give ourselves a meaningful name
 	//super.setName( "Connection number ("+ connection_number + ") " +
 	//client_socket.getInetAddress().getHostName() +
-	//		 " port:" + client_socket.getPort() );
+	//		 " port:" + clientSocket.getPort() );
 
 	//this.setPriority(priority);
 
 	// Save our other arguments away
-	client = client_socket;
+	client = clientSocket;
 	this.server = s;
 
 	// Create the streams
@@ -187,7 +187,7 @@ class Connection implements Runnable {
 			throw new NotLoggedInException("Please enter a Password with more than three characters.");
 		    }
 		    lUser = new Login(sPrimary, sPassword);
-			lUser.IP = client.getInetAddress().getHostAddress().toString() ;
+			lUser.IP = client.getInetAddress().getHostAddress();
 		} else if (line.toUpperCase().startsWith("CONTENT-LENGTH:")) {
 		    iLength = Integer.parseInt(line.substring(16));
 		} else if((start = line.indexOf("MSIE")) >= 0) {
@@ -265,7 +265,7 @@ class Connection implements Runnable {
      */
     private void resetUser()  throws ChatException {
 	if(!htReset.containsKey(client.getInetAddress())) {
-	    htReset.put(client.getInetAddress(), new Integer(1));
+	    htReset.put(client.getInetAddress(), 1);
 	    throw new NotLoggedInException("<p><center>please use the back button, and then RELOAD or REFRESH your browser -- </center></p>");
 	}
 
@@ -335,7 +335,7 @@ class Connection implements Runnable {
 	    c.setScroll(new AutoScroll(c.location().getTemplate(), out, bMisery, true));
 		
 	} catch (ShutDownException e) {
-	    ServerSocket ss = server.listen_socket;
+	    ServerSocket ss = server.listenSocket;
 
 	    if (ss != null) {
 				try {
@@ -386,9 +386,11 @@ class Connection implements Runnable {
     //---------------------------------------------------------------------------
     // This method returns the string representation of the Connection.
     // This is string is unused, but handy for debugging purposes
+    @Override
     public String toString() {
 	return /*this.getName() +*/ " connected to: "
 	    + client.getInetAddress().getHostName()
 	    + ":" + client.getPort() + " username: ";
     }
+    
 }  // end of Connection
