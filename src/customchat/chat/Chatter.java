@@ -511,12 +511,10 @@ public class Chatter extends Object implements Serializable {
             }
         }
 
-        // changed to use brackets G.T. 11/30/2017 
 	if(lt.getValue(HANDLE_VAR) != null) {
             sHandle = (new Filter()).FilterHTML(sHandle);
         }
 
-        // changed to use brackets G.T. 11/30/2017 
 	if(lt.getValue(TAGLINE_VAR) != null) {
             sTagline = (new Filter()).FilterHTML(sTagline);
         }
@@ -526,14 +524,10 @@ public class Chatter extends Object implements Serializable {
 	    aIgPub = lt.getFullValue(PUBLIC_IGNORE_VAR);  // ""      public message ignorees
 	    aIgPriv = lt.getFullValue(PRIVATE_IGNORE_VAR);//""     private message ignorees
 	} else {
-            // changed to use brackets G.T. 11/30/2017 
 	    if(lt.getValue(ChatObject.SET_ONE_VAR + PM_RECIPIENT_VAR) != null) {
-                // duplicate line of code found. Might serve purpose. G.T. 11/30/2017
-                // if(lt.getValue(ChatObject.SET_ONE_VAR + PM_RECIPIENT_VAR) != null)
                 aPMRecips = lt.getFullValue(PM_RECIPIENT_VAR);
             }
             
-            // changed to use brackets G.T. 11/30/2017 
 	    if(lt.getValue(ChatObject.SET_ONE_VAR + PUBLIC_IGNORE_VAR) != null) {
                 aIgPub = lt.getFullValue(PUBLIC_IGNORE_VAR);
             }
@@ -548,11 +542,10 @@ public class Chatter extends Object implements Serializable {
     }  
 
     /**
-	 * Verifies the given login name and passphrase.
-	 *
-	 * @param primary login name
-	 * @param pass passphrase
-	 * @return true for good login name and passphrase.
+     * Verifies the given login name and passphrase.
+     * @param l
+     * @param sHandle
+     * @return true for good login name and passphrase.
     */
     public boolean verify(Login l, String sHandle) {
 	return lUser.equals(l) && hashKeyIs(sHandle);
