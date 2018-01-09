@@ -2063,10 +2063,43 @@ public abstract class ChatObject extends Object implements Serializable {
 
 	Body b = new Body();
 	Container head = null;
+        StringBuilder sb = new StringBuilder();
+        Container style = new Container("style");
+        style.addArgument("type", "text/css");
 	Page pageTemplateTemp = new Page(head, b);
-
+        Map <String, String> attributes = new HashMap();
 	pageTemplateTemp.addHeadHTML(new Title(sName));
-
+        pageTemplateTemp.addHeadHTML(style);
+        attributes.put("background-image", "url(" + (sBgURL) +")");
+        attributes.put("background-color", sBg);
+        attributes.put("text-color", sTextColor);
+        attributes.put("link-color", sLinkColor);
+        attributes.put("vlink-color", sVLinkColor);
+        
+        style.addHTML(":root {\n");
+        for(Map.Entry<String, String> attr : attributes.entrySet()) {
+            if(attr.getValue() != null) {
+                sb.append("--").append(attr.getKey()).append(": ").append(attr.getValue()).append(";\n");
+            }    
+        }
+        style.addHTML(sb.toString());
+        style.addHTML("}\n");
+        
+        style.addHTML(".room-section {\n");
+        style.addHTML("background: var(--background-color) var(--background-image);\n");
+        style.addHTML("color: var(--text-color); \n");
+        style.addHTML("}\n");
+        
+        style.addHTML("a:link {\n");
+        style.addHTML("color: var(--link-color); \n");
+        style.addHTML("}\n");
+        
+        style.addHTML("a:visited {\n");
+        style.addHTML("color: var(--vlink-color); \n");
+        style.addHTML("}\n");
+        
+        b.addArgument("class","room-section");
+        
 	/** Modified by ritchie
 	 ** take into account the bad word filter setting
 	 */
@@ -2078,7 +2111,7 @@ public abstract class ChatObject extends Object implements Serializable {
 
 	
 
-	if(sBgType != null)
+	/*if(sBgType != null)
 	    if(sBgType.equals("Color"))
 		sBgURL = null;
 	    else
@@ -2104,7 +2137,7 @@ public abstract class ChatObject extends Object implements Serializable {
 	    for(int i = 0; i < children.size(); i++) {
 		((ChatObject)children.elementAt(i)).bHtmlDis = true ;
 	    }
-	}
+	}*/
 	       
 	for(int i = 0; i < children.size(); i++) {
 	    ((ChatObject)children.elementAt(i)).bPMDis = bPMDis ;

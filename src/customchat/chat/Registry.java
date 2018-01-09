@@ -1,9 +1,8 @@
 package customchat.chat;
 
-import java.util.Hashtable;
 import customchat.util.ErrorLog;
-
 import java.util.*;
+
 public class Registry {
   Hashtable reg = new Hashtable(100);
   public Registry() {}  
