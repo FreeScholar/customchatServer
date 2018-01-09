@@ -2069,6 +2069,7 @@ public abstract class ChatObject extends Object implements Serializable {
 	Page pageTemplateTemp = new Page(head, b);
         Map <String, String> attributes = new HashMap();
 	pageTemplateTemp.addHeadHTML(new Title(sName));
+
         pageTemplateTemp.addHeadHTML(style);
         attributes.put("background-image", "url(" + (sBgURL) +")");
         attributes.put("background-color", sBg);
@@ -2109,39 +2110,17 @@ public abstract class ChatObject extends Object implements Serializable {
 	    iWordSet = Integer.parseInt(bwf) ;
 	}
 
-	
-
-	/*if(sBgType != null)
-	    if(sBgType.equals("Color"))
-		sBgURL = null;
-	    else
-		sBgURL = lt.getValue("sBg" + sBgType);  // Read the value of backgound
-
-	if(sBgURL != null)
-	    b.addArgument("BACKGROUND", sBgURL);
-
-	if(sBg != null)
-	    b.addArgument("BGCOLOR", sBg);
-
-	if(sTextColor != null)
-	    b.addArgument("TEXT", sTextColor);
-
-	if(sLinkColor != null)
-	    b.addArgument("LINK", sLinkColor);
-
-	if(sVLinkColor != null)
-	    b.addArgument("VLINK", sVLinkColor);
-
-
+        /*
 	if (bHtmlDis) {
 	    for(int i = 0; i < children.size(); i++) {
 		((ChatObject)children.elementAt(i)).bHtmlDis = true ;
 	    }
-	}*/
-	       
+	}
+	      
+        
 	for(int i = 0; i < children.size(); i++) {
 	    ((ChatObject)children.elementAt(i)).bPMDis = bPMDis ;
-	}
+	}*/
 
 	pageTemplate = pageTemplateTemp;
 
