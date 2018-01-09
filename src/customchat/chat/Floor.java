@@ -39,7 +39,7 @@ public class Floor extends ChatObject {
     }
     public Floor(Login l, LookupTable lt, House h) throws ChatException {
 	this(l, h, lt.getValue("sKeyWord"), lt.getValue("sName"));
-	super.update(lt);
+	update(lt);
     }
     @Override
     protected String createChildPage() throws ChatException {
@@ -121,8 +121,7 @@ public class Floor extends ChatObject {
     }  
 
     @Override
-    protected ChatObject newChild(Login lOwner, LookupTable lt)
-	throws ChatException {
+    protected ChatObject newChild(Login lOwner, LookupTable lt) throws ChatException {
 	return new Room(lOwner, lt, this);
     }  
 }

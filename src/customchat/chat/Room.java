@@ -6,6 +6,8 @@ import java.io.*;
 import java.net.*;
 import customchat.util.*;
 import customchat.htmlutil.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
 
@@ -18,17 +20,17 @@ import org.jsoup.nodes.*;
  * @version 1.5
  */
 public class Room extends ChatObject {
-    //	static final long serialVersionUID = 8311762447962493048L;
+    //	static final long SERIAL_VERSION_UID = 8311762447962493048L;
     // added by ritchie
-    static final long serialVersionUID = 6448109445035551597L;
+    static final long SERIAL_VERSION_UID = 6448109445035551597L;
 
     public static final int ADD = 1001;
     public static final int MANUAL = 1002;
-    public static final int scrollTop = 1003;
-    public static final int scrollMessages = 1004;
-    public static final int scrollSend = 1005;
+    public static final int SCROLL_TOP = 1003;
+    public static final int SCROLL_MESSAGES = 1004;
+    public static final int SCROLL_SEND = 1005;
     public static final int SCROLL_MIDDLE = 1006;
-    public static final int scrollWhoList = 1007;
+    public static final int SCROLL_LIST = 1007;
     public static final int OPTIONS = 1008;
     public static final int SWITCH = 1009;
     public static final int EXIT = 1010;
@@ -52,11 +54,11 @@ public class Room extends ChatObject {
     public static final String VAR_OPTIONS_SUBMITTED = "OptionsFormSubmitted";
     
 
-    public static final String frameWhoList = "WhoListFrame";
+    public static final String FRAME_LIST = "WhoListFrame";
     public static final String FRAME_MIDDLE   = "MiddleFrame";
-    public static final String frameMessages = "MessagesFrame";
-    public static final String frameTop      = "TopFrame";
-    public static final String frameSend     = "SendFrame";
+    public static final String FRAME_MESSAGES = "MessagesFrame";
+    public static final String FRAME_TOP      = "TopFrame";
+    public static final String FRAME_SEND     = "SendFrame";
 
     public static final String FORM_WHO_LIST  = "PMForm";
     public static final String FORM_POST_IMAGES = "postimageform";
@@ -70,9 +72,9 @@ public class Room extends ChatObject {
      * The hashkey is the current value of auto_inc which then increases by one.
      * When auto_inc reaches mesg_limit, it is set to 0.
      */
-    private Hashtable htMessages = new Hashtable();
+    private final Hashtable htMessages = new Hashtable();
     private int auto_inc = 0; //Next open position in the message buffer.
-    private static final int mesg_limit = 300; //Max number of messages in the message buffer.
+    private static final int MESSAGE_LIMIT = 300; //Max number of messages in the message buffer.
 
 //    private transient Vector vChatters = new Vector();  //  List of current chatters
     private Filter fl = new Filter(); // The HTML filter used for this room
@@ -122,14 +124,15 @@ public class Room extends ChatObject {
     public String sDefaultSwitchKey = "";
 
     public int iMaxChatters = 30; //limit for number of chatters (but always lets in admins)
-    private static final String sBottomForm = "Bottom"; //NAME of the bottom Form
-    protected final static String sNewHTML =  htmlFile("NewRoom.html");
+    private static final String BOTTOM_FORM = "Bottom"; //NAME of the bottom Form
+    protected final static String NEW_HTML =  htmlFile("NewRoom.html");
     public boolean bCtrVid = false;
 
     public static String buttonJS = null;
-    public static String signature = null ;
+    public static String signature = null;
     
     private Page roomPage;
+    private DeliveryThread thread;
 
    class DeliveryThread extends Thread {
 	private final Room r;
@@ -164,9 +167,16 @@ public class Room extends ChatObject {
 	//This sets the owner, parent ChatObject, the keyword, and the full name.
 	super(l, parent, lt.getValue("sKeyWord"), lt.getValue("sName"));
 	// Updates all of the web settable variables
-	update(lt);
-	new DeliveryThread(this);
+        update(lt);
+        
+	thread = new DeliveryThread(this);
+        
     }  
+    
+    
+    public void start(){
+        thread.start();
+    }
     /**
      * This is used for when you are editing a room to pass the current chatters to the new room.
      *
@@ -345,7 +355,7 @@ public class Room extends ChatObject {
             // this might be where the public message error is
 	   // for(i = (auto_inc - iShowRecent) % mesg_limit; i < auto_inc; i = (i + 1) % mesg_limit) {
 	    for(i = iShowRecent; i > 0; i--) {
-		Message m = (Message)htMessages.get((auto_inc - i) % mesg_limit);
+		Message m = (Message)htMessages.get((auto_inc - i) % MESSAGE_LIMIT);
 		if(m != null && m.is(Message.PUBLIC)) {
 		    bFound = true;
 		    p.addHTML("<FONT SIZE=\"2\" FACE=\"Arial\">" + m.getHTML(null) + "</FONT>");
@@ -590,7 +600,7 @@ public class Room extends ChatObject {
      */
     @Override
     protected String createChildPage() throws ChatException {
-	String s = fileToString(Room.sNewHTML);
+	String s = fileToString(Room.NEW_HTML);
 	s = replace(s, "#ParentName#", sName);
 	s = replace(s, "#ParentKey#", sKeyWord);
 	return s;
@@ -635,7 +645,7 @@ public class Room extends ChatObject {
 	case EXIT :
 	    sURL = buttonURL("exit.gif");
 	    break;
-	case scrollWhoList :
+	case SCROLL_LIST :
 	case OPTIONS :
 	    sURL = buttonURL("setoptions.gif");
 	    break;
@@ -744,23 +754,23 @@ public class Room extends ChatObject {
 		send(c, lt);
 		con = manual(c);
 		break;
-            case scrollTop:
+            case SCROLL_TOP:
 		con = getTop(c, true);
 		break;
 	    case SCROLL_MIDDLE:
 		con = doMiddleFrame(c);
 		break;
-	    case scrollWhoList:
+	    case SCROLL_LIST:
 		c.update(lt);
 		con = doScrollList(c, lt.getValue("refreshtime"));
 		break;
-	    case scrollMessages:
+	    case SCROLL_MESSAGES:
 		if(c == null) {
                     throw new ChatterNotFoundException();
                 }
 		throw new AutoScrollException(c);
                
-	    case scrollSend:
+	    case SCROLL_SEND:
 		send(c, lt);
                con = scrollSend(c);
 		break;
@@ -903,12 +913,12 @@ public class Room extends ChatObject {
  	Page p = new Page();
 	//p.addFrameSetArg("COLS","75%,*");
 	//p.addFrameSetArg("BORDER","1");
-	p.addHTML("<FRAME NAME=\"" + frameMessages + "\" SRC=\""
-		   + commandURL(scrollMessages, c)
+	p.addHTML("<FRAME NAME=\"" + FRAME_MESSAGES + "\" SRC=\""
+		   + commandURL(SCROLL_MESSAGES, c)
 		   + "\" MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" "
 		   + "SCROLLING=\"auto\" BORDER=\"1\" FRAMEBORDER=\"1\">");
-	p.addHTML("<FRAME NAME=\"" + frameWhoList + "\" SRC=\""
-		   + commandURL(scrollWhoList, c)
+	p.addHTML("<FRAME NAME=\"" + FRAME_LIST + "\" SRC=\""
+		   + commandURL(SCROLL_LIST, c)
 		   + "\" MARGINWIDTH=\"0\" MARGINHEIGHT=\"0\" "
 		   + "SCROLLING=\"auto\" BORDER=\"1\" FRAMEBORDER=\"1\">");
 	return p;
@@ -1203,11 +1213,6 @@ public class Room extends ChatObject {
 	return PageFactory.makeUtilPage(con);
     }
 
-    Container getWhoList(Chatter c, String sRefresh) {
-        Container whoList = new Container("div");
-        
-        return whoList;
-    }
     Page doScrollList(Chatter c, String sRefresh) {
 	if (sRefresh == null || sRefresh.length() == 0) {
             sRefresh = "";
@@ -1229,7 +1234,7 @@ public class Room extends ChatObject {
 	}
 
 	Page p = (Page) pageTemplate.clone();
-	Form f = form(FORM_WHO_LIST, true, scrollWhoList, c);
+	Form f = form(FORM_WHO_LIST, true, SCROLL_LIST, c);
 
 	// add a dummy javascript function focusinput in here ...
 	// focusinput is only meant to be used with the bottom input frame but because of 
@@ -1585,7 +1590,7 @@ public class Room extends ChatObject {
         }
 		
 	//express messages form in the NON scrolling area
-	Form f = form(sBottomForm, ct);
+	Form f = form(BOTTOM_FORM, ct);
 	p.addHTML(f);
 	p.addHeadHTML("<script>") ;
 	p.addHeadHTML(buttonJS) ;
@@ -1743,10 +1748,24 @@ public class Room extends ChatObject {
 	return p;
     }    
 
+    /**
+     *
+     * @return
+     * @throws ChatException
+     */
+    @Override
     protected String modifyPage() throws ChatException {
-	return fileToString(sNewHTML);
+	return fileToString(NEW_HTML);
     }  
 
+    /**
+     *
+     * @param lOwner
+     * @param lt
+     * @return
+     * @throws ChatException
+     */
+    @Override
     protected ChatObject newChild(Login lOwner, LookupTable lt) throws ChatException {
 	return new Room(lOwner, lt, this);
     }  
@@ -1786,7 +1805,7 @@ public class Room extends ChatObject {
 
 	p.addHeadHTML("\n<SCRIPT>\n" + "function focusinput() {\n" + "}\n" + "</SCRIPT>\n") ;
 		
-	Form f = form(sBottomForm, ct);
+	Form f = form(BOTTOM_FORM, ct);
 	p.addHTML(f);
 
 	f.addHTML(new Input(Input.HIDDEN, VAR_OPTIONS_SUBMITTED, "ON"));
@@ -1867,8 +1886,7 @@ public class Room extends ChatObject {
     }  
     
     private Page scrollPage(Chatter ct) throws ChatException {
-	//The FRAMESET in AutoScroll rooms
-	//out.println("<FRAMESET  ROWS=\"17%,68%,*\" BORDER=\"1\">" +
+
 	roomPage = new Page();
         Container style = new Container("style");
         Container main = new Container();
@@ -1894,8 +1912,8 @@ public class Room extends ChatObject {
 	
 		      + "function doSubmit() {\n"
 		      // if they are the admin reload the top frame
-		      // + (isAdmin(ct.getLogin) ? "parent." + frameTop + ".location.reload();\n" : "")
-		      // + "parent." + frameWhoList + ".document.location.reload();\n"
+		      // + (isAdmin(ct.getLogin) ? "parent." + FRAME_TOP + ".location.reload();\n" : "")
+		      // + "parent." + FRAME_LIST + ".document.location.reload();\n"
 		      + "return true;\n"
 		      + "}\n"
 		      + "\n"
@@ -1924,12 +1942,12 @@ public class Room extends ChatObject {
         
         style.addHTML("html, body, .full-page {min-height: 100vh; overflow-x: hidden}");
         style.addHTML("#room-messages-frame {min-height:50vh;}");
+       
         
-
-	row.addHTML("<iframe id='room-top-frame' class='full-frame col-12 frame' name='" + frameTop + "' src='"+ commandURL(scrollTop, ct) + "'></iframe>");
-        row.addHTML("<iframe id='room-messages-frame' class='col-12 col-md-9 frame' name='" + frameMessages+ "' src='"+ commandURL(scrollMessages, ct) + "'></iframe>");
-        row.addHTML("<iframe id='room-user-list-frame' class='col-12 col-md-3 frame' name='" + frameWhoList + "' src='"+ commandURL(scrollWhoList, ct) + "'></iframe>");
-        row.addHTML("<iframe id='room-send-frame' class='col-12 frame' name='" + frameSend + "' src='"+ commandURL(scrollSend, ct) + "'></iframe>");
+	row.addHTML("<iframe id='room-top-frame' class='full-frame col-12 frame' name='" + FRAME_TOP + "' src='"+ commandURL(SCROLL_TOP, ct) + "'></iframe>");
+        row.addHTML("<iframe id='room-messages-frame' class='col-12 col-md-9 frame' name='" + FRAME_MESSAGES+ "' src='"+ commandURL(SCROLL_MESSAGES, ct) + "'></iframe>");
+        row.addHTML("<iframe id='room-user-list-frame' class='col-12 col-md-3 frame' name='" + FRAME_LIST + "' src='"+ commandURL(SCROLL_LIST, ct) + "'></iframe>");
+        row.addHTML("<iframe id='room-send-frame' class='col-12 frame' name='" + FRAME_SEND + "' src='"+ commandURL(SCROLL_SEND, ct) + "'></iframe>");
 	return roomPage;
     }
 
@@ -1974,8 +1992,8 @@ public class Room extends ChatObject {
 	
 		      + "function doSubmit() {\n"
 		      // if they are the admin reload the top frame
-		      // + (isAdmin(ct.getLogin) ? "parent." + frameTop + ".location.reload();\n" : "")
-		      // + "parent." + frameWhoList + ".document.location.reload();\n"
+		      // + (isAdmin(ct.getLogin) ? "parent." + FRAME_TOP + ".location.reload();\n" : "")
+		      // + "parent." + FRAME_LIST + ".document.location.reload();\n"
 		      + "return true;\n"
 		      + "}\n"
                       + "function checkSubmit(e) {\n" 
@@ -2007,11 +2025,11 @@ public class Room extends ChatObject {
 		      + "</script>\n");
 
 	//Bottom Form
-	Form tBottomForm = form(sBottomForm, ct);
+	Form tBottomForm = form(BOTTOM_FORM, ct);
 
         tBottomForm.addArgument("onKeyPress", "return checkSubmit(event)");
 	tBottomForm.addArgument("onSUBMIT", "doSubmit()");
-	tBottomForm.addHTML(commandInput(Input.HIDDEN, scrollSend));
+	tBottomForm.addHTML(commandInput(Input.HIDDEN, SCROLL_SEND));
 
 	p.addHTML(tBottomForm);
 
@@ -2042,26 +2060,26 @@ public class Room extends ChatObject {
 			    "        if ( scrolling == true )\n" +
 			    "        {\n" +
 			    "            scrolling = false;\n" +
-			    "            parent." + frameMessages + ".clearTimeout();\n" +
-			    "            parent." + frameMessages + ".autoScrollOn = 0;\n" +
-			    "            parent." + frameMessages + ".onblur = parent." + frameMessages + ".scrollOffFunction;\n" +
+			    "            parent." + FRAME_MESSAGES + ".clearTimeout();\n" +
+			    "            parent." + FRAME_MESSAGES + ".autoScrollOn = 0;\n" +
+			    "            parent." + FRAME_MESSAGES + ".onblur = parent." + FRAME_MESSAGES + ".scrollOffFunction;\n" +
 			    "        } else {\n" +
 			    "            scrolling = true;\n" +
-			    "            parent." + frameMessages + ".autoScrollOn = 1;\n" +
-			    "            parent." + frameMessages + ".onblur = parent." + frameMessages + ".scrollOnFunction;\n" +
-			    "            parent." + frameMessages + ".scroll(0, 65000);\n" +
-			    "            parent." + frameMessages + ".setTimeout('scrollWindow()', 200);\n" +
+			    "            parent." + FRAME_MESSAGES + ".autoScrollOn = 1;\n" +
+			    "            parent." + FRAME_MESSAGES + ".onblur = parent." + FRAME_MESSAGES + ".scrollOnFunction;\n" +
+			    "            parent." + FRAME_MESSAGES + ".scroll(0, 65000);\n" +
+			    "            parent." + FRAME_MESSAGES + ".setTimeout('scrollWindow()', 200);\n" +
 			    "        }  // end if\n" +
 			    "    }  // end toggleScrolling\n" +
-			    "    if ( parent." + frameMessages + " != null  &&  parent." + frameMessages + ".autoScrollOn != null )\n" +
+			    "    if ( parent." + FRAME_MESSAGES + " != null  &&  parent." + FRAME_MESSAGES + ".autoScrollOn != null )\n" +
 			    "    {\n" +
 			    "        document.write('<INPUT NAME=AUTOSCROLL TYPE=CHECKBOX onclick=\"toggleScrolling()\"');\n" +
-			    "        if ( parent." + frameMessages + ".autoScrollOn == 1 )\n" +
+			    "        if ( parent." + FRAME_MESSAGES + ".autoScrollOn == 1 )\n" +
 			    "        {\n" +
 			    "            document.write(' CHECKED');\n" +
 			    "        }  // end if\n" +
 			    "        document.write('> <FONT FACE=\"Arial,Helvetica,Geneva\" SIZE=1>Scroll - Uncheck to scroll back</FONT>');\n" +
-			    "        scrolling = ( parent." + frameMessages + ".autoScrollOn == 1 );\n" +
+			    "        scrolling = ( parent." + FRAME_MESSAGES + ".autoScrollOn == 1 );\n" +
 			    "    }  // end if\n" +
 			    "  //  -->\n" +
 			    "\n" +
@@ -2213,7 +2231,7 @@ public class Room extends ChatObject {
         }
 
         //Add the message to the hashtable
-        htMessages.put(auto_inc % mesg_limit, m);
+        htMessages.put(auto_inc % MESSAGE_LIMIT, m);
         auto_inc++;
 
         //Add message to queues of recips
