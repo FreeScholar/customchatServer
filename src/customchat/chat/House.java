@@ -2,7 +2,6 @@ package customchat.chat;
 
 import java.util.*;
 import java.io.*;
-import java.net.*;
 import customchat.util.*;
 import customchat.htmlutil.*;
 
@@ -16,7 +15,7 @@ import customchat.htmlutil.*;
 public class House extends ChatObject {
 
 	// added by ritchie
- static final long serialVersionUID = -4116962984823438181L;
+ static final long SERIAL_VERSION_UID = -4116962984823438181L;
   public static final int KILL = 1001;
   public static final int RESTART = 1002;
   public static final int BAD_WORDS = 1101;
@@ -90,7 +89,7 @@ public class House extends ChatObject {
     }
 
     protected String createChildPage() throws ChatException {
-	return fileToString(Floor.sNewHTML);
+	return fileToString(Floor.NEW_HTML);
     }  
 
     protected String getChildName() {
