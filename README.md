@@ -1,4 +1,6 @@
 # customchat
+Test site and server - Chatalot.com http://chatalotchat.com:6742 
+
 customchat server - Version 1.8
 
 The code is in /src
