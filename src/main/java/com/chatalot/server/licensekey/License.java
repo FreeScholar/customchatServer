@@ -229,7 +229,7 @@ public URL getAddr() {
 	private boolean isValid(int iport)
 	throws NoSuchAlgorithmException {
 		MessageDigest md = MessageDigest.getInstance("MD5");
-
+		System.out.println("The start date is " + starts.toString());
 		return
 		   MessageDigest.isEqual(nameFirstCheck      , md.digest(nameFirst.getBytes()))
 		&& MessageDigest.isEqual(nameLastCheck       , md.digest(nameLast.getBytes()))
@@ -318,8 +318,8 @@ License l = new License("Joe",
 								"http://127.0.0.1:6743",
 								10,
 								1,
-								new Date(1018, 1, 1),
-								new Date(1020,1,1));
+								new Date(118, 1, 1),
+								new Date(120,1,1));
 		l.output(new File("ccLicense"));
 
 		//License l = new License("Joe",
