@@ -229,7 +229,7 @@ public URL getAddr() {
 	private boolean isValid(int iport)
 	throws NoSuchAlgorithmException {
 		MessageDigest md = MessageDigest.getInstance("MD5");
-		System.out.println("The start date is " + starts.toString());
+		
 		return
 		   MessageDigest.isEqual(nameFirstCheck      , md.digest(nameFirst.getBytes()))
 		&& MessageDigest.isEqual(nameLastCheck       , md.digest(nameLast.getBytes()))
