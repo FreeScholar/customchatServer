@@ -21,36 +21,36 @@ static final long serialVersionUID = 8932408958778618078L;
 	private static final long p10 = -8042235109570871732L;
 	private static final long p11 =  8822752954864835784L;
 
-	private String nameFirst;
+	private String nameFirst = "Joe";
 	private byte[] nameFirstCheck;
-	private String nameLast;
+	private String nameLast = "Smith";
 	private byte[] nameLastCheck;
-	private String nameMiddle;
+	private String nameMiddle = "Harley";
 	private byte[] nameMiddleCheck;
 
-	private String addressStreet;
+	private String addressStreet = "315 MainStreet";
 	private byte[] addressStreetCheck;
-	private String addressCity;
+	private String addressCity = "Ashton";
 	private byte[] addressCityCheck;
-	private String addressState;
+	private String addressState = "Massachusetts";
 	private byte[] addressStateCheck;
-	private String addressCountry;
+	private String addressCountry = "USA";
 	private byte[] addressCountryCheck;
-	private String addressZip;
+	private String addressZip = "02458";
 	private byte[] addressZipCheck;
 
-	private String email;
+	private String email = "info@customchat.com";
 	private byte[] emailCheck;
-	private String ip;
+	private String ip = "http://127.0.0.1:6743";
 	private byte[] ipCheck;
 
-	private long   noUsers;
+	private long   noUsers = 10;
 	private byte[] noUsersCheck;
-	private long   version;
+	private long   version = 1;
 	private byte[] versionCheck;
-	private Date starts;
+	private Date starts = new Date(1018, 1, 1);
 	private byte[] startsCheck;
-	private Date ends;
+	private Date ends = new Date(1020, 1, 1);
 	private byte[] endsCheck;
 
 	private byte[] key;
@@ -318,8 +318,8 @@ License l = new License("Joe",
 								"http://127.0.0.1:6743",
 								10,
 								1,
-								new Date(99,1,1),
-								new Date(101,1,1));
+								new Date(1018, 1, 1),
+								new Date(1020,1,1));
 		l.output(new File("ccLicense"));
 
 		//License l = new License("Joe",

@@ -17,3 +17,4 @@ util
 
 To run the chat server on your local machine, you should download the compiled files from CustomChat.com
 http://www.customchat.com/downloads
+
