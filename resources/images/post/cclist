@@ -1,0 +1,12 @@
+# List of Images Room Admins May Allow to be Posted
+# Precede comment lines with a pound sign
+# The default URL to reach images in the postable images directory is 
+# /resources/images/post/
+# but if the property chat.resourceurl in the file chat.properties
+# is changed, this URL will change. 
+
+# Name of image		URL of image
+Bat			/resources/images/post/bat.gif
+Heart			/resources/images/post/heart.gif
+Juggler			/resources/images/post/juggler.gif
+Little Flower		/resources/images/post/lilflower.gif

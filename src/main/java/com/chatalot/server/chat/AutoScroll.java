@@ -21,50 +21,7 @@ public class AutoScroll extends Object {
 	if(!bMisery && !Connection.anotherIEHack)
 	    out.println(S_BOUNDARY);
 
-	p.addHeadHTML(
-		      "<SCRIPT LANGUAGE=\"JavaScript1.1\">\n" +
-		      "\n" +
-		      "  <!--\n" +
-		      "    var autoScrollOn = 1;\n" +
-		      "    var scrollOnFunction;\n" +
-		      "    var scrollOffFunction;\n" +
-		      "\n" +
-		      "    function scrollWindow( )\n" +
-		      "    {\n" +
-		      "        if ( autoScrollOn == 1 )\n" +
-		      "        {\n" +
-		      "            this.scroll(0, 65000);\n" +
-		      "            setTimeout('scrollWindow()', 200);\n" +
-		      "        }  // end if\n" +
-		      "    }  // end scrollWindow\n" +
-		      "\n" +
-		      "    function scrollOn( )\n" +
-		      "    {\n" +
-		      "        autoScrollOn = 1;\n" +
-		      "        scrollWindow( );\n" +
-		      "    }  // end scrollOn\n" +
-		      "\n" +
-		      "    function scrollOff( )\n" +
-		      "    {\n" +
-		      "        autoScrollOn = 0;\n" +
-		      "    }  // end scrollOff\n" +
-		      "\n" +
-		      "    function StartUp( )\n" +
-		      "    {\n" +
-		      "        this.onblur  = scrollOnFunction;\n" +
-		      "        this.onfocus = scrollOffFunction;\n" +
-		      "        scrollWindow( );\n" +
-		      "    }  // end StartUp\n" +
-		      "\n" +
-		      "  scrollOnFunction = new Function('scrollOn( )')\n" +
-		      "  scrollOffFunction = new Function('scrollOff( )')\n" +
-		      "  StartUp();\n" +
-		      "  self.onload = new Function('alert(\"You have timed out of the room.  " +
-		      "Hit Reload or Refresh on your browser to re-enter the chat.\")');\n" +
-		      "  \n" +
-		      "  // -->\n" +
-		      "\n" +
-		      "</SCRIPT>");
+	p.addHeadHTML("<script type='text/javascript' src='/resources/scripts/autoscroll.js'></script>");
 
 	p.addHTML("<FONT SIZE='1' FACE='Verdana, Arial, Helvetica'><B>MESSAGES WILL APPEAR ON THE SCREEN IN REAL TIME, AS OTHERS POST THEM.</FONT>" +
 		  "</B></FONT><BR><FONT SIZE='1' FACE='Verdana, Arial, Helvetica'>" +
