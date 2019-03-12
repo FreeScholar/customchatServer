@@ -32,4 +32,4 @@ var onLoad = function () {
 }
 
 this.StartUp();
-window.onload = this.onLoad();
+//window.onload = this.onLoad();
