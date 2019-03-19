@@ -1,0 +1,968 @@
+<html>
+
+
+
+<head>
+
+<title>The Creator - powered by CustomChat Inc</title>
+
+<meta HTTP-EQUIV="Description" CONTENT="Welcome to the Creator&#153;, the ultimate tool to create your own customizied conference room." NAME="Description">
+
+<style TYPE="text/css">
+
+    <!--
+
+    A:link, A:visited, A:active { text-decoration: none; }
+
+    -->
+
+  </style>
+
+</head>
+
+
+<body BGCOLOR="#FFFFFF" TEXT="#004080" LINK="#0000FF">
+
+
+<center>
+<table WIDTH="640" BORDER="0" CELLSPACING="2" CELLPADDING="2">
+<tr>
+<td COLSPAN="2" ALIGN="CENTER">
+<a HREF="http://www.customchat.com"><img SRC="#URL_IMG#misc/top_bar.gif" WIDTH=600 HEIGHT=37 BORDER=0 ALT="CustomChat.com"></a>
+
+        <table WIDTH="640" BORDER="0" CELLSPACING="2" CELLPADDING="1">
+<tr>
+        <td ALIGN="CENTER" BGCOLOR="#004080"><b><a HREF="http://www.customchat.com/products" TARGET="_blank"><font FACE="Arial, Helvetica, Geneva" SIZE="1" COLOR="#FFFFFF">Product</font></a></b></td>
+        <td ALIGN="CENTER" BGCOLOR="#004080"><b><a HREF="http://www.customchat.com/services" TARGET="_blank"><font FACE="Arial, Helvetica, Geneva" SIZE="1" COLOR="#FFFFFF">Services</font></a></b></td>
+        <td ALIGN="CENTER" BGCOLOR="#004080"><b><a HREF="http://www.customchat.com/partners" TARGET="_blank"><font FACE="Arial, Helvetica, Geneva" SIZE="1" COLOR="#FFFFFF">Partners</font></a></b></td>
+        <td ALIGN="CENTER" BGCOLOR="#004080"><b><a HREF="http://www.customchat.com/demo" TARGET="_blank"><font FACE="Arial, Helvetica, Geneva" SIZE="1" COLOR="#FFFFFF">Demo</font></a></b></td>
+        <td ALIGN="CENTER" BGCOLOR="#004080"><b><a HREF="http://www.customchat.com/support" TARGET="_blank"><font FACE="Arial, Helvetica, Geneva" SIZE="1" COLOR="#FFFFFF">Support</font></a></b></td>
+        <td ALIGN="CENTER" BGCOLOR="#004080"><b><a HREF="http://www.customchat.com/jobs" TARGET="_blank"><font FACE="Arial, Helvetica, Geneva" SIZE="1" COLOR="#FFFFFF">Jobs</font></a></b></td>
+        <td ALIGN="CENTER" BGCOLOR="#004080"><b><a HREF="http://www.customchat.com/about" TARGET="_blank"><font FACE="Arial, Helvetica, Geneva" SIZE="1" COLOR="#FFFFFF">About Us</font></a></b></td>
+	<td ALIGN="CENTER" BGCOLOR="#004080"><b><a HREF="http://www.customchat.com/contact" TARGET="_blank"><font FACE="Arial, Helvetica, Geneva" SIZE="1" COLOR="#FFFFFF">Contact</font></a></b></td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+<table WIDTH="640" BORDER="0" CELLSPACING="0" CELLPADDING="0">
+<tr>
+
+<td height="25" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;<font SIZE="4" face="Arial,Helvetica,Geneva" color="#004080"><b>The Creator&#153;... Make a CustomChat Room</b></font> &nbsp;&nbsp;&nbsp;&nbsp;<font FACE="Arial, Helvetica, Geneva" SIZE="1" COLOR="#004080">legend:</font> &nbsp;<b><font FACE="Arial, Helvetica, Geneva" SIZE="1" COLOR="#CCCC99">INSIDE</font></b> &nbsp;<b><font FACE="Arial, Helvetica, Geneva" SIZE="1" COLOR="#A4C6F4">OUTSIDE</font></b> 
+</td></tr><tr><td>&nbsp;&nbsp;
+<font FACE="Arial,Helvetica,Geneva" size="1" color="#004080">Remember the User Name and Password you enter into the grey pop up box, this will give you the Admin options inside the room.
+</font></td>
+</tr></table>
+<form ACTION="/#sKeyWord#" NAME="Creator" METHOD="post">
+  <input type="hidden" name="Action" value="#Command#">
+  <input type="hidden" name="Set Variables" value="on">
+<table WIDTH="640" BORDER="1" CELLSPACING="0" CELLPADDING="0">
+<tr><td COLSPAN="2">&nbsp;&nbsp;<font SIZE="1" FACE="Arial, Helvetica, Verdana">'The Room Name/Key Name' option will allow you to change your Room Name at any time, without changing the URL(Key Name). </td></tr>
+<tr><td>&nbsp;&nbsp;<font SIZE="1" FACE="Arial, Helvetica, Verdana">The Room Name will appear in the Live List</font></td><td>&nbsp;&nbsp;<font SIZE="1" FACE="Arial, Helvetica, Verdana">The Key Name will become the last part of your URL.<br>&nbsp;&nbsp;&nbsp;&nbsp;<b><i>example:</i></b> http://www.customchat.com:8080/<b>KeyName</b><br></font> </td></tr>
+
+<tr>
+<td HEIGHT="25" VALIGN="MIDDLE" NOWRAP BGCOLOR="#A4C6F4">&nbsp;<b><font FACE="Arial, Helvetica, Geneva" SIZE="4" COLOR="#FF0000">*</font></b>
+<b><font FACE="Arial, Helvetica, Geneva" SIZE="2" COLOR="#FF0000">ROOM NAME</font> <font FACE="Arial, Helvetica, Geneva" SIZE="2" >( You may use HTML )</font></b>
+<br>
+&nbsp;<input TYPE="TEXT" NAME="sName" SIZE="30"> <input TYPE="CHECKBOX" NAME="bCtrName" VALUE="yes" CHECKED> <b><font FACE="Arial, Helvetica, Geneva" SIZE="1">&nbsp;&nbsp;Center</font></b>
+</td>
+<td ALIGN="LEFT" NOWRAP BGCOLOR="#A4C6F4">&nbsp;<b><font FACE="Arial, Helvetica, Geneva" SIZE="4" COLOR="#FF0000">*</font></b> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2" COLOR="#FF0000">KEY NAME</font> <font FACE="Arial, Helvetica, Geneva" SIZE="2" >( ONE WORD - NO HTML )</font></b><br> &nbsp;&nbsp;<input TYPE="TEXT" NAME="sKeyWord" SIZE="20" VALUE="" MAXLENGTH="30"> &nbsp;
+</td>
+</tr><tr>
+<td COLSPAN="2" NOWRAP>&nbsp;&nbsp;<font FACE="Arial, Helvetica, Geneva" SIZE="1" > <i>Optional</i></font>
+<font FACE="Arial, Helvetica, Geneva" SIZE="2" COLOR="#004080"><b>Room Password:</b></font>
+&nbsp;&nbsp;<input TYPE="TEXT" NAME="sPass" SIZE="24"> &nbsp;&nbsp;<font FACE="Arial, Helvetica, Geneva" SIZE="1" COLOR="#004080">This will be used by your guests to enter this room.</font>
+</td>
+</tr><tr>
+<td COLSPAN="2" ALIGN="RIGHT" VALIGN="TOP" BGCOLOR="#A4C6F4">
+<font FACE="Arial, Helvetica, Geneva" SIZE="2">Choose an <b>EXIT</b> URL for your room: </font><input TYPE="TEXT" NAME="sExitURL" SIZE="45"> </td>
+</tr>
+</table>
+<br>
+<center><font FACE="Arial,Helvetica,Geneva" size="2" color="#004080">Be sure to include <b>http://</b> in any URLS to Web pages or images.</font></center>
+
+<br>
+<center><b><font FACE="Arial, Helvetica, Geneva" SIZE="2" color="#004080">You may continue customizing, or create the room now and edit later.</font><a HREF="../collections.jar"><br><font FACE="Arial, Helvetica, Geneva" SIZE="2" color="#FF0000">DO NOT use the BACK button when first creating a Room.</font></a></b></center>
+
+<!-- dropdown list of area choices -->
+
+
+<table WIDTH="640" BORDER="0" CELLSPACING="3" CELLPADDING="3" ALIGN="CENTER">
+<tr>
+<td ALIGN="CENTER" VALIGN="TOP"><b><font FACE="Arial, Helvetica, Geneva" SIZE="2" color="#004080">Your room will appear in <a   HREF="/#ParentKey#?Action=101">#ParentName#</a></font></b>
+</td>
+<td WIDTH="60">&nbsp;
+</td>
+<td ALIGN="LEFT" VALIGN="BOTTOM"><input TYPE="submit" VALUE="Create/Update My Chatroom!">
+
+<p>
+</td>
+</tr>
+</table>
+<!-- Choose the Button Color Theme -->
+<p>
+
+
+<table WIDTH="640" BORDER="0" CELLSPACING="0" CELLPADDING="0">
+
+
+<tr>
+<td COLSPAN="2" ALIGN="CENTER">
+<table WIDTH="640" BORDER=1 CELLSPACING="0" CELLPADDING="0" ALIGN="CENTER">
+			<tr>
+				<td HEIGHT="40" ALIGN="CENTER" BGCOLOR="#C0C0C0"><b><font SIZE="2" face="Arial,Helvetica,Geneva">OPTIONS FOR IMAGE, BUTTONS, TEXT COLORS and BACKGROUNDS</font></b></td></tr></table>
+<table WIDTH="640" BORDER=1 CELLSPACING="1" CELLPADDING="2">
+
+<tr>
+<td HEIGHT="25" COLSPAN="3" VALIGN="MIDDLE" BGCOLOR="#A4C6F4">
+&nbsp;<font FACE="Arial, Helvetica, Geneva" SIZE="1" ><b>Type in the full path URL to any .gif or .jpg image that is located on the Web ( including http:// )</b></font>
+	  <br>
+	  &nbsp;<b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >IMAGE for Room Entry Page:</font> <input TYPE="TEXT" SIZE="43" NAME="sEntryImg">&nbsp; <b><font FACE="Arial, Helvetica, Geneva" SIZE="1"> Center</b></FONT><input TYPE="CHECKBOX" NAME="bCtrImg" VALUE="yes" CHECKED></b></td>
+</tr>
+<tr>
+<td COLSPAN="3" ALIGN="CENTER" BGCOLOR="#A4C6F4">
+<b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >You may choose a set of matching buttons for your room</font></b><br><b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >BUTTON</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1" >Color Theme:</font>
+<select NAME="sButtonURL" size="1">
+
+
+            <option VALUE="#URL_IMG#buttons/lightgray/">Light Gray</option>
+
+            <option VALUE="#URL_IMG#buttons/darkgray/">Dark Gray</option>
+
+            <option VALUE="#URL_IMG#buttons/blue/">Blue</option>
+
+          </select>
+		  <font FACE="Arial, Helvetica, Geneva" SIZE="2" >Samples:</font> <img SRC="#URL_IMG#buttons/lightgray/dot.gif" WIDTH=16 HEIGHT=13 BORDER=0 ALT="Light Gray"> &nbsp;&nbsp;<img SRC="#URL_IMG#buttons/darkgray/dot.gif" WIDTH=16 HEIGHT=13 BORDER=0 ALT="Dark Gray"> &nbsp;&nbsp;<img SRC="#URL_IMG#buttons/blue/dot.gif" WIDTH=16 HEIGHT=13 BORDER=0 ALT="Blue">
+</td>
+</tr>
+
+
+<tr>
+<td WIDTH="213" VALIGN="MIDDLE" BGCOLOR="#FFFFFF"><font FACE="Arial, Helvetica, Geneva" SIZE="1" ><b>Text Color</b></font><br><font FACE="Arial, Helvetica, Geneva" SIZE="2"><select NAME="textSelect" onChange="document.Creator.sTextColor.value=this.options[this.options.selectedIndex].value"
+
+      size="1">
+
+        <option>Choose one </option>
+
+        <option VALUE="#000000" SELECTED>Black </option>
+
+        <option VALUE="#FFFFFF">White </option>
+
+        <option VALUE="#FDF1D2">Cream </option>
+
+        <option VALUE="#888888">Gray </option>
+
+        <option VALUE="#333333">Dk Gray </option>
+
+        <option VALUE="#BBBBBB">Lt Gray </option>
+
+        <option VALUE="#DDDDDD">Silver </option>
+
+        <option VALUE="#CC9966">Gold </option>
+
+        <option VALUE="#996666">Brown </option>
+
+        <option VALUE="#663300">Dk Brown </option>
+
+        <option VALUE="#CC9999">Lt Brown </option>
+
+        <option VALUE="#0000FF">Blue </option>
+
+        <option VALUE="#000066">Dk Blue </option>
+
+        <option VALUE="#CCFFFF">Lt Blue </option>
+
+        <option VALUE="#006699">Dk Teal </option>
+
+        <option VALUE="#669999">Lt Teal </option>
+
+        <option VALUE="#00FFFF">Aqua </option>
+
+        <option VALUE="#00FFCC">Aquamarine </option>
+
+        <option VALUE="#FF0000">Red </option>
+
+        <option VALUE="#660000">Maroon </option>
+
+        <option VALUE="#FF00CC">Hot Pink </option>
+
+        <option VALUE="#FF99CC">Pink </option>
+
+        <option VALUE="#FF6699">Rose </option>
+
+        <option VALUE="#FFCCCC">Dusky Rose </option>
+
+        <option VALUE="#FF9999">Salmon </option>
+
+        <option VALUE="#FF6600">Orange </option>
+
+        <option VALUE="#FFFF00">Yellow </option>
+
+        <option VALUE="#FFCC00">Dk Yellow </option>
+
+        <option VALUE="#FFFFCC">Lt Yellow </option>
+
+        <option VALUE="#006633">Green </option>
+
+        <option VALUE="#003300">Dk Green </option>
+
+        <option VALUE="#CCFFCC">Lt Green </option>
+
+        <option VALUE="#00FF00">Neon Green </option>
+
+        <option VALUE="#666633">Olive Green </option>
+
+        <option VALUE="#660099">Purple </option>
+
+        <option VALUE="#660066">Dk Purple </option>
+
+        <option VALUE="#FFCCFF">Lt Purple </option>
+
+      </select></font><br>
+</td>
+<td WIDTH="213" VALIGN="MIDDLE" BGCOLOR="#FFFFFF">
+<font FACE="Arial, Helvetica, Geneva" SIZE="1" COLOR="#0000FF"><b>Link Color</b></font><br><font FACE="Arial, Helvetica, Geneva" SIZE="2">
+	  <select NAME="linkSelect" onChange="document.Creator.sLinkColor.value=this.options[this.options.selectedIndex].value" size="1">
+
+        <option>Choose one </option>
+
+        <option VALUE="#000000">Black </option>
+
+        <option VALUE="#FFFFFF">White </option>
+
+        <option VALUE="#FDF1D2">Cream </option>
+
+        <option VALUE="#888888">Gray </option>
+
+        <option VALUE="#333333">Dk Gray </option>
+
+        <option VALUE="#BBBBBB">Lt Gray </option>
+
+        <option VALUE="#DDDDDD">Silver </option>
+
+        <option VALUE="#CC9966">Gold </option>
+
+        <option VALUE="#996666">Brown </option>
+
+        <option VALUE="#663300">Dk Brown </option>
+
+        <option VALUE="#CC9999">Lt Brown </option>
+
+        <option VALUE="#0000FF" SELECTED>Blue </option>
+
+        <option VALUE="#000066">Dk Blue </option>
+
+        <option VALUE="#CCFFFF">Lt Blue </option>
+
+        <option VALUE="#006699">Dk Teal </option>
+
+        <option VALUE="#669999">Lt Teal </option>
+
+        <option VALUE="#00FFFF">Aqua </option>
+
+        <option VALUE="#00FFCC">Aquamarine </option>
+
+        <option VALUE="#FF0000">Red </option>
+
+        <option VALUE="#660000">Maroon </option>
+
+        <option VALUE="#FF00CC">Hot Pink </option>
+
+        <option VALUE="#FF99CC">Pink </option>
+
+        <option VALUE="#FF6699">Rose </option>
+
+        <option VALUE="#FFCCCC">Dusky Rose </option>
+
+        <option VALUE="#FF9999">Salman </option>
+
+        <option VALUE="#FF6600">Orange </option>
+
+        <option VALUE="#FFFF00">Yellow </option>
+
+        <option VALUE="#FFCC00">Dk Yellow </option>
+
+        <option VALUE="#FFFFCC">Lt Yellow </option>
+
+        <option VALUE="#006633">Green </option>
+
+        <option VALUE="#003300">Dk Green </option>
+
+        <option VALUE="#CCFFCC">Lt Green </option>
+
+        <option VALUE="#00FF00">Neon Green </option>
+
+        <option VALUE="#666633">Olive Green </option>
+
+        <option VALUE="#660099">Purple </option>
+
+        <option VALUE="#660066">Dk Purple </option>
+
+        <option VALUE="#FFCCFF">Lt Purple </option>
+
+
+      </select> <br></font>
+ </td>
+ <td WIDTH="213" VALIGN="MIDDLE" NOWRAP BGCOLOR="#FFFFFF">
+	  <font FACE="Arial, Helvetica, Geneva" SIZE="1" COLOR="#660066"><b>Visited Link Color</b></font><br><font FACE="Arial, Helvetica, Geneva" SIZE="2">
+<select NAME="vlinkSelect"
+
+      onChange="document.Creator.sVLinkColor.value=this.options[this.options.selectedIndex].value"
+
+      size="1">
+
+        <option>Choose one </option>
+
+        <option VALUE="#000000">Black </option>
+
+        <option VALUE="#FFFFFF">White </option>
+
+        <option VALUE="#FDF1D2">Cream </option>
+
+        <option VALUE="#888888">Gray </option>
+
+        <option VALUE="#333333">Dk Gray </option>
+
+        <option VALUE="#BBBBBB">Lt Gray </option>
+
+        <option VALUE="#DDDDDD">Silver </option>
+
+        <option VALUE="#CC9966">Gold </option>
+
+        <option VALUE="#996666">Brown </option>
+
+        <option VALUE="#663300">Dk Brown </option>
+
+        <option VALUE="#CC9999">Lt Brown </option>
+
+        <option VALUE="#0000FF">Blue </option>
+
+        <option VALUE="#000066">Dk Blue </option>
+
+        <option VALUE="#CCFFFF">Lt Blue </option>
+
+        <option VALUE="#006699">Dk Teal </option>
+
+        <option VALUE="#669999">Lt Teal </option>
+
+        <option VALUE="#00FFFF">Aqua </option>
+
+        <option VALUE="#00FFCC">Aquamarine </option>
+
+        <option VALUE="#FF0000">Red </option>
+
+        <option VALUE="#660000">Maroon </option>
+
+        <option VALUE="#FF00CC">Hot Pink </option>
+
+        <option VALUE="#FF99CC">Pink </option>
+
+        <option VALUE="#FF6699">Rose </option>
+
+        <option VALUE="#FFCCCC">Dusky Rose </option>
+
+        <option VALUE="#FF9999">Salman </option>
+
+        <option VALUE="#FF6600">Orange </option>
+
+        <option VALUE="#FFFF00">Yellow </option>
+
+        <option VALUE="#FFCC00">Dk Yellow </option>
+
+        <option VALUE="#FFFFCC">Lt Yellow </option>
+
+        <option VALUE="#006633">Green </option>
+
+        <option VALUE="#003300">Dk Green </option>
+
+        <option VALUE="#CCFFCC">Lt Green </option>
+
+        <option VALUE="#00FF00">Neon Green </option>
+
+        <option VALUE="#666633">Olive Green </option>
+
+        <option VALUE="#660099" SELECTED>Purple </option>
+
+        <option VALUE="#660066">Dk Purple </option>
+
+        <option VALUE="#FFCCFF">Lt Purple </option>
+
+
+      </select> <br>
+</font>
+</td>
+</tr>
+<tr>
+<td WIDTH="213" BGCOLOR="#FFFFFF">
+<font FACE="Arial, Helvetica, Geneva" SIZE="1"><b>Hex Values:</b></font><br><input NAME="sTextColor" VALUE="#000000" SIZE="8">
+</td>
+<td WIDTH="213" BGCOLOR="#FFFFFF">
+<font FACE="Arial, Helvetica, Geneva" SIZE="1"><b>Hex Values:</b></font><br><input NAME="sLinkColor" VALUE="#0000FF" SIZE="8">
+</td>
+<td ALIGN="LEFT" WIDTH="213" BGCOLOR="#FFFFFF">
+<font FACE="Arial, Helvetica, Geneva" SIZE="1"><b>Hex Values:</b></font><br><input NAME="sVLinkColor" VALUE="#660066" SIZE="8">
+</td>
+</tr>
+</table>
+   <!-- CHOOSE A BACKGROUND -->
+</td>
+</tr>
+<tr>
+<td WIDTH="640" COLSPAN="2" ALIGN="CENTER" NOWRAP BGCOLOR="#C0C0C0">&nbsp;</td></tr>
+<tr>
+<td WIDTH="640" COLSPAN="2" ALIGN="CENTER" NOWRAP BGCOLOR="#C0C0C0"><b><font FACE="Arial, Helvetica, Geneva" SIZE="2" COLOR="#004080">Set the atmosphere by choosing a background for the chat messages to appear on.</font></b></td></tr><tr>
+<td WIDTH="640" COLSPAN="2" ALIGN="CENTER" NOWRAP BGCOLOR="#A4C6F4"><br>
+<b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >BACKGROUND COLOR:</font></b> <select NAME="bgSelect" onChange="document.Creator.sBg.value=this.options[this.options.selectedIndex].value" size="1">
+
+            <option>Choose one </option>
+
+        <option VALUE="#000000">Black </option>
+
+        <option VALUE="#FFFFFF" SELECTED>White </option>
+
+        <option VALUE="#FDF1D2">Cream </option>
+
+        <option VALUE="#888888">Gray </option>
+
+        <option VALUE="#333333">Dk Gray </option>
+
+        <option VALUE="#BBBBBB">Lt Gray </option>
+
+        <option VALUE="#DDDDDD">Silver </option>
+
+        <option VALUE="#CC9966">Gold </option>
+
+        <option VALUE="#996666">Brown </option>
+
+        <option VALUE="#663300">Dk Brown </option>
+
+        <option VALUE="#CC9999">Lt Brown </option>
+
+        <option VALUE="#0000FF">Blue </option>
+
+        <option VALUE="#000066">Dk Blue </option>
+
+        <option VALUE="#CCFFFF">Lt Blue </option>
+
+        <option VALUE="#006699">Dk Teal </option>
+
+        <option VALUE="#669999">Lt Teal </option>
+
+        <option VALUE="#00FFFF">Aqua </option>
+
+        <option VALUE="#00FFCC">Aquamarine </option>
+
+        <option VALUE="#FF0000">Red </option>
+
+        <option VALUE="#660000">Maroon </option>
+
+        <option VALUE="#FF00CC">Hot Pink </option>
+
+        <option VALUE="#FF99CC">Pink </option>
+
+        <option VALUE="#FF6699">Rose </option>
+
+        <option VALUE="#FFCCCC">Dusky Rose </option>
+
+        <option VALUE="#FF9999">Salman </option>
+
+        <option VALUE="#FF6600">Orange </option>
+
+        <option VALUE="#FFFF00">Yellow </option>
+
+        <option VALUE="#FFCC00">Dk Yellow </option>
+
+        <option VALUE="#FFFFCC">Lt Yellow </option>
+
+        <option VALUE="#006633">Green </option>
+
+        <option VALUE="#003300">Dk Green </option>
+
+        <option VALUE="#CCFFCC">Lt Green </option>
+
+        <option VALUE="#00FF00">Neon Green </option>
+
+        <option VALUE="#666633">Olive Green </option>
+
+        <option VALUE="#660099">Purple </option>
+
+        <option VALUE="#660066">Dk Purple </option>
+
+        <option VALUE="#FFCCFF">Lt Purple </option>
+
+
+          </select>&nbsp;&nbsp;&nbsp;&nbsp;<font FACE="Arial, Helvetica, Geneva" SIZE="1"><b>Hex Values:</b></font> <input NAME="sBg" VALUE="#FFFFFF" SIZE="8">
+</td>
+</tr>
+
+<tr>
+<td COLSPAN="3" ALIGN="CENTER">
+
+<table WIDTH="640" BORDER="0" CELLSPACING="0" CELLPADDING="0">
+<tr><td BGCOLOR="#A4C6F4" COLSPAN="2"><hr></td></tr>
+<tr>
+<td HEIGHT="25" COLSPAN="2" ALIGN="CENTER" VALIGN="MIDDLE" BGCOLOR="#A4C6F4">
+<font FACE="Arial, Helvetica, Geneva" SIZE="2" ><b>BACKGROUND IMAGE:</b></font> <font FACE="Arial, Helvetica, Geneva" SIZE="1" >Choose an image that is on the Web or one from the Gallery</font>
+</td>
+</tr>
+<tr>
+<td VALIGN="TOP" COLSPAN="2" NOWRAP BGCOLOR="#A4C6F4">&nbsp;&nbsp;&nbsp;<b><font FACE="Arial, Helvetica, Geneva" SIZE="1" > <input TYPE="HIDDEN" NAME="sBgType" VALUE="URL">Type in the full path URL to any .gif or .jpg image that is located on the Web ( including http:// )</font></b> <br>&nbsp;&nbsp;<input TYPE="TEXT" NAME="sBgURL" VALUE="" SIZE="75">
+</td>
+</tr>
+<tr>
+<td WIDTH="415" COLSPAN="2" BGCOLOR="#A4C6F4">&nbsp;&nbsp;
+<b><font FACE="Arial, Helvetica, Geneva" SIZE="1" >or, <i>Click</i> on a background image from the Gallery below:</font></b><br>
+
+<table WIDTH="640" BORDER="0" VALIGN="TOP">
+<tr>
+<td WIDTH="50" VALIGN="TOP" BGCOLOR="#A4C6F4">
+
+<a HREF="" onCLICK="document.Creator.sBgURL.value='#URL_IMG#backgrounds/aqua/aquamoss.jpg'; return false">
+<img SRC="#URL_IMG#backgrounds/aqua/aquamoss.jpg" HEIGHT=50 WIDTH=50 BORDER=0 ALT="Aqua Moss" ALIGN="TOP" VSPACE=0></a>
+
+
+                            </td>
+
+                                <td WIDTH="50" VALIGN="TOP" BGCOLOR="#A4C6F4">        
+
+<a HREF="" onCLICK="document.Creator.sBgURL.value='#URL_IMG#backgrounds/grape/grapecraters.jpg'; return false"><img SRC="#URL_IMG#backgrounds/grape/grapecraters.jpg" HEIGHT=50 WIDTH=50 ALT="Grape Craters" BORDER=0></a>
+
+                            </td>
+
+                                <td WIDTH="50" VALIGN="TOP" BGCOLOR="#A4C6F4">
+
+<a HREF="" onCLICK="document.Creator.sBgURL.value='#URL_IMG#backgrounds/cream/creamsuade.jpg'; return false"><img SRC="#URL_IMG#backgrounds/cream/creamsuade.jpg" HEIGHT=50 WIDTH=50 ALT="Creame Suede" BORDER=0></a>
+
+                            </td>
+
+                                <td WIDTH="50" VALIGN="TOP" BGCOLOR="#A4C6F4">        
+
+<a HREF="" onCLICK="document.Creator.sBgURL.value='#URL_IMG#backgrounds/mint/mintwax.jpg'; return false"><img SRC="#URL_IMG#backgrounds/mint/mintwax.jpg" HEIGHT=50 WIDTH=50 ALT="Mint Wax" BORDER=0></a>
+		</td>
+
+		<td WIDTH="50" VALIGN="TOP" BGCOLOR="#A4C6F4">
+
+<a HREF="" onCLICK="document.Creator.sBgURL.value='#URL_IMG#backgrounds/lavender/lavendermicrobes.jpg'; return false"><img SRC="#URL_IMG#backgrounds/lavender/lavendermicrobes.jpg" HEIGHT=50 WIDTH=50 ALT="Lavender Microbes" BORDER=0></a>
+		</td>
+
+
+		<td WIDTH="50" VALIGN="TOP" BGCOLOR="#A4C6F4">
+
+<a HREF="" onCLICK="document.Creator.sBgURL.value='#URL_IMG#backgrounds/rose/rosehoneycomb.jpg'; return false"><img SRC="#URL_IMG#backgrounds/rose/rosehoneycomb.jpg" HEIGHT=50 WIDTH=50 ALT="Rose Honeycomb" BORDER=0></a>
+		</td>
+				<td WIDTH="50" VALIGN="TOP" BGCOLOR="#A4C6F4">
+
+<a HREF="" onCLICK="document.Creator.sBgURL.value='#URL_IMG#backgrounds/lime/limemosaic.jpg'; return false"><img SRC="#URL_IMG#backgrounds/lime/limemosaic.jpg" HDTH=T=50 WIDTH=50 ALT="Lime Mosiac" BORDER=0></a>
+</td>
+<td WIDTH="290" ALIGN="CENTER" VALIGN="TOP" BGCOLOR="#A4C6F4">&nbsp;<b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >Gallery of<br> Background Libraries:</font></b>
+<br>
+#GalleryPullDown#
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td COLSPAN=3>
+<p>
+
+<table WIDTH="640" BORDER=1 CELLSPACING="0" CELLPADDING="0" ALIGN="CENTER">
+			<tr>
+				<td HEIGHT="40" ALIGN="CENTER" BGCOLOR="#C0C0C0"><b><font SIZE="2" face="Arial,Helvetica,Geneva">OPTIONS TO CUSTOMIZE THE ENTRY PAGE and INSIDE THE ROOM</font></b></td>		</tr></table></td></tr></table><table WIDTH="640" BORDER="0" CELLSPACING="0" CELLPADDING="0">
+<tr><td COLSPAN="2" ALIGN="CENTER" BGCOLOR="#A4C6F4">
+<font FACE="Arial, Helvetica, Geneva" SIZE="2" ><b>#1.</b> Top of Room Entry Page Text</font> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2" COLOR="#FF0000">above the login fields</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1" >( You may use HTML ):</font><br>
+<font FACE="Arial,Helvetica,Geneva" size="2" color="#004080">Be sure to include <b>http://</b> in any URLS to Web pages or images.</font>
+
+</td>
+</tr>
+<tr>
+<td BGCOLOR="#A4C6F4">
+<textarea NAME="sEntryText" COLS="68" ROWS="4" WRAP="VIRTUAL"></textarea>
+</td>
+<td ALIGN="LEFT" VALIGN="BOTTOM" BGCOLOR="#A4C6F4"><b><font FACE="Arial, Helvetica, Geneva" SIZE="1">&nbsp;Center</font></b> <font SIZE="2"><input TYPE="CHECKBOX" NAME="bCtrEntryText" VALUE="yes" CHECKED></font>
+</td>
+</tr>
+ <tr>
+ <td HEIGHT="25" COLSPAN="2" ALIGN="CENTER" BGCOLOR="#A4C6F4">
+
+<hr> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font FACE="Arial, Helvetica, Geneva" SIZE="2" ><b>#2.</b> Bottom of Room Entry Page Text</font> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2" COLOR="#FF0000">below the login fields</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1" >( You may use HTML ):</font><br>
+<font FACE="Arial,Helvetica,Geneva" size="2" color="#004080">Be sure to include <b>http://</b> in any URLS to Web pages or images.</font></td>
+</tr>
+    <tr>
+
+      <td BGCOLOR="#A4C6F4"><textarea NAME="sEntryBottom" COLS="68" ROWS="4" WRAP="VIRTUAL"></textarea></td>
+
+      <td ALIGN="LEFT" VALIGN="BOTTOM" BGCOLOR="#A4C6F4"><b><font FACE="Arial, Helvetica, Geneva" SIZE="1">&nbsp;Center</font></b>
+
+      <input TYPE="CHECKBOX" NAME="bCtrEntryBottom" VALUE="yes" CHECKED></td>
+
+
+    </tr>
+
+
+<!-- Begin visible messages on entry -->
+
+</TR>
+      <tr><td HEIGHT="25" COLSPAN="2" VALIGN="MIDDLE">
+<p>
+<br>
+<table WIDTH="640" BORDER=1 CELLSPACING="0" CELLPADDING="0" ALIGN="CENTER">
+			<tr>
+				<td height="40" align="center" BGCOLOR="#C0C0C0"><b><font SIZE="2" face="Arial,Helvetica,Geneva">OPTIONS for LINKS and MESSAGES ON THE ENTRY PAGE and INSIDE THE ROOM</font></b>
+<br>
+<center><font FACE="Arial,Helvetica,Geneva" size="2" color="#004080">Be sure to include <b>http://</b> in any URLS to Web pages or images.</font></center></td>
+			</tr>
+		</table>
+
+<center>
+<table WIDTH="640" BORDER=1 CELLSPACING="0" CELLPADDING="0">
+
+
+    <tr>
+
+      <td COLSPAN="2" ALIGN="RIGHT" BGCOLOR="#A4C6F4">
+
+	  &nbsp;&nbsp;<font FACE="Arial, Helvetica, Geneva" SIZE="1">Number of</font> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2">RECENT MESSAGES</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1">posted that will appear on the room entry page.&nbsp;&nbsp;</font>
+<select NAME="iShowRecent" size="1">
+
+        <option VALUE="0">None </option>
+
+        <option VALUE="10">10 </option>
+
+        <option VALUE="25">25 </option>
+
+        <option VALUE="50">50 </option>
+
+      </select>
+	  </td>
+    </tr>
+<tr>
+<td HEIGHT="25" COLSPAN="3" ALIGN="RIGHT" BGCOLOR="#A4C6F4">&nbsp;&nbsp;<font FACE="Arial, Helvetica, Geneva" SIZE="1" >Show a list of <b><font FACE="Arial, Helvetica, Geneva" SIZE="2">ACTIVE PEOPLE</font></b> chatting inside this room, on the entry page to this room: </font><input Type="CHECKBOX" NAME="bEntryWho" VALUE="ON" CHECKED>
+</td>
+</tr>
+</table>
+<table WIDTH="640" BORDER="0" CELLSPACING="0" CELLPADDING="0" ALIGN="CENTER">
+<tr><td>
+
+<!-- ADD LINKS -->
+
+<table BORDER=1 CELLSPACING="0" CELLPADDING="0">
+
+<tr><td WIDTH="320" ALIGN="CENTER" BGCOLOR="#A4C6F4">
+	 <b><font FACE="Arial, Helvetica, Geneva" SIZE="2"><b>LINKS - ENTRY PAGE TO ROOM</b></font></b></td></tr>
+<tr>
+<td HEIGHT="25" ALIGN="LEFT" BGCOLOR="#A4C6F4">&nbsp;&nbsp;&nbsp;&nbsp;<font FACE="Arial, Helvetica, Geneva" SIZE="2" ><b>LINK #1</b>:</font> <font FACE="Arial, Helvetica, Geneva" SIZE="1">* URL to a page on the Web:</font>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<input TYPE="TEXT" NAME="sEntryLink1" SIZE="34">
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp; <b><font FACE="Arial, Helvetica, Geneva" SIZE="2">TEXT</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1">that will represent</font> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2">LINK #1:<br></font></b>
+&nbsp;&nbsp;&nbsp;&nbsp;<input TYPE="TEXT" NAME="sEntryAnchor1" SIZE="34">
+
+</td>
+</tr>
+<tr>
+<td HEIGHT="25" ALIGN="LEFT" BGCOLOR="#A4C6F4">&nbsp;&nbsp;&nbsp;&nbsp;<font FACE="Arial, Helvetica, Geneva" SIZE="2" ><b>LINK #2:</b></font> <font FACE="Arial, Helvetica, Geneva" SIZE="1">* URL to a page on the Web:<br></font>
+&nbsp;&nbsp;&nbsp;&nbsp;<input TYPE="TEXT" NAME="sEntryLink2" SIZE="34">
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp; <b><font FACE="Arial, Helvetica, Geneva" SIZE="2">TEXT</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1">that will represent</font> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2">LINK #2:<br></font></b>
+&nbsp;&nbsp;&nbsp;&nbsp;<input TYPE="TEXT" NAME="sEntryAnchor2" SIZE="34">
+
+</td>
+</tr>
+
+</table>
+
+
+</td><td>
+
+<table BORDER=1 CELLSPACING="0" CELLPADDING="0">
+<tr><td WIDTH="320" ALIGN="CENTER" BGCOLOR="#CCCC99">
+	 <b><font FACE="Arial, Helvetica, Geneva" SIZE="2" ><b>LINKS - INSIDE ROOM</b></font></b></td></tr>
+
+
+<tr>
+<td HEIGHT="25" ALIGN="LEFT" BGCOLOR="#CCCC99">&nbsp;&nbsp;&nbsp;&nbsp;<font FACE="Arial, Helvetica, Geneva" SIZE="2" ><b>LINK #1</b>:</font> <font FACE="Arial, Helvetica, Geneva" SIZE="1" >* URL to a page on the Web:</font>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<input TYPE="TEXT" NAME="sRoomLink1" SIZE="34">
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp; <b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >TEXT</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1" >that will represent</font> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >LINK #1:<br></font></b>
+
+&nbsp;&nbsp;&nbsp;&nbsp;<input TYPE="TEXT" NAME="sRoomAnchor1" SIZE="34">
+
+</td>
+</tr>
+<tr>
+<td HEIGHT="25" ALIGN="LEFT" BGCOLOR="#CCCC99">&nbsp;&nbsp;&nbsp;&nbsp;<font FACE="Arial, Helvetica, Geneva" SIZE="2" ><b>LINK #2</b>:</font> <font FACE="Arial, Helvetica, Geneva" SIZE="1" >* URL to a page on the Web:<br></font>
+
+&nbsp;&nbsp;&nbsp;&nbsp;<input TYPE="TEXT" NAME="sRoomLink2" SIZE="34">
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp; <b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >TEXT</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1" >that will represent</font> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >LINK #2:<br></font></b>
+
+&nbsp;&nbsp;&nbsp;&nbsp;<input TYPE="TEXT" NAME="sRoomAnchor2" SIZE="34">
+
+</td>
+</tr>
+
+</table>
+
+
+</td></tr></table>
+
+<p>
+
+
+<center>
+<table WIDTH="640" BORDER="0" CELLSPACING="3" CELLPADDING="3">
+<tr>
+<td COLSPAN="3" BGCOLOR="#FFFFFF">
+
+<center><font FACE="Arial,Helvetica,Geneva" size="2" color="#004080">Be sure to include <b>http://</b> in any URLS to Web pages or images.</font></center>
+<p>
+
+<center><b><font FACE="Arial, Helvetica, Geneva" SIZE="2" color="#004080">You may continue customizing, or create the room now and edit later.</font><br><font FACE="Arial, Helvetica, Geneva" SIZE="2" color="#FF0000">DO NOT use the BACK button when first creating a Room.</font></b></center>
+</td></tr>
+<!-- dropdown list of area choices -->
+<tr>
+<td ALIGN="CENTER" VALIGN="TOP"><b><font FACE="Arial, Helvetica, Geneva" SIZE="2" color="#004080">Your room will appear in <a   HREF="/#ParentKey#?Action=101">#ParentName#</a></font></b>
+</td>
+<td WIDTH="60">&nbsp;
+</td>
+<td ALIGN="LEFT" VALIGN="BOTTOM"><input TYPE="submit" VALUE="Create/Update My Chatroom!">
+
+<p>
+</td>
+</tr>
+</table>
+<p>
+
+		<table WIDTH="640" BORDER=1 CELLSPACING="0" CELLPADDING="0" ALIGN="CENTER">
+			<tr>
+				<td height="40" align="center" BGCOLOR="#C0C0C0"><b><font SIZE="2" face="Arial,Helvetica,Geneva">OPTIONS TO ADD TEXT, IMAGES, SOUNDS and VIDEO -( .ram, .asx or webcam )</font></b></td>
+			</tr>
+		</table>
+<center>
+<table WIDTH="640" BORDER=1 CELLSPACING="0" CELLPADDING="0">
+<tr>
+<td BGCOLOR="#CCCC99"><center><font FACE="Arial, Helvetica, Geneva" SIZE="1" >Add a</font> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2">TEXT MESSAGE</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1">inside your room at the top of the screen:</font></center>
+&nbsp;&nbsp;&nbsp;&nbsp;<textarea COLS="64" ROWS="4" NAME="sRoomText" WRAP="VIRTUAL"></textarea> &nbsp;&nbsp;<b><font FACE="Arial, Helvetica, Geneva" SIZE="1">Center</font></b>
+<input TYPE="Checkbox" NAME="bCtrRoomText" VALUE="yes" ALIGN="TEXTTOP" CHECKED></td>
+</tr>
+
+</table>
+
+<p>
+<table WIDTH="640" BORDER=1 CELLSPACING="0" CELLPADDING="0"><tr><td VALIGN="MIDDLE" BGCOLOR="#CCCC99"><center><font FACE="Arial, Helvetica, Geneva" SIZE="1" >&nbsp;Add an</font> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2">IMAGE</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1">to the inside of your room at the top of the screen:</font></center>
+&nbsp;&nbsp;&nbsp;&nbsp;<input TYPE="TEXT" NAME="sTop" SIZE="66"> &nbsp;&nbsp;<b><font FACE="Arial, Helvetica, Geneva" SIZE="1">Center</font></b> <input TYPE="CHECKBOX" NAME="bCtrTop" VALUE="yes" CHECKED></td></tr>
+</table>
+<br>
+<!-- EMBED VIDEO WITH THE CREATOR-->
+
+<table WIDTH="640" BORDER=1 CELLSPACING="0" CELLPADDING="0">
+
+<tr>
+<td VALIGN="MIDDLE" BGCOLOR="#CCCC99">
+<center><font FACE="Arial, Helvetica, Geneva" SIZE="1" >&nbsp;ADD</font> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2">VIDEO</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1">to the inside of your room at the top of the screen - type in the full URL to the video file:</font></center>
+&nbsp;&nbsp;&nbsp;&nbsp;<input TYPE="TEXT" NAME="sVideo" SIZE="50">
+
+<select NAME="video">
+<option>Choose one</option>
+<option VALUE="webcam">Webcam IMAGE</option>
+<option VALUE="realvid">Real Video</option>
+<option VALUE="winvid">Windows Video</option>
+<option VALUE="winvid">QuickTime Movie</option>
+<option VALUE="winvid">MP3 - AUDIO</option>
+</select>
+
+
+<b><font FACE="Arial, Helvetica, Geneva" SIZE="1">Center</font></b> <input TYPE="CHECKBOX" NAME="bCtrVid" VALUE="yes" CHECKED>
+</td>
+</tr>
+</table>
+<p>
+<!-- END EMBED VIDEO CODE -->
+
+
+<table WIDTH="640" BORDER="3" CELLSPACING="0" CELLPADDING="0" ALIGN="CENTER">
+<tr>
+<td COLSPAN="2" ALIGN="CENTER" NOWRAP BGCOLOR="#CCCC99"><font FACE="Arial, Helvetica, Geneva" SIZE="2" COLOR="#FF0000">THIS NEXT OPTION IS ONLY AVAILABLE AFTER CREATION and DURING <b>EDIT</b></font><br><font FACE="Arial, Helvetica, Geneva" SIZE="2" >You may choose to have <b>IMAGES and SOUNDS</b> appear in your room in a dropdown list.</font><br><font FACE="Arial, Helvetica, Geneva" SIZE="1" >Users may post these images publicly or privately while chatting.</font><br>
+<a HREF="#URL_PREFIX##sKeyWord#?Action=1011">  <b><font FACE="Arial, Helvetica, Geneva" SIZE="2">POSTABLE IMAGES</font></a></B> &nbsp;&nbsp;&nbsp;&nbsp;<a HREF="#URL_PREFIX##sKeyWord#?Action=1012"> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2">POSTABLE SOUNDS</font></b> </a>
+</td>
+</tr>
+</table>
+
+<p>
+<!-- OPTIONS TO HIDE AND DISABLE FEATURES AND FILTER BADWORDS-->
+
+
+		<table WIDTH="640" BORDER=1 CELLSPACING="0" CELLPADDING="0" ALIGN="CENTER">
+			<tr>
+				<td height="40" align="center" BGCOLOR="#C0C0C0"><b><font SIZE="2" face="Arial,Helvetica,Geneva">OPTIONS TO HIDE and DISABLE FEATURES and FILTER BAD WORDS</font></b></td>
+			</tr>
+		</table>
+
+<table WIDTH="640" BORDER=1 CELLSPACING="0" CELLPADDING="0">
+<tr>
+<td WIDTH="325" HEIGHT="25" ROWSPAN="2" ALIGN="RIGHT" BGCOLOR="#CCCC99"><font FACE="Arial, Helvetica, Geneva" SIZE="1" >Choose a</font> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >BAD WORD FILTER:</font></b> &nbsp;<select
+
+      name="iWordSet" size="1">
+
+        <option value="-1">None</option>
+
+        <option value="0">G</option>
+
+        <option value="1">PG</option>
+
+        <option value="2">PG13</option>
+
+        <option value="3">R</option>
+
+      </select>
+<br><font FACE="Arial, Helvetica, Geneva" SIZE="1" >Edit the Bad Word list via the dropdown menu &nbsp;&nbsp; <br>next to your room name in the Live List &nbsp;&nbsp;<br></font>
+</td>
+<td WIDTH="295" HEIGHT="25" ALIGN="RIGHT" BGCOLOR="#A4C6F4"><b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >HIDE</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1" >this room from the <a HREF="/?Command=Who&amp;FloorKey=All+Areas&amp;NoPic">Live List</a>:&nbsp;</font>
+</td>
+<td WIDTH="20" ALIGN="RIGHT" BGCOLOR="#A4C6F4"><input TYPE="CHECKBOX" NAME="bHidden" VALUE="yes">
+</td>
+</tr>
+
+</table>
+
+
+<table WIDTH="640" BORDER="1" CELLSPACING="0" CELLPADDING="0" ALIGN="CENTER">
+<tr>
+<td WIDTH="325" HEIGHT="25" ALIGN="Right" BGCOLOR="#CCCC99"><b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >DISABLE Room Switching</font> </b>&nbsp;&nbsp;&nbsp;
+<input TYPE="CHECKBOX" NAME="bSwitchDis" VALUE="yes">
+</td>
+<td WIDTH="295" HEIGHT="25" ALIGN="RIGHT" BGCOLOR="#CCCC99"><b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >DISABLE PMs</font> <font FACE="Arial, Helvetica, Geneva" SIZE="1" >between chatters.</font></b>
+</td>
+<td WIDTH="20" ALIGN="LEFT" BGCOLOR="#CCCC99"><input TYPE="CHECKBOX" NAME="bPMDis" VALUE="yes">
+</td>
+</tr>
+
+<tr>
+<td COLSPAN="2" ALIGN="RIGHT" BGCOLOR="#CCCC99"><b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >DISABLE ALL HTML</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1" > including IMAGES and SOUNDS. Allow only PLAIN TEXT messages:&nbsp;</font></td>
+<td ALIGN="LEFT" BGCOLOR="#CCCC99"><input TYPE="CHECKBOX" NAME="bHtmlDis" VALUE="yes"></td>
+</tr>
+
+<!-- test for idle time removal -->
+<tr>
+<td COLSPAN="2" ALIGN="RIGHT" BGCOLOR="#CCCC99"><b><font FACE="Arial, Helvetica, Geneva" SIZE="2" ><b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >Select the Type of Identification</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1" >that will appear after chatters handles:</font> &nbsp;
+</td>
+<td ALIGN="RIGHT" BGCOLOR="#CCCC99"><select NAME="bIdleTimes" size="1">
+
+			<option> Select One </option>
+
+            <option VALUE="0"> No Numbers </option>
+
+            <option VALUE="1"> ID Numbers </option>
+
+            <option VALUE="2"> IP Address </option>
+
+          </select></td>
+
+</tr>
+
+
+</table>
+
+<p>
+
+
+		<table WIDTH="640" BORDER=1 CELLSPACING="0" CELLPADDING="0" ALIGN="CENTER">
+			<tr>
+				<td height="40" align="center" BGCOLOR="#C0C0C0"><b><font SIZE="2" face="Arial,Helvetica,Geneva">OPTIONS for TEXT ON BUTTONS in MANUAL CHAT, NUMBER OF USERS, TRANSCRIPTS</font></b></td>
+			</tr>
+		</table>
+
+
+
+<table WIDTH="640" BORDER="1" CELLSPACING="0" CELLPADDING="0" ALIGN="CENTER">
+
+<tr>
+<td HEIGHT="25" WIDTH="230" ALIGN="RIGHT" NOWRAP BGCOLOR="#CCCC99"><font FACE="Arial, Helvetica, Geneva" SIZE="1" >&nbsp;&nbsp;Text for the</font> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >&quot;SPEAK&quot;</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1" >button:</font> &nbsp;
+</td>
+<td WIDTH="140" ALIGN="LEFT" NOWRAP BGCOLOR="#CCCC99"><font FACE="Arial, Helvetica, Geneva"><input TYPE="TEXT" NAME="sSpeak" SIZE="12" VALUE="Speak"></font>
+</td>
+<td HEIGHT="25" ALIGN="RIGHT" NOWRAP BGCOLOR="#CCCC99"><font FACE="Arial, Helvetica, Geneva" SIZE="1" >Set</font> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >NUMBER</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1" >of users allowed:&nbsp;</font> <input TYPE="TEXT" NAME="iMaxChatters" SIZE="3" VALUE="10" maxlength="3">
+</td>
+</tr>
+<tr>
+<td WIDTH="230" HEIGHT="25" ALIGN="RIGHT" BGCOLOR="#CCCC99"><font FACE="Arial, Helvetica, Geneva" SIZE="1" >&nbsp;&nbsp;Text for the</font> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >&quot;WHISPER&quot;</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1" >button:</font> &nbsp;
+</td>
+<td WIDTH="140" ALIGN="LEFT" BGCOLOR="#CCCC99"><font FACE="Arial, Helvetica, Geneva"><input TYPE="TEXT" NAME="sWhisper" SIZE="12" VALUE="Whisper"></font>
+</td>
+<td height="25" align="RIGHT" bgcolor="#CCCC99"><font FACE="Arial, Helvetica, Geneva" SIZE="1" >Log a</font> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2" >TRANSCRIPT</font></b>  <font FACE="Arial, Helvetica, Geneva" SIZE="1" >of this room: </font> <input Type="CHECKBOX" NAME="bLogging" VALUE="ON">
+</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+</table>
+<p>
+
+<center>
+		<table WIDTH="640" BORDER=1 CELLSPACING="0" CELLPADDING="0" ALIGN="CENTER">
+			<tr>
+				<td height="40" align="center" BGCOLOR="#C0C0C0"><b><font SIZE="2" face="Arial,Helvetica,Geneva">THIS INFO WILL APPEAR AT THE BOTTOM OF EACH PAGE AS YOUR SIGNATURE:</font></b></td>
+			</tr>
+		</table>
+
+<center>
+<table WIDTH="640" BORDER=1 CELLSPACING="0" CELLPADDING="0" BGCOLOR="#A4C6F4">
+<tr>
+<td>
+&nbsp;<font FACE="Arial, Helvetica, Geneva" SIZE="1">*Your Handle,</font> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2">NAME</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1">or Company Name:</font><br>&nbsp;<input TYPE="TEXT" NAME="sOwnerHandle" SIZE="40">
+</td>
+<td>
+&nbsp;<font FACE="Arial, Helvetica, Geneva" SIZE="1">*Your</font> <b><font FACE="Arial, Helvetica, Geneva" SIZE="2">EMAIL</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1">Address:</font><br>&nbsp;<input TYPE="TEXT" NAME="sEmail" SIZE="30"></FONT>
+</td>
+</tr>
+<tr>
+<td COLSPAN="2">&nbsp;<font FACE="Arial, Helvetica, Geneva" SIZE="1">*Enter the full URL to your <b><font FACE="Arial, Helvetica, Geneva" SIZE="2">HOMEPAGE</font></b> <font FACE="Arial, Helvetica, Geneva" SIZE="1">( <b>including http://</b> ):</font></font><br>&nbsp;<input TYPE="TEXT" NAME="sHome" SIZE="70">
+</td>
+</tr>
+</table>
+<br>
+<center><b><font FACE="Arial,Helvetica,Geneva" size="2" color="#004080">Be sure to include <b>http://</b> in any URLS to Web pages or images.</font><br><font FACE="Arial, Helvetica, Geneva" SIZE="2" color="#FF0000">DO NOT use the BACK button when first creating a Room.</font></b></center>
+<br>
+<center><p><input TYPE="submit" VALUE="Create/Update My Chatroom!"> <input TYPE="reset" NAME="reset" VALUE="Clear Form">
+</form>
+<b><font FACE="Arial, Helvetica, Geneva" SIZE="2" color="#004080">Your room will appear in <a   HREF="/#ParentKey#?Action=101">#ParentName#</a></font></b>
+<p>
+<p align="center"><b><font FACE="Arial, Helvetica, Geneva" SIZE="2"><a HREF="http://customchat.com/support.html" TARGET="_blank">Help</a> | <a
+
+HREF="mailto:info@customchat.com">Contact</a></font></b>
+
+
+
+<p align="center"><font FACE="Arial, Helvetica, Geneva" SIZE="-2">&copy; 1997 - 2007 <a
+
+HREF="http://www.customchat.com" TARGET="_blank"><img SRC="#URL_IMG#misc/ccminilogo.gif" WIDTH=83 HEIGHT=13 BORDER=0 ALT="CustomChat" ALIGN="TOP"></a><br>
+
+ALL RIGHTS RESERVED.</font>
+
+</TD>
+</TR>
+</TABLE>
+
+</TD>
+
+</TABLE>
+</center>
+
+
+
+</CENTER>
+
+</body>
+</html>

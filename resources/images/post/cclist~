@@ -1,0 +1,12 @@
+# List of Sounds Room Admins May Allow to be Posted
+# Precede comment lines with a pound sign
+# The default URL to reach sounds in the sounds resources directory is 
+# /resources/sounds
+# but if the property chat.resourceurl in the file chat.properties
+# is changed, this URL will change. 
+
+# Name of sound		URL of sound
+Cow			/resources/sounds/cow.wav
+It's Me			/resources/sounds/itsme.wav
+Laugh			/resources/sounds/laugh.au
+What's Goin' On		/resources/sounds/whatsGoinOn.au

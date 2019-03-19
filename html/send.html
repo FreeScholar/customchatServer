@@ -1,0 +1,108 @@
+<html>
+<head>
+<title>The Messenger - powered by CustomChat Inc</title>
+<style TYPE="text/css">
+    <!--
+    A:link, A:visited, A:active { text-decoration: none; }
+    -->
+  </style>
+
+<script>
+
+var mPrefix = "You did not enter a value into the " ;
+var mSuffix = " field. This is a required field. Please enter it now." ;
+var whitespace = " \t\n\r";
+var defaultEmptyOK = false ;
+var sRecip = "Recipient" ;
+var sHandle = "Handle" ;
+var sMessage = "Message" ;
+
+function isWhitespace(s)
+{   var i;
+
+    if (isEmpty(s)) return true;
+
+    for (i = 0; i < s.length; i++)
+    {   
+        var c = s.charAt(i);
+        if (whitespace.indexOf(c) == -1) return false;
+    }
+    return true;
+}
+
+function isEmpty(s)
+{   return ((s == null) || (s.length == 0)) ;
+}
+
+function warnEmpty (theField, s)
+{   theField.focus() ;
+    alert(mPrefix + s + mSuffix) ;
+    return false ;
+}
+
+function checkString (theField, s, emptyOK)
+{   
+    
+    if (checkString.arguments.length == 2) emptyOK = defaultEmptyOK;
+    if ((emptyOK == true) && (isEmpty(theField.value))) return true;
+    if (isWhitespace(theField.value)) 
+       return warnEmpty (theField, s);
+    else return true;
+}
+
+
+function validateFields(form)
+{   return (
+      checkString(form.elements["Recip"],sRecip) &&
+      checkString(form.elements["sHandle"],sHandle) &&
+      checkString(form.elements["Public"],sMessage)
+    ) ;
+}
+</script>
+
+</head>
+
+<body BGCOLOR="#FDF1D2">
+<center>
+  <table WIDTH="640" BORDER="0">
+    <tr> 
+      <td WIDTH="260" ALIGN="LEFT" VALIGN="TOP"><a HREF="http://www.customchat.com" TARGET="_blank"><img SRC="#URL_IMG#misc/customchat.gif" WIDTH=243 HEIGHT=34 BORDER=0 ALT="Home"></a></td>
+      <td ALIGN="CENTER" VALIGN="TOP"><b><font FACE="Arial" SIZE="5">The Messenger</font></b></td>
+    </tr>
+  </table>
+  <p> <font FACE="Arial, Helvetica" SIZE="2">Send a Private Message to anyone 
+    logged into the CustomChat&#153; Server</font> 
+  <form ACTION="/" METHOD="GET" onSubmit="return validateFields(this);">
+    <table WIDTH="640" BORDER="0">
+      <tr>
+        <td> 
+          <input TYPE="HIDDEN" NAME="Action" VALUE="100">
+          <b><font FACE="Arial, Helvetica" SIZE="2">Recipient's Handle:</font></b> 
+          <input NAME="Recip" VALUE="#Recip#">
+        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><font FACE="Arial, Helvetica" SIZE="2">Your 
+          Handle:</font></b> 
+          <input NAME="sHandle" VALUE="#sHandle#">
+        </td>
+      </tr>
+      <tr>
+        <td COLSPAN=3> 
+          <textarea NAME="Public" COLS=75 ROWS=10>#Public#</textarea>
+          <br>
+          <input TYPE="SUBMIT" VALUE="Send My Message">
+        </td>
+      </tr>
+    </table>
+  </form>
+  <b><font FACE="Arial" SIZE="+1"><a HREF="http://www.customchat.com/support.html" TARGET="_blank">Help</a> 
+  | <a HREF="mailto:info@customchat.com">Contact</a></font></b> 
+</center>
+<center>
+  <font FACE="Arial, Helvetica" SIZE="-2">&copy; 1997 - 2007 <a HREF="http://www.customchat.com" TARGET="_blank">CustomChat 
+  Inc.</a><br>
+  ALL RIGHTS RESERVED.</font>
+</center>
+<p> 
+</body>
+
+</html>
+

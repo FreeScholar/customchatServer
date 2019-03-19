@@ -1,0 +1,188 @@
+<meta NAME="Description" CONTENT="Medieval and Renaissance Chat Site, Welcome all Role Players, Vampires and Goths">
+<meta NAME="Keywords" CONTENT="Chat, Chatalot, Medieval Kingdom, Renaissance Realm, Bohemian Fringe, FreeRide, role playing, roleplaying, Role Players, Vampires, Gothic, Castle, Village,">
+<meta HTTP-EQUIV="Expires" CONTENT="25 Dec 1968">
+<meta HTTP-EQUIV="Refresh" CONTENT="240">
+
+<style type="text/css">
+    body {
+        background: black;
+        color:#CC9966;
+    }
+    a {
+        color: #5268CB;
+    }
+
+    a:visited{
+        color:#CC6600;
+    }
+</style>
+
+ 
+
+<meta HTTP-EQUIV="Refresh" CONTENT="220">
+</head>
+
+
+
+<body>
+
+
+<center><table WIDTH="600" BORDER="0" CELLSPACING="0" CELLPADDING="0">
+<tr>
+        <td>
+<center><table WIDTH="600" BORDER="0" CELLSPACING="0" CELLPADDING="0">
+<tr>
+        <td WIDTH="1" VALIGN="TOP" BGCOLOR="#1D1D1D"><img SRC="http://www.chatalot.com/AnewChatalot/images/livelist/clear.gif" WIDTH=1 HEIGHT=30 BORDER=0 ALT=""></td>
+        <td ALIGN="CENTER" VALIGN="MIDDLE" BGCOLOR="#1D1D1D"><b><font FACE="Arial" SIZE="2"><a HREF="http://www.chatalot.com/">Home</a> | <a HREF="http://www.chatalot.com/help">Help</a> |  
+<a HREF="http://chatalot.com/contact">Contact</a></font></b></td>     
+</tr>
+</table></center>
+
+<table WIDTH="600" BORDER="0" CELLSPACING="0" CELLPADDING="0">
+<tr>
+        <td WIDTH="220" ALIGN="LEFT" VALIGN="TOP"><img SRC="http://www.chatalot.com/AnewChatalot/images/livelist/clear.gif" WIDTH=1 HEIGHT=50 BORDER=0 ALT=""><a HREF="http://www.chatalot.com/"><img SRC="http://www.chatalot.com/AnewChatalot/images/home/chatsilversm.gif" WIDTH=176 HEIGHT=39 BORDER=0 ALT="Chatalot.com"></a><br>
+	<img SRC="http://www.chatalot.com/AnewChatalot/images/livelist/clear.gif" ALT="" WIDTH=24 HEIGHT=1 BORDER=0><font FACE="Arial" SIZE="1"><i>Powered by</i> <b><a HREF="http://www.customchat.com">CUSTOM CHAT</a></b></font>
+<center>
+
+
+<!-- BEGIN LOGIN POP UP -->
+
+<table BORDER="1" CELLPADDING="5"><tr><td ALIGN="CENTER" BGCOLOR="#000000"><font SIZE="1" FACE="Arial, Helvetica, Verdana">Choose a login with <br>4 to 12 characters</font></td></tr><tr><td ALIGN="CENTER" BGCOLOR="#000000"><b><font SIZE="2" FACE="Arial, Helvetica, Verdana"><a HREF="http://chatalotchat.com:6742?Reset">LOGIN HERE</a></font></b><br><font SIZE="1" FACE="Arial, Helvetica, Verdana">then select a Room</font></td></tr></table>
+
+<!-- END LOGIN POP UP -->
+
+<b><a href='http://chatalot.com/room-rentals'><font FACE="Arial,Helvetica,Geneva" SIZE="2" COLOR="#008000">Own a Room in<br> the Live List</font></a></b>
+</CENTER></TD>
+        <td ALIGN="LEFT" VALIGN="TOP"><table WIDTH="450" BORDER="0" CELLSPACING="0" CELLPADDING="0"><tr><td WIDTH="200" ALIGN="left" VALIGN="top" NOWRAP><img SRC="http://www.chatalot.com/AnewChatalot/images/livelist/clear.gif" WIDTH=1 HEIGHT=10 BORDER=0 ALT=""><br>&nbsp;&nbsp;&nbsp;&nbsp;<font FACE="Arial" SIZE="+1" COLOR="#FF0000">Who's Here Live List</font>
+<img SRC="http://www.chatalot.com/AnewChatalot/images/livelist/clear.gif" WIDTH=150 HEIGHT=1 BORDER=0 ALT="">
+</td><td><form name="where">
+<table WIDTH="225" BORDER="0" CELLSPACING="0" CELLPADDING="0">
+  <tr>
+    <td VALIGN="bottom" NOWRAP>
+	<select name="city" size="1" onChange="updateclock(this);"> 
+<option value="" selected>Local Time</option>
+<option value="2">Amsterdam</option>
+<option value="-7">Arizona</option>
+<option value="7">Bangkok</option>
+<option value="-3">Buenos Aires</option>
+<option value="6">Calcutta</option> 
+<option value="-7">Canada BC</option>
+<option value="-5">Chicago CST</option>
+<option value="-5">Dallas</option>
+<option value="1">Dublin</option>
+<option value="0">Greenwich GMT</option>
+<option value="10">Guam</option>  
+<option value="-10">Hawaii</option>
+<option value="8">Hong Kong</option>
+<option value="2">Johannesburg</option>
+<option value="1">London</option>
+<option value="-7">Los Angeles PST</option>
+<option value="-5">Mexico City</option> 
+<option value="-6">Montana MST</option>
+<option value="4">Moscow</option>  
+<option value="-4">New York EST</option>
+<option value="1">Rome</option>
+<option value="-7">San Francisco PST</option>
+<option value="-7">Seattle PST</option> 
+<option value="10">Sydney</option>
+<option value="9">Tokyo</option> 
+</select>
+	 <!--Place holder for NS4 only-->
+<ilayer id="worldclockns" width=100% height=35><layer id="worldclockns2" width=100% height=35 left=0 top=0 style="font:bold 16px Arial;"></layer></ilayer>&nbsp;&nbsp;<script language="JavaScript">
+
+/*
+Drop Down World Clock- By JavaScript Kit (http://www.javascriptkit.com)
+Portions of code by Kurt @ http://www.btinternet.com/~kurt.grigg/javascript
+*/
+
+if (document.all||document.getElementById)
+document.write('<span id="worldclock" style="font:bold 16px Arial;"></span><br>')
+
+zone=0;
+isitlocal=true;
+ampm='';
+
+function updateclock(z){
+zone=z.options[z.selectedIndex].value;
+isitlocal=(z.options[0].selected)?true:false;
+}
+
+function WorldClock(){
+now=new Date();
+ofst=now.getTimezoneOffset()/60;
+mins=now.getMinutes();
+min=-1.57+Math.PI*mins/30;
+hr=(isitlocal)?now.getHours():(now.getHours() + parseInt(ofst)) + parseInt(zone);
+hrs=-1.575+Math.PI*hr/6+Math.PI*parseInt(now.getMinutes())/360;
+if (hr < 0) hr+=24;
+if (hr > 23) hr-=24;
+ampm = (hr > 11)?"PM":"AM";
+statusampm = ampm.toUpperCase();
+
+hr2 = hr;
+if (hr2 == 0) hr2=12;
+(hr2 < 13)?hr2:hr2 %= 12;
+if (hr2<10) hr2="0"+hr2
+
+var finaltime=hr2+':'+((mins < 10)?"0"+mins:mins)+' '+statusampm;
+
+if (document.all)
+worldclock.innerHTML=finaltime
+else if (document.getElementById)
+document.getElementById("worldclock").innerHTML=finaltime
+else if (document.layers){
+document.worldclockns.document.worldclockns2.document.write(finaltime)
+document.worldclockns.document.worldclockns2.document.close()
+}
+
+
+setTimeout('WorldClock()',1000);
+}
+
+window.onload=WorldClock
+//-->
+</script>
+</td>
+  </tr>
+</table></form>
+</TD></TR></table>
+
+<table BORDER="0" CELLSPACING="0" CELLPADDING="0">
+<tr>
+        <td VALIGN="MIDDLE"><a HREF="http://www.chatalotchat.com:6745/"> Private Rooms</a></td>
+        </tr>
+</table>
+
+
+ <b><font FACE="Arial,Helvetica,Verdana,Geneva" SIZE="3">
+<a HREF="http://www.punktv.com" TARGET=new>PunkTV.com</a> >> Support Creativity!<br>
+<a HREF="http://aversaart.com" TARGET=new>Virtual Art Gallery</a> &nbsp;  | &nbsp; <a HREF="http://www.communitybridge.com" TARGET=new>CommunityBridge</a></font></b> <br>
+<font SIZE="2" FACE="Arial, Helvetica, Verdana"><b><a HREF="http://chatalotchat.com:6742/private2">Two Person Rooms</a> - private discussions</font><br>
+<b><font FACE="Arial, Helvetica, Verdana" SIZE="2" COLOR="#FF0000">Please keep Adult Handles (image/text) in the 'Tagline' only.</font></b>
+<table BORDER="0"><tr><td VALIGN="middle">
+
+ </td><td> 
+</td></tr><tr><td COLSPAN=2>
+<b><font FACE="Arial" SIZE="1"><a HREF="http://chatalotchat.com:6742/?Pics">Live List with images</a><img 
+SRC="http://www.chatalot.com/AnewChatalot/images/livelist/clear.gif" WIDTH=50 HEIGHT=1 BORDER=0 ALT=""> <a HREF="http://chatalotchat.com:6742/">Live List without images</a></font></b></td></tr><tr><td COLSPAN=2>
+</td></tr>
+</table>
+</TD></TR>
+<tr><td COLSPAN=2>
+
+<table WIDTH="400" BORDER="0" CELLPADDING="10" ALIGN="center"><tr><td ALIGN="center">
+
+
+
+</TD></TR></table>
+
+
+
+</td>
+</tr>
+</table>
+
+
+</TD>
+</TR>
+</TABLE></center>
