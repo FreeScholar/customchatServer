@@ -1,4 +1,4 @@
-package customchat.htmlutil;
+package com.chatalot.server.htmlutil;
 
 public class Input extends Tag {
     public static final short HIDDEN = 0;

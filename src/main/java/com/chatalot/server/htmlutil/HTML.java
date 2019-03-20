@@ -1,7 +1,7 @@
-package customchat.htmlutil;
+package com.chatalot.server.htmlutil;
 
 import java.io.*;
-import customchat.util.ErrorLog;
+import com.chatalot.server.util.ErrorLog;
 
 public abstract class HTML implements Serializable, Cloneable {
   public static final char QUOTE_ESCAPE = '\u00b0';

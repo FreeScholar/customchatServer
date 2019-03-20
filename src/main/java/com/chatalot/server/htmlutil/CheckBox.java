@@ -1,4 +1,4 @@
-package customchat.htmlutil;
+package com.chatalot.server.htmlutil;
 
 public class CheckBox extends Input {
   public static final String TRUE = "TRUE";

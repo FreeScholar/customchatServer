@@ -1,4 +1,4 @@
-package customchat.htmlutil;
+package com.chatalot.server.htmlutil;
 
 public class Text extends HTML {
   private final String text;

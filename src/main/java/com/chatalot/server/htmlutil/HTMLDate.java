@@ -1,6 +1,6 @@
-package customchat.htmlutil;
+package com.chatalot.server.htmlutil;
 
-import customchat.util.*;
+import com.chatalot.server.util.*;
 import java.util.*;
 
 public class HTMLDate extends HTML {

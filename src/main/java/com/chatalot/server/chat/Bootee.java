@@ -1,8 +1,8 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
 //import com.sun.java.util.collections.*;
-import customchat.htmlutil.*;
-import customchat.util.*;
+import com.chatalot.server.htmlutil.*;
+import com.chatalot.server.util.*;
 import java.util.Calendar;
 import java.util.LinkedList;
 

@@ -1,6 +1,5 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
-import customchat.chat.ChatException;
 import java.util.*;
 
 public class BootedException extends ChatException {

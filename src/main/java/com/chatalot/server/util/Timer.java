@@ -1,4 +1,4 @@
-package customchat.util;
+package com.chatalot.server.util;
 
 import java.util.Hashtable;
 import java.util.Date;

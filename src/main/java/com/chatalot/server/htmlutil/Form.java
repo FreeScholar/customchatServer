@@ -1,4 +1,4 @@
-package customchat.htmlutil;
+package com.chatalot.server.htmlutil;
 
 public class Form extends Container {
 	public Form(String name, String action, String method) {

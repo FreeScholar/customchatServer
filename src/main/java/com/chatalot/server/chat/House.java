@@ -1,9 +1,9 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
 import java.util.*;
 import java.io.*;
-import customchat.util.*;
-import customchat.htmlutil.*;
+import com.chatalot.server.util.*;
+import com.chatalot.server.htmlutil.*;
 
 /**
  * This class represents the entire house it stores the floors and
@@ -50,7 +50,6 @@ public class House extends ChatObject {
 	/**
 	 * sets the mode to s, sets up the file paths.
 	 *
-	 * @param s the mode or null for default
 	 */
     public House() throws ChatException {
 	super(lDefaultOwner, null, "", "CustomChat Server");
@@ -261,7 +260,7 @@ public class House extends ChatObject {
      * @param showPics
      * @param ct
      * @return 
-     * @throws customchat.chat.ChatException 
+     * @throws com.chatalot.server.chat.ChatException
      */
     @Override
     protected HTML liveList0(int level, String handle, boolean showPics, Container ct) throws ChatException {

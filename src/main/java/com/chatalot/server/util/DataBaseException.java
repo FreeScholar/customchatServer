@@ -1,4 +1,4 @@
-package customchat.util;
+package com.chatalot.server.util;
 
 public class DataBaseException extends Exception {
  /* public String toString() {

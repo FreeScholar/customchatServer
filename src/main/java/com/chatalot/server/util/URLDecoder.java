@@ -1,4 +1,4 @@
-package customchat.util;
+package com.chatalot.server.util;
 
 // This appears in Core Web Programming from
 // Prentice Hall Publishers, and may be freely used

@@ -1,8 +1,8 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
 import java.util.*;
 import java.io.*;
-import customchat.util.* ;
+import com.chatalot.server.util.* ;
 
 // For java 1.1 compatablility
 //import com.sun.java.util.collections.*;
@@ -38,7 +38,7 @@ class TimeOut extends Thread implements Serializable {
 	while(true) {
 	    try { sleep(60000); } catch (InterruptedException ignored) {;}
 	    try {
-		customchat.util.Timer.start();
+		com.chatalot.server.util.Timer.start();
 		i = UserRegistry.getChatters();
 		expires = new Date().getTime() - lTimeOut;
 

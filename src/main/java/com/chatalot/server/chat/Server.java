@@ -1,7 +1,7 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
-import customchat.util.*;
-import customchat.licensekey.*;
+import com.chatalot.server.util.*;
+import com.chatalot.server.licensekey.*;
 
 import java.net.*;	// Needed so we can access sockets, etc
 import java.io.*;	 // So we can use streams

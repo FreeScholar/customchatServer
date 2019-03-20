@@ -1,4 +1,4 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
 class FloorNotFoundException extends ChatException {
   FloorNotFoundException(String s) {

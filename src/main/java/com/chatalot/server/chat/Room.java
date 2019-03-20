@@ -1,11 +1,11 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
 import java.lang.reflect.*;
 import java.util.*;
 import java.io.*;
 import java.net.*;
-import customchat.util.*;
-import customchat.htmlutil.*;
+import com.chatalot.server.util.*;
+import com.chatalot.server.htmlutil.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jsoup.Jsoup;

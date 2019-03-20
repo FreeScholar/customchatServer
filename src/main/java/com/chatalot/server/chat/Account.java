@@ -1,7 +1,7 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
 import java.util.*;
-import customchat.util.* ;
+import com.chatalot.server.util.* ;
 // This is a comment added for intial commit
 /**
  * An account represents one active user account.  It keeps track of all

@@ -1,6 +1,6 @@
-package customchat.htmlutil;
+package com.chatalot.server.htmlutil;
 
-import customchat.util.ErrorLog;
+import com.chatalot.server.util.ErrorLog;
 
 public class Page extends Container {
     StringBuilder sBuilder = new StringBuilder();

@@ -1,7 +1,7 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
 import java.sql.*;
-import customchat.util.*;
+import com.chatalot.server.util.*;
 
 public class Auth {
   private String sURL,

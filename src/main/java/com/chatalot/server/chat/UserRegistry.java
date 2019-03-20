@@ -1,7 +1,7 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
 import java.util.*;
-import customchat.util.*;
+import com.chatalot.server.util.*;
 
 public abstract class UserRegistry {
     public static Hashtable accounts = new Hashtable();

@@ -1,7 +1,7 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
-import customchat.util.*;
-import customchat.htmlutil.*;
+import com.chatalot.server.util.*;
+import com.chatalot.server.htmlutil.*;
 import java.util.*;
 import java.io.*;
 import java.lang.reflect.*;
@@ -845,7 +845,7 @@ public abstract class ChatObject extends Object implements Serializable {
 			
 
 		try {
-			Object key = customchat.util.Timer.start(null);
+			Object key = com.chatalot.server.util.Timer.start(null);
 			//Debug.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") ;
 			//Debug.println("sKeyWord:"+sKeyWord );
 			//Debug.println("iCommand:"+ String.valueOf(iCommand));

@@ -1,6 +1,6 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
-import customchat.htmlutil.Page;
+import com.chatalot.server.htmlutil.Page;
 import java.io.*;
 
 

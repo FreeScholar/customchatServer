@@ -1,4 +1,4 @@
-package customchat.util;
+package com.chatalot.server.util;
 
 public class Base64 {
 

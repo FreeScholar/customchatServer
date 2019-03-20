@@ -1,4 +1,4 @@
-package customchat.util;
+package com.chatalot.server.util;
 
 public class Debug {
   public static void print(int ch) {

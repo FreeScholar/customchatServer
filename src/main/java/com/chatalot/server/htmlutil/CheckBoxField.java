@@ -1,7 +1,7 @@
-package customchat.htmlutil;
+package com.chatalot.server.htmlutil;
 
 //import com.sun.java.util.collections.*;
-import customchat.util.*;
+import com.chatalot.server.util.*;
 import java.util.*;
 import java.io.*;
 

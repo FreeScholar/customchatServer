@@ -1,4 +1,4 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
 class ChatterNotFoundException extends ChatException {
   ChatterNotFoundException() {

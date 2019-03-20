@@ -1,4 +1,4 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
 import java.util.*;
 import java.io.*;

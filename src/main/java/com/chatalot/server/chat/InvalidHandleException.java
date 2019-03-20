@@ -1,4 +1,4 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
 public class InvalidHandleException extends ChatException {
   public InvalidHandleException(String s){

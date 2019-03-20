@@ -1,4 +1,4 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
 //============================================================================
 // This class waits to be notified that a thread is dying (exiting)

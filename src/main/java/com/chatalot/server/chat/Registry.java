@@ -1,6 +1,6 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
-import customchat.util.ErrorLog;
+import com.chatalot.server.util.ErrorLog;
 import java.util.*;
 
 public class Registry {

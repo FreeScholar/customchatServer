@@ -1,9 +1,9 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
 //import com.sun.java.util.collections.*;
 import java.io.*;
-import customchat.htmlutil.*;
-import customchat.util.*;
+import com.chatalot.server.htmlutil.*;
+import com.chatalot.server.util.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;

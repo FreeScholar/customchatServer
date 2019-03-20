@@ -1,4 +1,4 @@
-package customchat.htmlutil;
+package com.chatalot.server.htmlutil;
 
 public class Image extends Tag {
   public static final String name = "IMG";

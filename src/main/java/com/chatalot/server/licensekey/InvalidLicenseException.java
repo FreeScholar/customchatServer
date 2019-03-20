@@ -1,4 +1,4 @@
-package customchat.licensekey;
+package com.chatalot.server.licensekey;
 
 import java.security.*;
 import java.io.*;

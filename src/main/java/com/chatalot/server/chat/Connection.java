@@ -1,9 +1,9 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
 import java.net.*;
 import java.io.*;
 import java.util.*;
-import customchat.util.*;
+import com.chatalot.server.util.*;
 
 
 //=============================================================================
@@ -174,7 +174,7 @@ class Connection implements Runnable {
 		    sAuth = sAuth.trim();
 		    //Parse the authorization info
 		    //reminder--do not allow :'s in the passwords
-		    sAuth = customchat.util.Base64.decode(sAuth);
+		    sAuth = com.chatalot.server.util.Base64.decode(sAuth);
 		    int iLastColon = sAuth.lastIndexOf(':');
 		    if(iLastColon < 0)
 			continue;
@@ -233,7 +233,7 @@ class Connection implements Runnable {
 	    if(sToken != null && sToken.length() > 0) {
 
 		try {
-		    String sUrl = customchat.util.URLDecoder.decode(sToken).trim();
+		    String sUrl = com.chatalot.server.util.URLDecoder.decode(sToken).trim();
 		    int offset = 1;
 		    if(sUrl.startsWith("/"))
 			offset = 1;
@@ -280,13 +280,13 @@ class Connection implements Runnable {
 	
 	LookupTable lt = null;
 	long parseTime = -1L;
-	Object key = customchat.util.Timer.start(null);
+	Object key = com.chatalot.server.util.Timer.start(null);
 	try {
 	
 	    // Reads CGI Variables into the lookup table.
-	    customchat.util.Timer.start();
+	    com.chatalot.server.util.Timer.start();
 	    lt = parseRequest();
-	    parseTime = customchat.util.Timer.stop();
+	    parseTime = com.chatalot.server.util.Timer.stop();
 
 	    // If load testing allow authentication using cgi var LoadUser
 	    if (System.getProperty("chat.loadtest") != null) {
@@ -308,7 +308,7 @@ class Connection implements Runnable {
 			if (!f.exists() || !f.isFile() || !f.canRead())
 				throw new ChatException("Error reading file: " + sFile + ".");
 
-			os.write(("HTTP/1.0 200 Okay\r\nContent-type: " + customchat.htmlutil.HTTP.guessMimeType(sFile) + "\r\n" + "Content-length: " + String.valueOf(f.length()) + "\r\n\n").getBytes("latin1"));
+			os.write(("HTTP/1.0 200 Okay\r\nContent-type: " + com.chatalot.server.htmlutil.HTTP.guessMimeType(sFile) + "\r\n" + "Content-length: " + String.valueOf(f.length()) + "\r\n\n").getBytes("latin1"));
 			BufferedInputStream fs = new BufferedInputStream(new FileInputStream(f));
 			byte ba[] = new byte[256];
 			int iread = 0;

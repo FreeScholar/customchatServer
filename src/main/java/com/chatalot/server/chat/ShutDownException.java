@@ -1,4 +1,4 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
 public class ShutDownException extends ChatException {
   private boolean bRestart = false;

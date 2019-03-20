@@ -1,7 +1,7 @@
-package customchat.chat;
+package com.chatalot.server.chat;
 
-import customchat.util.*;
-import customchat.htmlutil.*; 
+import com.chatalot.server.util.*;
+import com.chatalot.server.htmlutil.*;
 import java.io.*;
 
 public abstract class PageFactory {
