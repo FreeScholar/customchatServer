@@ -21,6 +21,8 @@ var scrollOff = function () {
     autoScrollOn = false;
 }  // end scrollOff
 
+var source = new EventSource(this.chatRoom);
+
 var StartUp = function () {
     this.onblur = scrollOn;
     this.onfocus = scrollOff;
@@ -32,4 +34,16 @@ var onLoad = function () {
 }
 
 this.StartUp();
+
+window.onload = function(){
+    console.log("window loaded");
+    this.source.onmessage = function(event){
+        document.getElementById("room-messages-frame").innerHTML += event.data + "<br>";
+    }
+    this.source.onopen = function(event){
+        console.log("connection established.");
+        document.getElementById("room-messages-frame").innerHTML += "Connection established!" + "<br>";
+    }
+}
+
 //window.onload = this.onLoad();

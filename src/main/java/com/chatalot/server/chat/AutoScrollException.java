@@ -1,12 +1,12 @@
 package customchat.chat;
 
-public class AutoScrollException extends ChatException {
-  Chatter c;
+public class AutoScrollException extends customchat.chat.ChatException {
+  customchat.chat.Chatter c;
 
-  AutoScrollException(Chatter c) {
+  AutoScrollException(customchat.chat.Chatter c) {
 	this.c = c;
   }  
-  public Chatter getChatter() {
+  public customchat.chat.Chatter getChatter() {
 	return c;
   }  
 }

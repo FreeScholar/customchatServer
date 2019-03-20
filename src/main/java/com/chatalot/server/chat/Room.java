@@ -768,8 +768,9 @@ public class Room extends ChatObject {
 		if(c == null) {
                     throw new ChatterNotFoundException();
                 }
+
 		throw new AutoScrollException(c);
-               
+
 	    case SCROLL_SEND:
 		send(c, lt);
                con = scrollSend(c);
@@ -1945,9 +1946,12 @@ public class Room extends ChatObject {
        
         
 	row.addHTML("<iframe id='room-top-frame' class='full-frame col-12 frame' name='" + FRAME_TOP + "' src='"+ commandURL(SCROLL_TOP, ct) + "'></iframe>");
-        row.addHTML("<iframe id='room-messages-frame' class='col-12 col-md-9 frame' name='" + FRAME_MESSAGES+ "' src='"+ commandURL(SCROLL_MESSAGES, ct) + "'></iframe>");
-        row.addHTML("<iframe id='room-user-list-frame' class='col-12 col-md-3 frame' name='" + FRAME_LIST + "' src='"+ commandURL(SCROLL_LIST, ct) + "'></iframe>");
+        //row.addHTML("<iframe id='room-messages-frame' class='col-12 col-md-9 frame' name='" + FRAME_MESSAGES+ "' src='"+ commandURL(SCROLL_MESSAGES, ct) + "'></iframe>");
+        row.addHTML("<div id='room-messages-frame' class='col-12 col-md-3 frame' name='" + FRAME_MESSAGES + "'></div>");
+		row.addHTML("<iframe id='room-user-list-frame' class='col-12 col-md-3 frame' name='" + FRAME_LIST + "' src='"+ commandURL(SCROLL_LIST, ct) + "'></iframe>");
         row.addHTML("<iframe id='room-send-frame' class='col-12 frame' name='" + FRAME_SEND + "' src='"+ commandURL(SCROLL_SEND, ct) + "'></iframe>");
+		row.addHTML("<script>var chatRoom = '" + commandURL(SCROLL_MESSAGES, ct) + "';</script>");
+		row.addHTML("<script type='text/javascript' src='/resources/scripts/autoscroll.js'></script>");
 	return roomPage;
     }
 

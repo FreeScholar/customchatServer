@@ -3,7 +3,6 @@ package customchat.chat;
 import java.util.*;
 import java.io.*;
 import java.net.*;
-import customchat.util.*;
 
 
 /**
@@ -61,7 +60,7 @@ public class Chatter extends Object implements Serializable {
  // State Variables
 
     private Date dLastCheck = new Date();  // Time of last activity
-    private transient AutoScroll scroll = null;
+    private transient customchat.chat.AutoScroll scroll = null;
     //private final transient Thread outThread = null; //thread associated with chatter
 
     // Messages waiting for chatter
@@ -89,7 +88,7 @@ public class Chatter extends Object implements Serializable {
 	 *
 	 * @param m The message to be added.
 	 */
-    public void addMessage(Message m) {
+    public void addMessage(customchat.chat.Message m) {
 	//Sort messages into public and private boxes (vectors)
 	switch(m.getType()) {
 	case Message.PUBLIC:
@@ -325,14 +324,16 @@ public class Chatter extends Object implements Serializable {
 	scroll = as;
     }
     
-    public void deliverMessages() {
+    public void deliverMessages() throws customchat.chat.AutoScrollException {
 	if(scroll != null) {
             
 	    synchronized(scroll) {
-		scroll.print(HTMLGetNewMessages(true));
+		this.scroll.print(HTMLGetNewMessages(true));
 	    }
+	} else {
+		throw new customchat.chat.AutoScrollException(this);
 	}
-    }
+	}
     /**
      * Cleans up when the chatter leaves the system.  Currently calls AutoScroll.exit().
      *
