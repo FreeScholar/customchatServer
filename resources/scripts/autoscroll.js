@@ -21,7 +21,7 @@ var scrollOff = function () {
     autoScrollOn = false;
 }  // end scrollOff
 
-var source = new EventSource(this.chatRoom);
+//var source = new EventSource(this.chatRoom);
 
 var StartUp = function () {
     this.onblur = scrollOn;
@@ -34,16 +34,38 @@ var onLoad = function () {
 }
 
 this.StartUp();
+var url = "http://" + window.location.host + this.chatRoom;
+console.log(url);
+$(document).ready(function(event){
+    $.ajax({
+        type: 'GET',
+        url: url,
+        async: true,
+        contentType: 'application/json',
+        done: function(err){
+            console.log(err);
+        },
+        success: function(res){
+            console.log(res);
+              $("#room-messages-frame").html(res.data);
+            }
+    });
+});
+
 
 window.onload = function(){
-    console.log("window loaded");
-    this.source.onmessage = function(event){
-        document.getElementById("room-messages-frame").innerHTML += event.data + "<br>";
-    }
-    this.source.onopen = function(event){
-        console.log("connection established.");
-        document.getElementById("room-messages-frame").innerHTML += "Connection established!" + "<br>";
-    }
+//   console.log("window loaded");
+//    this.source.onmessage = function(event){
+//        document.getElementById("room-messages-frame").innerHTML += event.data + "<br>";
+//    }
+//    this.source.onopen = function(event){
+//        console.log("connection established.");
+//        document.getElementById("room-messages-frame").innerHTML += "Connection established!" + "<br>";
+//    }
+//    setInterval(function () {
+//
+//    }, 1000);
+
 }
 
 //window.onload = this.onLoad();

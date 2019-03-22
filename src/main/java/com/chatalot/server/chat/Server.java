@@ -115,7 +115,7 @@ public class Server extends Thread {
 		if (args.length > 1) {
 			sPropFile = args[1];
 		} else
-			sPropFile = "." + File.separator + "chat.properties";
+			sPropFile = "." + File.separator + "chatalot.properties";
 
 		// read in properties file
 		Properties p = new Properties(System.getProperties());

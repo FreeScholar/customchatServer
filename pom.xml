@@ -6,7 +6,7 @@
 
     <groupId>com.chatalot.server</groupId>
     <artifactId>customChatServer</artifactId>
-    <version>1</version>
+    <version>1.1</version>
     <packaging>jar</packaging>
     <name>customChatServer</name>
     <description>A simple customChatServer.</description>
@@ -62,7 +62,7 @@
                             <manifest>
                                 <addClasspath>true</addClasspath>
                                 <classpathPrefix></classpathPrefix>	
-                                <mainClass>customchat.chat.Server</mainClass>
+                                <mainClass>com.chatalot.server.chat.Server</mainClass>
                             </manifest>
                         </archive>
                     </configuration>

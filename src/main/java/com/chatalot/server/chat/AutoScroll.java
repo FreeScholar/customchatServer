@@ -7,8 +7,8 @@ import java.io.*;
 public class AutoScroll extends Object {
     public boolean bMisery = false;
     PrintWriter out;
-    private static final String S_BOUNDARY = "";//"ThisRandomString\nContent-type: text/html\r\n\n";
-    private static final String HTTP_RESPONSE = "HTTP/1.1 200 OK\r\nContent-type: text/json\r\n";
+    private static final String S_BOUNDARY = "===";//"ThisRandomString\nContent-type: text/html\r\n\n";
+    private static final String HTTP_RESPONSE = "HTTP/1.1 200 OK\r\nContent-type: application/json;";
 
     /*
     * We can format our json like this...
@@ -21,11 +21,11 @@ public class AutoScroll extends Object {
     public AutoScroll(Page p, final PrintWriter pw, final boolean b, boolean bPrintHeader) {
 	out = pw;
 	bMisery = b;
-	if (bPrintHeader)
-	    out.print(HTTP_RESPONSE);
+	/*if (bPrintHeader)
+	    out.print(HTTP_RESPONSE);*/
 
-	if(!bMisery && !Connection.anotherIEHack)
-	    out.println(S_BOUNDARY);
+	/*if(!bMisery && !Connection.anotherIEHack)
+	    out.println(S_BOUNDARY);*/
 
 	//p.addHeadHTML("<script type='text/javascript' src='/resources/scripts/autoscroll.js'></script>");
 
@@ -34,8 +34,15 @@ public class AutoScroll extends Object {
 		  "<BR> If you are idle for a while you may see the message \"Transfer interrupted!\", or if you want to clear the screen" +
 		  " of all messages...<BR> just hit the Reload button in your browser to reconnect to the CustomChat Server.<BR>" +
 		  "</FONT><BR><HR>\n\n");
-
-	out.println("CHAT:\n\n");//p.openPage());
+	String responseBody = "{ \"data\": \"hello, world!\" }";
+	int contentLength = responseBody.getBytes().length;
+	String header = "HTTP/1.1 200 OK\n" +
+			"Content-type: application/json\n"
+			+ "Content-Length: " + contentLength + "\n"
+			+ "Connection: close\n";
+	out.println(header);//p.openPage());
+		out.println(responseBody);
+		//out.println("--" + S_BOUNDARY + "--");
 	out.flush();
     }
     public synchronized void Exit() {
