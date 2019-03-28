@@ -332,7 +332,7 @@ class Connection implements Runnable {
 		
 	} catch (AutoScrollException e) {
 	    Chatter c = e.getChatter();
-	    c.setScroll(new AutoScroll(c.location().getTemplate(), out, bMisery, true));
+	    c.setScroll(new AutoScroll(c, out, e.printHeader));
 		
 	} catch (ShutDownException e) {
 	    ServerSocket ss = server.listenSocket;

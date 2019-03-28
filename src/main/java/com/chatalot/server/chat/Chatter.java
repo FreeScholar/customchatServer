@@ -3,6 +3,8 @@ package com.chatalot.server.chat;
 import java.util.*;
 import java.io.*;
 import java.net.*;
+
+import com.google.gson.*;
 import com.chatalot.server.util.*;
 
 
@@ -15,39 +17,39 @@ import com.chatalot.server.util.*;
  */
 
 public class Chatter extends Object implements Serializable {
-    static final long serialVersionUID 				= 6448109445035551597L;
-    public static final String PRIVATE_IGNORE_VAR 	= "IgPriv";
-    public static final String PUBLIC_IGNORE_VAR 	= "IgPub";
-    public static final String NO_IMAGE_VAR 		= "bNoPic";
-    public static final String NO_HANDLE_IMAGE_VAR 	= "bNoPicHandle";
-    public static final String NO_SOUND_VAR 		= "bNoSound";
-    public static final String IG_OUTSIDE_VAR 		= "bIgOutside";
-    public static final String IG_ENTRY_VAR 		= "bIgEntry";
-    public static final String USER_DING 			= "bUserDing";
-    public static final String PM_RECIPIENT_VAR 	= "PM";
-    public static final String HANDLE_VAR 			= "sHandle";
-    public static final String HOMEPAGE_VAR 		= "sHomePage";
-    public static final String TAGLINE_VAR 			= "sTagline";
-    public static final String USING_IE_VAR 		= "bIE";
-	public static final String NO_BUTTONS			= "bNoButtons" ;
+    static final long serialVersionUID = 6448109445035551597L;
+    public static final String PRIVATE_IGNORE_VAR = "IgPriv";
+    public static final String PUBLIC_IGNORE_VAR = "IgPub";
+    public static final String NO_IMAGE_VAR = "bNoPic";
+    public static final String NO_HANDLE_IMAGE_VAR = "bNoPicHandle";
+    public static final String NO_SOUND_VAR = "bNoSound";
+    public static final String IG_OUTSIDE_VAR = "bIgOutside";
+    public static final String IG_ENTRY_VAR = "bIgEntry";
+    public static final String USER_DING = "bUserDing";
+    public static final String PM_RECIPIENT_VAR = "PM";
+    public static final String HANDLE_VAR = "sHandle";
+    public static final String HOMEPAGE_VAR = "sHomePage";
+    public static final String TAGLINE_VAR = "sTagline";
+    public static final String USING_IE_VAR = "bIE";
+    public static final String NO_BUTTONS = "bNoButtons";
 
     // -------------------Private Variables ----------------------------
     // Configuration variables for the chat session.
-    public  Login lUser;
+    public Login lUser;
     public String sHandle;   // Handle displayed in the room
     public String sHomePage; // Home page of the chatter, optional.
     // This is used to link the users name in a room to their home page.
     public String sTagline;  // Optional user tagline.
 
- // User Options
+    // User Options
     public boolean bNoPic = true;        // Don't display <img> tags in messages.
     public boolean bNoPicHandle = true;  // Don't display <img> tags in handles.
     public boolean bNoSound = true;      // Don't play sound in messages.
     public boolean bIgOutside = false;   // Ignore messages sent from outside the room.
     public boolean bIgEntry = false;   // Ignore entry/exit messages
     public boolean bUserDing = false;   // Ding on entry/exit
-    public boolean bNoButtons = false ; 
-	boolean bIE = false;	// using IE browser
+    public boolean bNoButtons = false;
+    boolean bIE = false;    // using IE browser
 
     //who was last sent a private message(PM)
     private String[] aPMRecips = null;
@@ -57,8 +59,8 @@ public class Chatter extends Object implements Serializable {
     private String[] aIgPriv = null;
     public ChatObject loc = null;
 
-    public boolean isAdmin = false ;
- // State Variables
+    public boolean isAdmin = false;
+    // State Variables
 
     private Date dLastCheck = new Date();  // Time of last activity
     private transient AutoScroll scroll = null;
@@ -68,123 +70,127 @@ public class Chatter extends Object implements Serializable {
     private final Vector vPubBox = new Vector();  // Public message queue.
     private final Vector vPrivBox = new Vector(); // Private message queue.
 
-	public String sChatPic = "DEF";
+    public String sChatPic = "DEF";
 
     public Chatter(final Login l, String handle) {
-	lUser = l;
-	sHandle = (new Filter()).FilterHTML(handle);
-    }  
+        lUser = l;
+        sHandle = (new Filter()).FilterHTML(handle);
+    }
 
     // -------------------Public Interface ----------------------------
 
     public Chatter(final Login l, String handle, final LookupTable lt) {
-	this(l, handle);
-	update(lt);
-	// bNoPic = bNoPicHandle = bNoSound = true; // Must set default true's outside of update(lt)
+        this(l, handle);
+        update(lt);
+        // bNoPic = bNoPicHandle = bNoSound = true; // Must set default true's outside of update(lt)
     }
 
+    public AutoScroll getScroll() {
+        return this.scroll;
+    }
 
     /**
-	 * Adds a message to the public or private message queue.
-	 *
-	 * @param m The message to be added.
-	 */
+     * Adds a message to the public or private message queue.
+     *
+     * @param m The message to be added.
+     */
     public void addMessage(Message m) {
-	//Sort messages into public and private boxes (vectors)
-	switch(m.getType()) {
-	case Message.PUBLIC:
-	    //check if sender is being ignored publicly
-	    if(isIgPub(m.getFrom())) {
-                break;
-            }
-            /* otherwise, falls through */
-	case Message.BROADCAST :
-            /* falls through again */
-	case Message.SYSTEM:
-	    synchronized(vPubBox) {
-		vPubBox.addElement(m);
-	    }
-	    break;
-	case Message.PRIVATE:
-	    //check if sender is being ignored privately
-	    if(isIgPriv(m.getFrom())) {
-                break;
-            }
-            
-	    synchronized(vPrivBox) {
-		vPrivBox.addElement(m); //if not, add the message
-	    }
-	    break;
-	case Message.INSTANT:
-	    //check if chatter is ignoring outside messages
-            // changed to use brackets G.T. 11/30/2017
-	    if(bIgOutside) {
-                break;
-            }
-            
-	    synchronized(vPrivBox) {
-		vPrivBox.addElement(m);
-	    }
-	    break;
-	case Message.REMOVE: 
-	    if (loc != null) {
-                // changed to use brackets G.T. 11/30/2017
-		if (loc.bScroll) {
-                    m.append("\n<script>parent.WhoListFrame.document.location.reload();</script>\n");
+        //Sort messages into public and private boxes (vectors)
+        switch (m.getType()) {
+            case Message.PUBLIC:
+                //check if sender is being ignored publicly
+                if (isIgPub(m.getFrom())) {
+                    break;
                 }
-	    }
+                /* otherwise, falls through */
+            case Message.BROADCAST:
+                /* falls through again */
+            case Message.SYSTEM:
+                synchronized (vPubBox) {
+                    vPubBox.addElement(m);
+                }
+                break;
+            case Message.PRIVATE:
+                //check if sender is being ignored privately
+                if (isIgPriv(m.getFrom())) {
+                    break;
+                }
 
-	    if (!bIgEntry) {
-		if (bUserDing) {
-                    m.append("<embed src=\"/resources/sounds/doorbell.wav\" autostart=\"true\" hidden=\"true\">") ;
-		    //System.out.println("doing sound for user leaving");
-		}	
-		
-		synchronized(vPubBox) {
-		    vPubBox.addElement(m);
-		}	
-            }
-	    break;
-	case Message.ADDCHATTER:
-	    if (loc != null) {
+                synchronized (vPrivBox) {
+                    vPrivBox.addElement(m); //if not, add the message
+                }
+                break;
+            case Message.INSTANT:
+                //check if chatter is ignoring outside messages
                 // changed to use brackets G.T. 11/30/2017
-		if (loc.bScroll) {
-                    m.append("\n<script>parent.WhoListFrame.document.location.reload();</script>\n");
-                }  
-	    }
-	
-	    if (!bIgEntry) {
-		if (bUserDing) {
-		    m.append("<embed src=\"/resources/sounds/doorbell.wav\" autostart=\"true\" hidden=\"true\">") ;
-		    //System.out.println("doing sound for user arriving");
-		}
-                
-		synchronized(vPubBox) {
-		    vPubBox.addElement(m);
-	    	}
-	    }
-            break;
-	default:
-	    ErrorLog.error(new ChatException(), 12321, "Invalid message type");
+                if (bIgOutside) {
+                    break;
+                }
+
+                synchronized (vPrivBox) {
+                    vPrivBox.addElement(m);
+                }
+                break;
+            case Message.REMOVE:
+                if (loc != null) {
+                    // changed to use brackets G.T. 11/30/2017
+                    if (loc.bScroll) {
+                        m.append("\n<script>parent.WhoListFrame.document.location.reload();</script>\n");
+                    }
+                }
+
+                if (!bIgEntry) {
+                    if (bUserDing) {
+                        m.append("<embed src=\"/resources/sounds/doorbell.wav\" autostart=\"true\" hidden=\"true\">");
+                        //System.out.println("doing sound for user leaving");
+                    }
+
+                    synchronized (vPubBox) {
+                        vPubBox.addElement(m);
+                    }
+                }
+                break;
+            case Message.ADDCHATTER:
+                if (loc != null) {
+                    // changed to use brackets G.T. 11/30/2017
+                    if (loc.bScroll) {
+                        m.append("\n<script>parent.WhoListFrame.document.location.reload();</script>\n");
+                    }
+                }
+
+                if (!bIgEntry) {
+                    if (bUserDing) {
+                        m.append("<embed src=\"/resources/sounds/doorbell.wav\" autostart=\"true\" hidden=\"true\">");
+                        //System.out.println("doing sound for user arriving");
+                    }
+
+                    synchronized (vPubBox) {
+                        vPubBox.addElement(m);
+                    }
+                }
+                break;
+            default:
+                ErrorLog.error(new ChatException(), 12321, "Invalid message type");
             /* I added a break statement even though redundant in most cases. 
               It can fix fall through errors. G.T. 11/30/2017 */
-            break;
-	}
+                break;
+        }
     }
-    /**
-	 * @return a String containing CGI variables to uniquely identify the user (for use in a URL)
-	 */
-    protected String GetGetVars() {
-	return (sHandle == null ? "" : HANDLE_VAR + "=" + java.net.URLEncoder.encode(sHandle)) +
-	    (HasScroll() ? "&" + Room.SCROLL_VAR : "");
-    } 
 
     /**
-	 * @return Last time the chatter interacted with the server.
-	 */
+     * @return a String containing CGI variables to uniquely identify the user (for use in a URL)
+     */
+    protected String GetGetVars() {
+        return (sHandle == null ? "" : HANDLE_VAR + "=" + java.net.URLEncoder.encode(sHandle)) +
+                (HasScroll() ? "&" + Room.SCROLL_VAR : "");
+    }
+
+    /**
+     * @return Last time the chatter interacted with the server.
+     */
 
     public Date GetLastCheck() {
-	return dLastCheck;
+        return dLastCheck;
     }
 
     /**
@@ -192,78 +198,130 @@ public class Chatter extends Object implements Serializable {
      */
 
     public String HTMLGetNewMessages() {
-	return HTMLGetNewMessages(false);
+        return HTMLGetNewMessages(false);
+    }
+
+    //This just exists to make my life easier
+    //@author JamesVorder 28-MAR-2019
+    public class Inbox {
+        private ArrayList<String> Messages = new ArrayList();
+        private boolean isPrivate;
+
+        Inbox(boolean p) {
+            this.isPrivate = p;
+        }
+
+        //accessor
+        public boolean isPrivate() {
+            return this.isPrivate;
+        }
+
+        public void clear() {
+
+            this.Messages = new ArrayList();
+        }
+
+        public void add(String message) {
+
+            this.Messages.add(message);
+        }
+
+        public String toString() {
+            //JsonElement inbox = new JsonElement("")
+            if (this.Messages.size() > 0) {
+                Gson gson = new Gson();
+                return gson.toJson(this.Messages, ArrayList.class);
+            } else {
+                return "";
+            }
+        }
+    }
+
+    public String JSONGetNewMessages() {
+        Inbox privInbox = new Inbox(true);
+        for (int i = 0; i < vPrivBox.size(); i++) {
+            privInbox.add(vPrivBox.get(i).toString());
+        }
+        vPrivBox.removeAllElements();
+        Inbox pubInbox = new Inbox(false);
+        for (int i = 0; i < vPubBox.size(); i++) {
+            pubInbox.add(vPubBox.get(i).toString());
+        }
+        vPubBox.removeAllElements();
+        JsonObject ret = new JsonObject();
+        ret.addProperty("priv", privInbox.toString());
+        ret.addProperty("pub", pubInbox.toString());
+        return ret.toString();
     }
 
     /**
-     *
      * @param bScroll true if the user is using real time chat.
      * @return a string with the HTML formatted messages pending in the public and private queues.
      */
 
     public String HTMLGetNewMessages(boolean bScroll) {
-	StringBuilder out;
+        StringBuilder out;
         out = new StringBuilder("");
-	Message mCurr;
-	Enumeration e;
+        Message mCurr;
+        Enumeration e;
 
-	if(vPrivBox.size() > 0) {
-          
-	    if(!bScroll) {
+        if (vPrivBox.size() > 0) {
+
+            if (!bScroll) {
                 out.append("<H2><FONT FACE=Arial, Helvetica>Private Messages</FONT></H2>\n");
             }
 
-	    //Print out the private messages
-	    e = vPrivBox.elements();
-	    while(e.hasMoreElements()) {
-		mCurr = (Message)e.nextElement();
+            //Print out the private messages
+            e = vPrivBox.elements();
+            while (e.hasMoreElements()) {
+                mCurr = (Message) e.nextElement();
                 // changed to use brackets G.T. 11/30/2017
-		if(mCurr.is(Message.INSTANT)) {
+                if (mCurr.is(Message.INSTANT)) {
                     out.append("<H3><FONT FACE=Arial, Helvetica>Outside Message:</FONT></H3>");
-                } else if(bScroll) {
+                } else if (bScroll) {
                     out.append("<H3><FONT FACE=Arial, Helvetica>Private Message:</FONT></H3>");
                 }
-					
-		out.append(mCurr.getHTML(this));
-	    }
+
+                out.append(mCurr.getHTML(this));
+            }
 
 
-	    if(!bScroll) {
+            if (!bScroll) {
                 out.append("<HR>\n");
             }
 
-	    vPrivBox.removeAllElements(); //delete messages
-	}
+            vPrivBox.removeAllElements(); //delete messages
+        }
 
-	if(!bScroll) {
+        if (!bScroll) {
             out.append("\n<H2><FONT FACE=Arial, Helvetica>Public Messages</FONT></H2>\n");
         }
 
-	if(vPubBox.size() > 0) {
-	    //Print out the public messages
-	    e = vPubBox.elements();
-	    while(e.hasMoreElements()) {
-		mCurr = (Message)e.nextElement();
-		out.append(mCurr.getHTML(this));
-	    }
-	    vPubBox.removeAllElements();//delete them
-	} else if(!bScroll) {
-	    out.append("<FONT FACE=Arial, Helvetica SIZE=2><I>None</I></FONT>");
-	}
-        
-	return out.toString();
+        if (vPubBox.size() > 0) {
+            //Print out the public messages
+            e = vPubBox.elements();
+            while (e.hasMoreElements()) {
+                mCurr = (Message) e.nextElement();
+                out.append(mCurr.getHTML(this));
+            }
+            vPubBox.removeAllElements();//delete them
+        } else if (!bScroll) {
+            out.append("<FONT FACE=Arial, Helvetica SIZE=2><I>None</I></FONT>");
+        }
+
+        return out.toString();
     }
     //---------------------- HTML methods ------------------------------
+
     /**
-     *
      * @return a String containing HTML hidden variables to uniquely identify the user.
      */
 
     protected String HTMLGetVars() {
-	return sHandle == null ? "" : "<INPUT TYPE=\"HIDDEN\" NAME=\"" + HANDLE_VAR +
-	    "\" VALUE=\"" + sHandle + "\">\n" +
-	    (this.HasScroll() ? "<INPUT TYPE=\"HIDDEN\" NAME=\"" + Room.SCROLL_VAR +
-	     "\" VALUE=TRUE>\n" : "");
+        return sHandle == null ? "" : "<INPUT TYPE=\"HIDDEN\" NAME=\"" + HANDLE_VAR +
+                "\" VALUE=\"" + sHandle + "\">\n" +
+                (this.HasScroll() ? "<INPUT TYPE=\"HIDDEN\" NAME=\"" + Room.SCROLL_VAR +
+                        "\" VALUE=TRUE>\n" : "");
     }
 
     /**
@@ -271,283 +329,291 @@ public class Chatter extends Object implements Serializable {
      *
      * @return True if there is an AutoScroll Object associated with the chatter.
      */
-    
+
     public boolean HasScroll() {
-	return scroll != null;
+        return scroll != null;
     }
-    
+
     //----------------Data Abstraction Functions ----------------------------
     public String HashKey() {
         // changed to use brackets G.T. 11/30/2017
-	if(!hasHandle()) {
+        if (!hasHandle()) {
             return null;
         }
-        
-	return sHandle;
+
+        return sHandle;
     }
-    
+
     /**
      * Perform tasks needed every time a chatter makes contact with the server,
      * like setting time of last check, and checking to see if he's booted.
      */
-    
+
     void MakeContact() {
-	dLastCheck = new Date();
-    } 
+        dLastCheck = new Date();
+    }
 
     /**
      * @return True if the user is ignoring <img> tags in handles.
      */
     public boolean NoPicHandle() {
-	return bNoPicHandle;
+        return bNoPicHandle;
     }
 
     /**
      * @return True if the user is ignoring sounds in messages.
      */
-    
+
     public boolean NoSound() {
-	return bNoSound;
+        return bNoSound;
     }
-    
+
     /**
      * Associates the chatter with the given AutoScroll object.
      * Used in real time chat.
      *
      * @param as An AutoScoll object that outputs to the user's Web Browser.
      */
-    
+
     public synchronized void setScroll(AutoScroll as) {
 
-	if(scroll != null) {
+        if (scroll != null) {
             scroll.Exit();
         }
-	scroll = as;
+        scroll = as;
     }
-    
-    public void deliverMessages() {
-	if(scroll != null) {
-            
-	    synchronized(scroll) {
-		this.scroll.print(HTMLGetNewMessages(true));
-	    }
-	}
-	}
+
+    public void deliverMessages() { //TODO: ought to be deprecated.
+        if (scroll != null) {
+
+            synchronized (scroll) {
+                this.scroll.print(HTMLGetNewMessages(true));
+            }
+        }
+    }
+
     /**
      * Cleans up when the chatter leaves the system.  Currently calls AutoScroll.exit().
      *
      * @return the this pointer.
      */
-    
+
     public Chatter doExit() {
-	if(scroll != null) {
-	    scroll.Exit();
-	}
-	setLocation(null);
-	return this;
+        if (scroll != null) {
+            scroll.Exit();
+        }
+        setLocation(null);
+        return this;
     }
+
     /**
-	 * Calls getFullHTML(false) which means with images.
-	 */
+     * Calls getFullHTML(false) which means with images.
+     */
     public String getFullHTML() {
-	return getFullHTML(false);
+        return getFullHTML(false);
     }
     /**
-	 * Generates the HTML code for the user handle to be displayed in the browser.
-	 * Makes the name bold, links it to the home page (if provided) and adds the idle
-	 * time.
-	 *
-	 * @return a string with the handle as it should be printed in html
-	 */
+     * Generates the HTML code for the user handle to be displayed in the browser.
+     * Makes the name bold, links it to the home page (if provided) and adds the idle
+     * time.
+     *
+     * @return a string with the handle as it should be printed in html
+     */
 
     /**
      * Generates the HTML code for the user handle to be displayed in the browser.Makes the name bold, links it to the home page (if provided) and adds the idle
- time.
+     * time.
+     *
      * @param bNoPic
      * @return a string with the handle as it should be printed in html
      */
     public String getFullHTML(boolean bNoPic) {
-	return (!bNoPicHandle ? ((!sChatPic.equals("DEF")) ? "<IMG src=\"" + sChatPic +"\" width=\"144\" height=\"120\">" : "") : "") +
-				getHTML(bNoPic,(loc==null) ? "None" : loc.bIdleTimes) + "<BR>"
-	    // include tagline
-	    + (sTagline != null ?
-	       "<B><FONT FACE=\"Arial,Helvetica,Geneva\" SIZE=\"2\">" + (bNoPic ? Filter.ImgFilter(sTagline) : sTagline) + "</font></B>\n" :
-	       "");
+        return (!bNoPicHandle ? ((!sChatPic.equals("DEF")) ? "<img src='" + sChatPic + "' style='width:144px;height:120px'></img>" : "") : "") +
+                getHTML(bNoPic, (loc == null) ? "None" : loc.bIdleTimes) + "<BR>"
+                // include tagline
+                + (sTagline != null ?
+                "<strong>" + (bNoPic ? Filter.ImgFilter(sTagline) : sTagline) + "</strong>\n" :
+                "");
     }
     //((!bNoPic) ? ("<IMG src=\"" + sChatPic +"\">") : "" ) +
-	/**
-	 * Calls getHTML(false) which means with images.
-	 */
-    public String getHTML() {
-	return getHTML(false,(loc==null) ? "None" : loc.bIdleTimes);
-    }
+
     /**
-	 * Generates the HTML code for the user handle to be displayed in the browser.
-	 * Makes the name bold, links it to the home page (if provided) and adds the idle
-	 * time.
-	 *
-	 * @param bNoPic true means replace images in handle with a small default image.
+     * Calls getHTML(false) which means with images.
+     */
+    public String getHTML() {
+        return getHTML(false, (loc == null) ? "None" : loc.bIdleTimes);
+    }
+
+    /**
+     * Generates the HTML code for the user handle to be displayed in the browser.
+     * Makes the name bold, links it to the home page (if provided) and adds the idle
+     * time.
+     *
+     * @param bNoPic      true means replace images in handle with a small default image.
      * @param noIdleTimes
-	 * @return a string with the handle as it should be printed in html
-	 */
-    public String getHTML(boolean bNoPic,String noIdleTimes) {
-	Date dNow = new Date();
-	long time = (dNow.getTime() - this.dLastCheck.getTime()) / 1000;
-	
-	String idleTimes = "";
+     * @return a string with the handle as it should be printed in html
+     */
+    public String getHTML(boolean bNoPic, String noIdleTimes) {
+        Date dNow = new Date();
+        long time = (dNow.getTime() - this.dLastCheck.getTime()) / 1000;
 
-	if (!noIdleTimes.equals("0")) {
-		if (noIdleTimes.equals("1")) {	
-		    idleTimes = " (#" +  String.valueOf(this.getLogin().hashCode()) + ")"
-			+ "</B></A>; idle " + String.valueOf(time) + " seconds\n";
-		}
+        String idleTimes = "";
 
-		if (noIdleTimes.equals("2")) {
-			idleTimes = " (" + this.getLogin().IP + ")"
-			+ "</B></A>; idle " + String.valueOf(time) + " seconds\n";
-		}
-	}
-	
-	return ((sHomePage != null || "".equals(sHomePage) ) ?
-		"<A HREF=\"" + sHomePage + "\" TARGET=\"_blank\">" : "")
-	    + "<B>" + (bNoPic ? Filter.ImgFilter(this.sHandle) : this.sHandle)
-	    + idleTimes ;
+        if (!noIdleTimes.equals("0")) {
+            if (noIdleTimes.equals("1")) {
+                idleTimes = " (#" + String.valueOf(this.getLogin().hashCode()) + ")"
+                        + "</B></A>; idle " + String.valueOf(time) + " seconds\n";
+            }
+
+            if (noIdleTimes.equals("2")) {
+                idleTimes = " (" + this.getLogin().IP + ")"
+                        + "</B></A>; idle " + String.valueOf(time) + " seconds\n";
+            }
+        }
+
+        return ((sHomePage != null || "".equals(sHomePage)) ?
+                "<A HREF=\"" + sHomePage + "\" TARGET=\"_blank\">" : "")
+                + "<B>" + (bNoPic ? Filter.ImgFilter(this.sHandle) : this.sHandle)
+                + idleTimes;
     }
 
     public Login getLogin() {
-	return lUser;
+        return lUser;
     }
 
     public String getText() {
-	return Filter.stripHTML(sHandle);
+        return Filter.stripHTML(sHandle);
     }
-    
+
     boolean hasHandle() {
-	return sHandle != null;
+        return sHandle != null;
     }
-    
+
     boolean hashKeyIs(Object o) {
-	return((HashKey() != null) && (HashKey().equals(o)));
+        return ((HashKey() != null) && (HashKey().equals(o)));
     }
-    
+
     public boolean isIgPriv(final String handle) {
         // changed to use brackets G.T. 11/30/2017 both statements (2 ifs and 1 for)
-	if(handle == null || aIgPriv == null) {
+        if (handle == null || aIgPriv == null) {
             return false;
         }
 
-	for(int i = 0; i < aIgPriv.length; i++) {
-            if(aIgPriv[i].equals(handle)) {
+        for (int i = 0; i < aIgPriv.length; i++) {
+            if (aIgPriv[i].equals(handle)) {
                 return true;
             }
         }
 
-	return false;
+        return false;
     }
-    
+
     public boolean isIgPub(final String handle) {
         // changed to use brackets G.T. 11/30/2017 both statements (2 ifs and 1 for)
-	if(handle == null || aIgPub == null) {
+        if (handle == null || aIgPub == null) {
             return false;
         }
 
-	for(int i = 0; i < aIgPub.length; i++) {
-            if(aIgPub[i].equals(handle)) {
+        for (int i = 0; i < aIgPub.length; i++) {
+            if (aIgPub[i].equals(handle)) {
                 return true;
             }
         }
 
-	return false;
+        return false;
     }
-    
+
     public boolean isPMRecip(final String handle) {
         // changed to use brackets G.T. 11/30/2017 both statements (2 ifs and 1 for)
-	if(handle == null || aPMRecips == null) {
+        if (handle == null || aPMRecips == null) {
             return false;
         }
 
-	for(int i = 0; i < aPMRecips.length; i++) {
-            if(aPMRecips[i].equals(handle)) {
+        for (int i = 0; i < aPMRecips.length; i++) {
+            if (aPMRecips[i].equals(handle)) {
                 return true;
             }
         }
 
-	return false;
+        return false;
     }
 
     public final ChatObject location() {
-	return loc;
-    }  
+        return loc;
+    }
 
     Message privateMessage(String s) {
         // changed to use brackets G.T. 11/30/2017 
-	if(aPMRecips != null && aPMRecips.length > 0) {
+        if (aPMRecips != null && aPMRecips.length > 0) {
             return new Message(s, this.HashKey(), aPMRecips, Message.PRIVATE);
         }
-        
-	return null;
+
+        return null;
     }
 
     public final ChatObject setLocation(ChatObject dest) {
-	return loc=dest;
-    }  
+        return loc = dest;
+    }
+
     /**
-	 * Overrides the default toString method of Object class.
-	 *
-	 * @return A string with the chatters handle.
-	 */
+     * Overrides the default toString method of Object class.
+     *
+     * @return A string with the chatters handle.
+     */
 
     public String toString() {
-	return sHandle;
+        return sHandle;
     }
 
     void update(final LookupTable lt) {
-	//set options
-	ChatObject.setFields(this, lt);
+        //set options
+        ChatObject.setFields(this, lt);
         // changed to use brackets G.T. 11/30/2017 
-	if(lt.getValue(ChatObject.SET_ONE_VAR + Room.SCROLL_VAR) != null) {
-            if(lt.getValue(Room.SCROLL_VAR) == null) {
+        if (lt.getValue(ChatObject.SET_ONE_VAR + Room.SCROLL_VAR) != null) {
+            if (lt.getValue(Room.SCROLL_VAR) == null) {
                 scroll = null;
             }
         }
 
-	if(lt.getValue(HANDLE_VAR) != null) {
+        if (lt.getValue(HANDLE_VAR) != null) {
             sHandle = (new Filter()).FilterHTML(sHandle);
         }
 
-	if(lt.getValue(TAGLINE_VAR) != null) {
+        if (lt.getValue(TAGLINE_VAR) != null) {
             sTagline = (new Filter()).FilterHTML(sTagline);
         }
 
-	if(lt.getValue(ChatObject.SET_VAR) != null) {
-	    aPMRecips = lt.getFullValue(PM_RECIPIENT_VAR);// Handles of private message recipients.
-	    aIgPub = lt.getFullValue(PUBLIC_IGNORE_VAR);  // ""      public message ignorees
-	    aIgPriv = lt.getFullValue(PRIVATE_IGNORE_VAR);//""     private message ignorees
-	} else {
-	    if(lt.getValue(ChatObject.SET_ONE_VAR + PM_RECIPIENT_VAR) != null) {
+        if (lt.getValue(ChatObject.SET_VAR) != null) {
+            aPMRecips = lt.getFullValue(PM_RECIPIENT_VAR);// Handles of private message recipients.
+            aIgPub = lt.getFullValue(PUBLIC_IGNORE_VAR);  // ""      public message ignorees
+            aIgPriv = lt.getFullValue(PRIVATE_IGNORE_VAR);//""     private message ignorees
+        } else {
+            if (lt.getValue(ChatObject.SET_ONE_VAR + PM_RECIPIENT_VAR) != null) {
                 aPMRecips = lt.getFullValue(PM_RECIPIENT_VAR);
             }
-            
-	    if(lt.getValue(ChatObject.SET_ONE_VAR + PUBLIC_IGNORE_VAR) != null) {
+
+            if (lt.getValue(ChatObject.SET_ONE_VAR + PUBLIC_IGNORE_VAR) != null) {
                 aIgPub = lt.getFullValue(PUBLIC_IGNORE_VAR);
             }
-	
-	    if(lt.getValue(ChatObject.SET_ONE_VAR + PRIVATE_IGNORE_VAR) != null) {
+
+            if (lt.getValue(ChatObject.SET_ONE_VAR + PRIVATE_IGNORE_VAR) != null) {
                 aIgPriv = lt.getFullValue(PRIVATE_IGNORE_VAR);
             }
-	}
+        }
     }
+
     public final boolean usingIE() {
-	return bIE;
-    }  
+        return bIE;
+    }
 
     /**
      * Verifies the given login name and passphrase.
+     *
      * @param l
      * @param sHandle
      * @return true for good login name and passphrase.
-    */
+     */
     public boolean verify(Login l, String sHandle) {
-	return lUser.equals(l) && hashKeyIs(sHandle);
+        return lUser.equals(l) && hashKeyIs(sHandle);
     }
 }
