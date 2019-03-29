@@ -67,8 +67,8 @@ public class Chatter extends Object implements Serializable {
     //private final transient Thread outThread = null; //thread associated with chatter
 
     // Messages waiting for chatter
-    private final Vector vPubBox = new Vector();  // Public message queue.
-    private final Vector vPrivBox = new Vector(); // Private message queue.
+    private final Vector<Message> vPubBox = new Vector();  // Public message queue.
+    private final Vector<Message> vPrivBox = new Vector(); // Private message queue.
 
     public String sChatPic = "DEF";
 
@@ -203,8 +203,20 @@ public class Chatter extends Object implements Serializable {
 
     //This just exists to make my life easier
     //@author JamesVorder 28-MAR-2019
+    public class SimpleMessage{
+        public String from;
+        public String message;
+
+        SimpleMessage(String f, String m){
+            this.from = f;
+            this.message = m;
+        }
+    }
+
+    //This just exists to make my life easier
+    //@author JamesVorder 28-MAR-2019
     public class Inbox {
-        private ArrayList<String> Messages = new ArrayList();
+        private ArrayList<SimpleMessage> Messages = new ArrayList();
         private boolean isPrivate;
 
         Inbox(boolean p) {
@@ -221,9 +233,9 @@ public class Chatter extends Object implements Serializable {
             this.Messages = new ArrayList();
         }
 
-        public void add(String message) {
+        public void add(String from, String message) {
 
-            this.Messages.add(message);
+            this.Messages.add(new SimpleMessage(from, message));
         }
 
         public String toString() {
@@ -240,12 +252,12 @@ public class Chatter extends Object implements Serializable {
     public String JSONGetNewMessages() {
         Inbox privInbox = new Inbox(true);
         for (int i = 0; i < vPrivBox.size(); i++) {
-            privInbox.add(vPrivBox.get(i).toString());
+            privInbox.add(vPrivBox.get(i).getFrom(), vPrivBox.get(i).toString());
         }
         vPrivBox.removeAllElements();
         Inbox pubInbox = new Inbox(false);
         for (int i = 0; i < vPubBox.size(); i++) {
-            pubInbox.add(vPubBox.get(i).toString());
+            pubInbox.add(vPubBox.get(i).getFrom(), vPubBox.get(i).toString());
         }
         vPubBox.removeAllElements();
         JsonObject ret = new JsonObject();

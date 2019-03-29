@@ -35,7 +35,7 @@
 
 //this.StartUp();
 var url = "http://" + window.location.host + this.chatRoom;
-console.log(url);
+//console.log(url);
 $(document).ready(function(event){
     setInterval(function(){
         $.ajax({
@@ -51,27 +51,29 @@ $(document).ready(function(event){
                 if(res.data.priv == undefined || res.data.pub == undefined){
                     $("#room-messages-frame").prepend(res.data);
                 } else{
-                    var privateHeader = "<h3>Private Message(s)</h3>";
+                    var privatePreamble = "<i>(private)</i>\t";
                     var private = (res.data.priv != "") ? JSON.parse(res.data.priv) : [];
                     //console.log("PRIVATE: " + private + " (Count: " + private.length + ")");
-                    var publicHeader = "<h3>Public Message(s)</h3>";
+                    var publicPreamble = "<i>(public)</i>\t";
                     var public = (res.data.pub != "") ? JSON.parse(res.data.pub) : [];
                     //console.log("PUBLIC: " + public + " (Count: " + private.length + ")")
                     if(private.length > 0){
-                        $("#room-messages-frame").append(privateHeader);
                         for(var i = 0; i < private.length; i++){
                             //console.log(private[i]);
-                            $("#room-messages-frame").append(private[i]);
+                            $("#room-messages-frame").append(privatePreamble);
+                            $("#room-messages-frame").append(
+                                private[i].from + " : " + private[i].message + "<br>");
                         }
                     }
                     if(public.length > 0){
-                        $("#room-messages-frame").append(publicHeader);
                         for(var i = 0; i < public.length; i++){
                             //console.log(public[i]);
-                            $("#room-messages-frame").append(public[i]);
+                            $("#room-messages-frame").append(publicPreamble);
+                            $("#room-messages-frame").append(
+                                public[i].from + " : " + public[i].message + "<br>");
                         }
                     }
-
+                    $("#room-messages-frame").scrollTop($("#room-messages-frame")[0].scrollHeight);
                 }
             }
         });
