@@ -1,7 +1,7 @@
 package com.chatalot.server.chat;
 
 import com.chatalot.server.util.*;
-import com.chatalot.server.licensekey.*;
+//import com.chatalot.server.licensekey.*;
 
 import java.net.*;	// Needed so we can access sockets, etc
 import java.io.*;	 // So we can use streams
@@ -132,7 +132,7 @@ public class Server extends Thread {
 		} catch (IOException e) {
 			System.out.println("Error reading properties file");
 		}
-		License l = null;
+		/*License l = null;
 		try {
 			l = License.getInstance(new File("ccLicense"), iPort);
 			ChatObject.maxChatters = l.maxChatters();
@@ -140,14 +140,14 @@ public class Server extends Thread {
 			System.err.println(e.getMessage());
 			fail(e, "Could not start server");
 		}
-		addr = l.getAddr() ;
+		addr = l.getAddr() ;*/
 
 		System.out.println("\n\nCustomChat Chat Server version 1.5 by CustomChat");
 		System.out.println("Written by CustomChat");
 		System.out.println("Programming by Ezra Keshet");
 		System.out.println("Concept and Architecture by Micky Metts");
 		System.out.println();
-		System.out.println("This license will expire on : " + l.date());
+		//System.out.println("This license will expire on : " + l.date());
 		System.out.println("To obtain a free copy of the program see our web site at:");
 		System.out.println("http://customchat.com");
 
