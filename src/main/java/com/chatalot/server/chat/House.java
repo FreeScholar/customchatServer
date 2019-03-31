@@ -35,7 +35,7 @@ public class House extends ChatObject {
     /**
 	 * the default chatter who never expires with id 0; all messages from the server come from this user.
 	 */
-    public static String ctDaemon = null; 
+    public static String ctDaemon = "SYSTEM";
     //new Chatter("", 0, "CustomChat Server", "", Chatter.ADMIN, null);
 
     //Server Commands

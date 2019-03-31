@@ -441,10 +441,10 @@ public class Chatter extends Object implements Serializable {
      */
     public String getFullHTML(boolean bNoPic) {
         return (!bNoPicHandle ? ((!sChatPic.equals("DEF")) ? "<img src='" + sChatPic + "' style='width:144px;height:120px'></img>" : "") : "") +
-                getHTML(bNoPic, (loc == null) ? "None" : loc.bIdleTimes) + "<BR>"
+                getHTML(bNoPic, (loc == null) ? "None" : loc.bIdleTimes) + " "
                 // include tagline
                 + (sTagline != null ?
-                "<strong>" + (bNoPic ? Filter.ImgFilter(sTagline) : sTagline) + "</strong>\n" :
+                "<strong>" + (bNoPic ? Filter.ImgFilter(sTagline) : sTagline) + "</strong>" :
                 "");
     }
     //((!bNoPic) ? ("<IMG src=\"" + sChatPic +"\">") : "" ) +
